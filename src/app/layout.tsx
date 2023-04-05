@@ -18,7 +18,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={clsx(roboto.className, 'text-body')}>
+    <html
+      lang="en"
+      className={clsx(roboto.className, 'text-body text-base font-normal')}
+    >
       <body>{children}</body>
     </html>
   )
