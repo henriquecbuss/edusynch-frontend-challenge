@@ -1,3 +1,9 @@
+const screens = {
+  sm: '320px',
+  md: '768px',
+  lg: '1440px',
+}
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
@@ -70,6 +76,17 @@ module.exports = {
       bold: 700,
     },
     fontFamily: {},
+    screens,
+    container: {
+      screens,
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+        sm: '1.5rem',
+        md: '3rem',
+        lg: '7rem',
+      },
+    },
     extend: {},
   },
   plugins: [],
