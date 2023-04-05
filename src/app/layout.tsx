@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import './globals.css'
 import { Roboto } from 'next/font/google'
+import Header from '@/components/Header'
 
 const roboto = Roboto({
   weight: ['400', '700'],
@@ -21,7 +22,11 @@ export default function RootLayout({
       lang="en"
       className={clsx(roboto.className, 'text-body text-base font-normal')}
     >
-      <body>{children}</body>
+      <body>
+        <Header />
+
+        {children}
+      </body>
     </html>
   )
 }
