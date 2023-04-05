@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import './globals.css'
 import { Roboto } from 'next/font/google'
 
@@ -17,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={roboto.className}>
+    <html lang="en" className={clsx(roboto.className, 'text-body')}>
       <body>{children}</body>
     </html>
   )
