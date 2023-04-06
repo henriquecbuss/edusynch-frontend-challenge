@@ -1,4 +1,4 @@
-export default function ChevronDown() {
+const ChevronDown = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="none">
       <path
@@ -10,3 +10,5 @@ export default function ChevronDown() {
     </svg>
   )
 }
+
+export default ChevronDown

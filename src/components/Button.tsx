@@ -16,12 +16,12 @@ const primaryClassName =
 const ghostClassName =
   'bg-transparent hover:underline active:text-secondary-900 transition-colors'
 
-export default function Button({
+const Button = ({
   onClick,
   className,
   variant = 'primary',
   children,
-}: Props) {
+}: Props) => {
   return (
     <button
       onClick={onClick}
@@ -38,3 +38,5 @@ export default function Button({
     </button>
   )
 }
+
+export default Button

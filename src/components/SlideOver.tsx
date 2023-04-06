@@ -15,7 +15,7 @@ type Props = {
   dialogStyle?: React.CSSProperties
 }
 
-export default function SlideOver({
+const SlideOver = ({
   side,
   children,
   isOpen,
@@ -24,7 +24,7 @@ export default function SlideOver({
   overlayStyle,
   dialogClassName,
   dialogStyle,
-}: Props) {
+}: Props) => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10 md:hidden" onClose={onClose}>
@@ -86,3 +86,5 @@ export default function SlideOver({
     </Transition.Root>
   )
 }
+
+export default SlideOver

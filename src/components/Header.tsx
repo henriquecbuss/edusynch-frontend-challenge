@@ -1,11 +1,12 @@
 'use client'
 
-import { useRef, forwardRef } from 'react'
+import { useRef } from 'react'
 import Logo from './Logo'
 import Link from 'next/link'
 import User from './User'
+import CoinCarrousel from './CoinCarrousel'
 
-export default function Header() {
+const Header = () => {
   const headerRef = useRef<HTMLElement>(null)
   const carrouselRef = useRef<HTMLDivElement>(null)
 
@@ -22,7 +23,7 @@ export default function Header() {
           <HeaderLink href="#top-cryptos">Top cryptos</HeaderLink>
         </nav>
 
-        <CoinCarrousel className="hidden lg:block ml-auto" />
+        <CoinCarrousel className="hidden lg:block ml-auto" coins={[]} />
 
         <User
           className="hidden md:block ml-auto lg:ml-20"
@@ -32,18 +33,22 @@ export default function Header() {
       </header>
       <hr className="text-secondary-200" />
 
-      <CoinCarrousel className="lg:hidden shadow-md" ref={carrouselRef} />
+      <CoinCarrousel
+        className="lg:hidden shadow-md"
+        ref={carrouselRef}
+        coins={[]}
+      />
     </>
   )
 }
 
-function HeaderLink({
+const HeaderLink = ({
   href,
   children,
 }: {
   href: string
   children: React.ReactNode
-}) {
+}) => {
   return (
     <Link href={href} className="text-label hover:underline">
       {children}
@@ -51,13 +56,4 @@ function HeaderLink({
   )
 }
 
-const CoinCarrousel = forwardRef<HTMLDivElement, { className?: string }>(
-  ({ className }, ref) => {
-    return (
-      <div className={className} ref={ref}>
-        coin carrousel
-      </div>
-    )
-  }
-)
-CoinCarrousel.displayName = 'CoinCarrousel'
+export default Header

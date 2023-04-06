@@ -1,7 +1,8 @@
 type Props = {
   className?: string
 }
-export default function Hamburger({ className }: Props) {
+
+const Hamburger = ({ className }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -29,3 +30,5 @@ export default function Hamburger({ className }: Props) {
     </svg>
   )
 }
+
+export default Hamburger

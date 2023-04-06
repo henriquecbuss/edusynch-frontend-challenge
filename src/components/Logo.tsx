@@ -6,7 +6,7 @@ type Props = {
   className?: string
 }
 
-export default function Logo({ className, width = 124, height = 21 }: Props) {
+const Logo = ({ className, width = 124, height = 21 }: Props) => {
   return (
     <Image
       alt="CoinSynch logo"
@@ -17,3 +17,5 @@ export default function Logo({ className, width = 124, height = 21 }: Props) {
     />
   )
 }
+
+export default Logo

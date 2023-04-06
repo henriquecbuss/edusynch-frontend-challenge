@@ -13,13 +13,13 @@ type Props = {
   coinCarrouselRef: React.RefObject<HTMLElement>
 }
 
-export default function User(props: Props) {
+const User = (props: Props) => {
   const isSignedIn = false
 
   return isSignedIn ? <SignedInView {...props} /> : <SignedOutView {...props} />
 }
 
-function SignedInView({ className }: Props) {
+const SignedInView = ({ className }: Props) => {
   // TODO
   return (
     <div className="flex items-center ml-auto">
@@ -35,7 +35,7 @@ function SignedInView({ className }: Props) {
   )
 }
 
-function SignedOutView({ className, headerRef, coinCarrouselRef }: Props) {
+const SignedOutView = ({ className, headerRef, coinCarrouselRef }: Props) => {
   const [isSlideOverOpen, setIsSlideOverOpen] = useState(false)
 
   return (
@@ -95,7 +95,7 @@ function SignedOutView({ className, headerRef, coinCarrouselRef }: Props) {
   )
 }
 
-function SlideOverLink({
+const SlideOverLink = ({
   href,
   children,
   onClick,
@@ -103,10 +103,12 @@ function SlideOverLink({
   href: string
   children: React.ReactNode
   onClick?: () => void
-}) {
+}) => {
   return (
     <Link href={href} className="text-label hover:underline" onClick={onClick}>
       {children}
     </Link>
   )
 }
+
+export default User
