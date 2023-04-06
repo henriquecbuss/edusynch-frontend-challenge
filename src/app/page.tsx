@@ -12,7 +12,7 @@ const Home = () => {
         alt=""
         width={1440}
         height={247}
-        className="object-cover object-[40%] h-[180px] -mt-10 sm:h-[247px] sm:object-[50%] md:mt-0"
+        className="object-cover object-[40%] h-[180px] -mt-10 sm:h-[247px] sm:object-[50%] md:mt-0 lg:object-left lg:object-fill lg:w-full"
       />
 
       <AboutUs />
