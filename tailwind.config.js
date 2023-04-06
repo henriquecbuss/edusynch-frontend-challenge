@@ -69,8 +69,8 @@ module.exports = {
       h4: ['1.5rem', { lineHeight: '2rem', letterSpacing: 0 }],
       h5: ['1.25rem', { lineHeight: '1.5rem', letterSpacing: 0 }],
       base: ['1rem', { lineHeight: '1.5rem', letterSpacing: 0 }],
-      label: ['0.875', { lineHeight: '1rem', letterSpacing: 0 }],
-      'small-label': ['0.75', { lineHeight: '0.875rem', letterSpacing: 0 }],
+      label: ['0.875rem', { lineHeight: '1rem', letterSpacing: 0 }],
+      'small-label': ['0.75rem', { lineHeight: '0.875rem', letterSpacing: 0 }],
     },
     fontWeight: {
       normal: 400,
