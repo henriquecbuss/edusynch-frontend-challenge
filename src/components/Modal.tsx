@@ -1,9 +1,6 @@
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import BrandName from './BrandName'
 import Icons from './Icons'
-import Input from './Input'
-import Link from 'next/link'
 
 export type Props = {
   isOpen: boolean
