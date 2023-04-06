@@ -41,7 +41,10 @@ const Header = () => {
           <HeaderLink href="#top-cryptos">Top cryptos</HeaderLink>
         </nav>
 
-        <CoinCarrousel className="hidden lg:block lg:ml-auto" coins={coins} />
+        <CoinCarrousel
+          className="hidden lg:block ml-auto max-w-[360px]"
+          coins={coins}
+        />
 
         <User
           className="hidden md:block ml-auto lg:ml-20"
@@ -51,11 +54,13 @@ const Header = () => {
       </header>
       <hr className="text-secondary-200" />
 
-      <CoinCarrousel
-        className="lg:hidden shadow-md"
-        ref={carrouselRef}
-        coins={coins}
-      />
+      <div className="lg:hidden shadow-md">
+        <CoinCarrousel
+          className="max-w-min mx-auto"
+          ref={carrouselRef}
+          coins={coins}
+        />
+      </div>
     </>
   )
 }
