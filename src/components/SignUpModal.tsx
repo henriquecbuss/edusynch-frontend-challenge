@@ -31,7 +31,7 @@ const SignInModal = ({ ...modalProps }: Props) => {
         </Button>
       </form>
 
-      <span className="text-small-label mt-6">
+      <div className="text-small-label mt-6">
         <span className="hidden md:inline">Already have an account? </span>
         <button
           onClick={() => {
@@ -41,7 +41,7 @@ const SignInModal = ({ ...modalProps }: Props) => {
         >
           Sign in to <BrandName />
         </button>
-      </span>
+      </div>
     </Modal.Root>
   )
 }

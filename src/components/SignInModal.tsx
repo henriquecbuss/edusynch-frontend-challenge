@@ -33,7 +33,7 @@ const SignInModal = ({ ...modalProps }: Props) => {
         </Button>
       </form>
 
-      <span className="text-small-label mt-4">
+      <div className="text-small-label mt-4">
         <span className="hidden md:inline">Don{"'"}t have an account? </span>
         <button
           onClick={() => {
@@ -43,7 +43,7 @@ const SignInModal = ({ ...modalProps }: Props) => {
         >
           Sign up to <BrandName />
         </button>
-      </span>
+      </div>
     </Modal.Root>
   )
 }
