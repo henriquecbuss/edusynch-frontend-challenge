@@ -7,7 +7,11 @@ import Button from './Button'
 import SlideOver from './SlideOver'
 import Link from 'next/link'
 
-type Props = { className?: string }
+type Props = {
+  className?: string
+  headerRef: React.RefObject<HTMLElement>
+  coinCarrouselRef: React.RefObject<HTMLElement>
+}
 
 export default function User(props: Props) {
   const isSignedIn = false
@@ -31,7 +35,7 @@ function SignedInView({ className }: Props) {
   )
 }
 
-function SignedOutView({ className }: Props) {
+function SignedOutView({ className, headerRef, coinCarrouselRef }: Props) {
   const [isSlideOverOpen, setIsSlideOverOpen] = useState(false)
 
   return (
@@ -46,8 +50,17 @@ function SignedOutView({ className }: Props) {
         isOpen={isSlideOverOpen}
         onClose={() => setIsSlideOverOpen(false)}
         side="right"
-        overlayClassName="top-20"
-        dialogClassName="mt-14 border-t border-secondary-300"
+        overlayClassName="top-[--top-distance]"
+        overlayStyle={{
+          '--top-distance': `${
+            (headerRef.current?.clientHeight ?? 0) +
+            (coinCarrouselRef.current?.clientHeight ?? 0)
+          }px`,
+        }}
+        dialogClassName="mt-[--header-height] border-t border-secondary-300"
+        dialogStyle={{
+          '--header-height': `${headerRef.current?.clientHeight}px`,
+        }}
       >
         <div className="flex flex-col items-center gap-8 px-[62px]">
           <SlideOverLink

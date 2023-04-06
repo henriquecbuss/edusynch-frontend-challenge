@@ -1,11 +1,17 @@
+'use client'
+
+import { useRef, forwardRef } from 'react'
 import Logo from './Logo'
 import Link from 'next/link'
 import User from './User'
 
 export default function Header() {
+  const headerRef = useRef<HTMLElement>(null)
+  const carrouselRef = useRef<HTMLDivElement>(null)
+
   return (
     <>
-      <header className="container py-4 flex items-center">
+      <header className="container py-4 flex items-center" ref={headerRef}>
         <Link href="/" className="md:mr-10">
           <Logo />
         </Link>
@@ -18,10 +24,15 @@ export default function Header() {
 
         <CoinCarrousel className="hidden lg:block ml-auto" />
 
-        <User className="hidden md:block ml-auto lg:ml-20" />
+        <User
+          className="hidden md:block ml-auto lg:ml-20"
+          headerRef={headerRef}
+          coinCarrouselRef={carrouselRef}
+        />
       </header>
       <hr className="text-secondary-200" />
-      <CoinCarrousel className="lg:hidden shadow-md" />
+
+      <CoinCarrousel className="lg:hidden shadow-md" ref={carrouselRef} />
     </>
   )
 }
@@ -40,6 +51,13 @@ function HeaderLink({
   )
 }
 
-const CoinCarrousel = ({ className }: { className?: string }) => {
-  return <div className={className}>coin carrousel</div>
-}
+const CoinCarrousel = forwardRef<HTMLDivElement, { className?: string }>(
+  ({ className }, ref) => {
+    return (
+      <div className={className} ref={ref}>
+        coin carrousel
+      </div>
+    )
+  }
+)
+CoinCarrousel.displayName = 'CoinCarrousel'

@@ -10,7 +10,9 @@ type Props = {
   isOpen: boolean
   onClose: () => void
   overlayClassName?: string
+  overlayStyle?: React.CSSProperties
   dialogClassName?: string
+  dialogStyle?: React.CSSProperties
 }
 
 export default function SlideOver({
@@ -19,7 +21,9 @@ export default function SlideOver({
   isOpen,
   onClose,
   overlayClassName,
+  overlayStyle,
   dialogClassName,
+  dialogStyle,
 }: Props) {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -38,6 +42,7 @@ export default function SlideOver({
               'fixed inset-0 bg-secondary-500 bg-opacity-75 transition-opacity',
               overlayClassName
             )}
+            style={overlayStyle}
           />
         </Transition.Child>
 
@@ -67,6 +72,7 @@ export default function SlideOver({
                     'pointer-events-auto relative',
                     dialogClassName
                   )}
+                  style={dialogStyle}
                 >
                   <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
                     {children}
