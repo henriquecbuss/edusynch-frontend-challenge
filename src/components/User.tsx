@@ -92,7 +92,7 @@ const SignedOutView = ({ className, headerRef, coinCarrouselRef }: Props) => {
       <div
         className={clsx('hidden md:flex flex-nowrap items-center', className)}
       >
-        <Button variant="ghost" onClick={() => {}}>
+        <Button variant="ghost" onClick={() => setIsSignInModalOpen(true)}>
           Sign in
         </Button>
         <Button onClick={() => {}} className="ml-6">
