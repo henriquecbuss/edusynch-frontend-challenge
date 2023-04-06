@@ -11,9 +11,9 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
-          <HeaderLink href="/about">About us</HeaderLink>
+          <HeaderLink href="#about-us">About us</HeaderLink>
 
-          <HeaderLink href="/top-cryptos">Top cryptos</HeaderLink>
+          <HeaderLink href="#top-cryptos">Top cryptos</HeaderLink>
         </nav>
 
         <CoinCarrousel className="hidden lg:block ml-auto" />
