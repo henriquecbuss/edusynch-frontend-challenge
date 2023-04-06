@@ -7,6 +7,7 @@ import Button from './Button'
 import SlideOver from './SlideOver'
 import Link from 'next/link'
 import SignInModal from './SignInModal'
+import SignUpModal from './SignUpModal'
 
 type Props = {
   className?: string
@@ -36,21 +37,34 @@ const SignedInView = ({ className }: Props) => {
   )
 }
 
+type ForegroundElement = 'slideOver' | 'signInModal' | 'signUpModal'
+
 const SignedOutView = ({ className, headerRef, coinCarrouselRef }: Props) => {
-  const [isSlideOverOpen, setIsSlideOverOpen] = useState(false)
-  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
+  // const [isSlideOverOpen, setIsSlideOverOpen] = useState(false)
+  // const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
+  // const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false)
+  const [openForegroundElement, setOpenForegroundElement] =
+    useState<ForegroundElement | null>(null)
 
   return (
     <>
       <button
         className="md:hidden ml-auto"
-        onClick={() => setIsSlideOverOpen((currState) => !currState)}
+        onClick={() =>
+          setOpenForegroundElement((prev) =>
+            prev === 'slideOver' ? null : 'slideOver'
+          )
+        }
       >
         <Icons.Hamburger />
       </button>
       <SlideOver
-        isOpen={isSlideOverOpen}
-        onClose={() => setIsSlideOverOpen(false)}
+        isOpen={openForegroundElement === 'slideOver'}
+        onClose={() =>
+          setOpenForegroundElement((prev) =>
+            prev === 'slideOver' ? null : prev
+          )
+        }
         side="right"
         overlayClassName="top-[--top-distance]"
         overlayStyle={{
@@ -67,41 +81,58 @@ const SignedOutView = ({ className, headerRef, coinCarrouselRef }: Props) => {
         <div className="flex flex-col items-center gap-8 px-[62px]">
           <SlideOverLink
             href="#about-us"
-            onClick={() => setIsSlideOverOpen(false)}
+            onClick={() => setOpenForegroundElement(null)}
           >
             About us
           </SlideOverLink>
           <SlideOverLink
             href="#top-cryptos"
-            onClick={() => setIsSlideOverOpen(false)}
+            onClick={() => setOpenForegroundElement(null)}
           >
             Top Cryptos
           </SlideOverLink>
           <Button
             variant="ghost"
-            onClick={() => {
-              setIsSlideOverOpen(false)
-              setIsSignInModalOpen(true)
-            }}
+            onClick={() => setOpenForegroundElement('signInModal')}
           >
             Sign in
           </Button>
-          <Button onClick={() => {}}>Sign up</Button>
+          <Button onClick={() => setOpenForegroundElement('signUpModal')}>
+            Sign up
+          </Button>
         </div>
       </SlideOver>
       <div
         className={clsx('hidden md:flex flex-nowrap items-center', className)}
       >
-        <Button variant="ghost" onClick={() => setIsSignInModalOpen(true)}>
+        <Button
+          variant="ghost"
+          onClick={() => setOpenForegroundElement('signInModal')}
+        >
           Sign in
         </Button>
-        <Button onClick={() => {}} className="ml-6">
+        <Button
+          onClick={() => setOpenForegroundElement('signUpModal')}
+          className="ml-6"
+        >
           Sign up
         </Button>
       </div>
       <SignInModal
-        isOpen={isSignInModalOpen}
-        close={() => setIsSignInModalOpen(false)}
+        isOpen={openForegroundElement === 'signInModal'}
+        close={() =>
+          setOpenForegroundElement((prev) =>
+            prev === 'signInModal' ? null : prev
+          )
+        }
+      />
+      <SignUpModal
+        isOpen={openForegroundElement === 'signUpModal'}
+        close={() =>
+          setOpenForegroundElement((prev) =>
+            prev === 'signUpModal' ? null : prev
+          )
+        }
       />
     </>
   )
