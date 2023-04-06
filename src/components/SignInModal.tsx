@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import BrandName from './BrandName'
 import Icons from './Icons'
+import Input from './Input'
 
 type Props = {
   isOpen: boolean
@@ -43,7 +44,12 @@ const SignInModal = ({ isOpen, close }: Props) => {
                   <button onClick={close} className="absolute top-4 right-4">
                     <Icons.XMark className="hover:fill-secondary-400 active:fill-secondary-600 transition-colors" />
                   </button>
-                  {/* Content */}
+                  <Input type="email" placeholder="Email" className="mt-6" />
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    className="mt-6"
+                  />
                 </Dialog.Panel>
               </Transition.Child>
             </div>
