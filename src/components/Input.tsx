@@ -39,7 +39,7 @@ const Input = ({ type, className, ...inputAttrs }: Props) => {
       <IconForType type={type} className="flex-shrink-0" />
       <input
         type={inputType}
-        className="focus:outline-none text-label w-full"
+        className="focus:outline-none text-label w-full border-none p-0 focus:ring-0 placeholder:text-secondary-400"
         {...inputAttrs}
       ></input>
       {type === 'password' && (
