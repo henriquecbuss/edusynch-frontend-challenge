@@ -1,5 +1,9 @@
 import Button from '@/components/Button'
 import CryptoDisclosure from '@/components/CryptoDisclosure'
+import CryptoRow from '@/components/CryptoRow'
+import FormattedNumber from '@/components/FormattedNumber'
+import clsx from 'clsx'
+import Image from 'next/image'
 
 const cryptos = [
   {
@@ -35,9 +39,11 @@ const cryptos = [
 const TopCryptos = () => {
   return (
     <section className="mt-14 container mb-20">
-      <h2 className="text-h5 font-bold text-center">Top Cryptos</h2>
+      <h2 className="font-bold text-center text-h5 md:text-h4 lg:text-h5">
+        Top Cryptos
+      </h2>
 
-      <div className="flex flex-col mt-4">
+      <div className="flex flex-col mt-4 md:hidden">
         {cryptos.map((crypto, index) => (
           <CryptoDisclosure
             crypto={crypto}
@@ -47,10 +53,36 @@ const TopCryptos = () => {
         ))}
       </div>
 
+      <table className="hidden md:table table-auto w-full text-left mt-6">
+        <thead>
+          <tr>
+            <Th>#</Th>
+            <Th>Crypto</Th>
+            <Th>Price</Th>
+            <Th>Change</Th>
+            <Th>Trade</Th>
+          </tr>
+        </thead>
+        <tbody>
+          {cryptos.map((crypto, index) => (
+            // TODO - Change key to crypto symbol
+            <CryptoRow crypto={crypto} index={index + 1} key={index} />
+          ))}
+        </tbody>
+      </table>
+
       <Button variant="ghost" className="text-primary mt-4 mx-auto block">
         View more +
       </Button>
     </section>
+  )
+}
+
+const Th = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <th className="py-4 px-6 font-normal text-secondary text-label">
+      {children}
+    </th>
   )
 }
 

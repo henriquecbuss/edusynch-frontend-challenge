@@ -5,17 +5,10 @@ import Image from 'next/image'
 import ChevronDown from './Icons/ChevronDown'
 import clsx from 'clsx'
 import FormattedNumber from './FormattedNumber'
-
-type Crypto = {
-  name: string
-  image: string
-  symbol: string
-  price: number
-  changePercentage: number
-}
+import { CryptoCurrency } from '@/cryptoCurrency'
 
 type Props = {
-  crypto: Crypto
+  crypto: CryptoCurrency
   className?: string
 }
 
