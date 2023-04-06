@@ -60,6 +60,7 @@ module.exports = {
       white: '#FFFFFF',
       black: '#000000',
       body: '#5D6670',
+      transparent: 'transparent',
     },
     fontSize: {
       h1: ['3rem', { lineHeight: '3.5rem', letterSpacing: -1 }],
