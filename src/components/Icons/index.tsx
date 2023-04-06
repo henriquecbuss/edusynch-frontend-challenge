@@ -4,6 +4,7 @@ import XMark from './XMark'
 import Envelope from './Envelope'
 import Lock from './Lock'
 import Eye from './Eye'
+import User from './User'
 
 const icons = {
   Hamburger,
@@ -12,6 +13,7 @@ const icons = {
   Envelope,
   Lock,
   Eye,
+  User,
 }
 
 export default icons
