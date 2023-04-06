@@ -1,7 +1,6 @@
 import Logo from './Logo'
 import Link from 'next/link'
-import Icons from './Icons'
-import clsx from 'clsx'
+import User from './User'
 
 export default function Header() {
   return (
@@ -20,8 +19,6 @@ export default function Header() {
         <CoinCarrousel className="hidden lg:block ml-auto" />
 
         <User className="hidden md:block ml-auto lg:ml-20" />
-
-        <Icons.Hamburger className="md:hidden" />
       </header>
       <hr className="text-secondary-200" />
       <CoinCarrousel className="lg:hidden shadow-md" />
