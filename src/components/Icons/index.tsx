@@ -6,6 +6,10 @@ import Lock from './Lock'
 import Eye from './Eye'
 import User from './User'
 import ArrowRight from './ArrowRight'
+import CryptoCurrency from './CryptoCurrency'
+import Chart from './Chart'
+import Computer from './Computer'
+import CryptoCurrencyCircle from './CryptoCurrencyCircle'
 
 const icons = {
   Hamburger,
@@ -16,6 +20,10 @@ const icons = {
   Eye,
   User,
   ArrowRight,
+  CryptoCurrency,
+  Chart,
+  Computer,
+  CryptoCurrencyCircle,
 }
 
 export default icons
