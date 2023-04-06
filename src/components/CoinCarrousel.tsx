@@ -2,6 +2,8 @@ import clsx from 'clsx'
 import { forwardRef } from 'react'
 import FormattedNumber from './FormattedNumber'
 
+// TODO - Add auto scroll?
+
 type Coin = {
   symbol: string
   price: number
