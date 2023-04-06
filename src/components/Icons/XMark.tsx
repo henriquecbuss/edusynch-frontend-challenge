@@ -9,9 +9,9 @@ const XMark = ({ className }: { className?: string }) => {
       className={clsx('fill-secondary', className)}
     >
       <path
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M4.104 2.913a.842.842 0 1 0-1.19 1.191L6.808 8l-3.896 3.896a.842.842 0 1 0 1.191 1.19L8 9.192l3.896 3.896a.842.842 0 0 0 1.19-1.191L9.191 8l3.895-3.896a.842.842 0 1 0-1.19-1.19L8 6.808 4.104 2.913Z"
-        clip-rule="evenodd"
+        clipRule="evenodd"
       />
     </svg>
   )
