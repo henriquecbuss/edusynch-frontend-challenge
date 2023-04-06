@@ -6,6 +6,7 @@ import Icons from './Icons'
 import Button from './Button'
 import SlideOver from './SlideOver'
 import Link from 'next/link'
+import SignInModal from './SignInModal'
 
 type Props = {
   className?: string
@@ -37,6 +38,7 @@ const SignedInView = ({ className }: Props) => {
 
 const SignedOutView = ({ className, headerRef, coinCarrouselRef }: Props) => {
   const [isSlideOverOpen, setIsSlideOverOpen] = useState(false)
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
 
   return (
     <>
@@ -75,7 +77,13 @@ const SignedOutView = ({ className, headerRef, coinCarrouselRef }: Props) => {
           >
             Top Cryptos
           </SlideOverLink>
-          <Button variant="ghost" onClick={() => {}}>
+          <Button
+            variant="ghost"
+            onClick={() => {
+              setIsSlideOverOpen(false)
+              setIsSignInModalOpen(true)
+            }}
+          >
             Sign in
           </Button>
           <Button onClick={() => {}}>Sign up</Button>
@@ -91,6 +99,10 @@ const SignedOutView = ({ className, headerRef, coinCarrouselRef }: Props) => {
           Sign up
         </Button>
       </div>
+      <SignInModal
+        isOpen={isSignInModalOpen}
+        close={() => setIsSignInModalOpen(false)}
+      />
     </>
   )
 }
