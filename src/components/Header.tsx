@@ -69,9 +69,9 @@ const HeaderLink = ({
   children: React.ReactNode
 }) => {
   return (
-    <Link href={href} className="text-label hover:underline">
+    <a href={href} className="text-label hover:underline">
       {children}
-    </Link>
+    </a>
   )
 }
 
