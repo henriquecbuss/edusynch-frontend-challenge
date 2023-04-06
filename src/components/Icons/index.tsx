@@ -5,6 +5,7 @@ import Envelope from './Envelope'
 import Lock from './Lock'
 import Eye from './Eye'
 import User from './User'
+import ArrowRight from './ArrowRight'
 
 const icons = {
   Hamburger,
@@ -14,6 +15,7 @@ const icons = {
   Lock,
   Eye,
   User,
+  ArrowRight,
 }
 
 export default icons
