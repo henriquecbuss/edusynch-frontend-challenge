@@ -46,6 +46,7 @@ const Input = ({ type, className, ...inputAttrs }: Props) => {
         <button
           onClick={handleTogglePasswordVisibility}
           className="flex-shrink-0 group"
+          type="button"
         >
           <Icons.Eye className="fill-secondary-300 group-hover:fill-secondary-400 group-active:fill-secondary-500 transition-colors" />
         </button>
