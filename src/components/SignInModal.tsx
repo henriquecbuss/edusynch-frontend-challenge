@@ -3,6 +3,8 @@ import { Dialog, Transition } from '@headlessui/react'
 import BrandName from './BrandName'
 import Icons from './Icons'
 import Input from './Input'
+import Link from 'next/link'
+import Button from './Button'
 
 type Props = {
   isOpen: boolean
@@ -37,7 +39,7 @@ const SignInModal = ({ isOpen, close }: Props) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-lg bg-white p-6 shadow-xl transition-all relative">
+                <Dialog.Panel className="w-full max-w-xs transform overflow-hidden rounded-lg bg-white p-6 shadow-xl transition-all relative">
                   <Dialog.Title as="h3" className="text-center">
                     Sign in to <BrandName />
                   </Dialog.Title>
@@ -50,6 +52,35 @@ const SignInModal = ({ isOpen, close }: Props) => {
                     placeholder="Password"
                     className="mt-6"
                   />
+                  <Link
+                    href="#"
+                    className="text-small-label text-secondary hover:underline block w-max ml-auto mt-[9px]"
+                  >
+                    Forgot password?
+                  </Link>
+
+                  <Button
+                    onClick={() => {
+                      // TODO - Handle sign in
+                    }}
+                    className="mt-4 w-full py-3"
+                  >
+                    Sign in
+                  </Button>
+
+                  <span className="text-small-label mt-4">
+                    <span className="hidden md:inline">
+                      Don{"'"}t have an account?{' '}
+                    </span>
+                    <button
+                      onClick={() => {
+                        // TODO - Handle sign up
+                      }}
+                      className="font-bold hover:underline"
+                    >
+                      Sign up to <BrandName />
+                    </button>
+                  </span>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
