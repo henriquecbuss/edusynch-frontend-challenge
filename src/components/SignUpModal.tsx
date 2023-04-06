@@ -3,6 +3,7 @@ import Input from './Input'
 import Link from 'next/link'
 import Button from './Button'
 import * as Modal from './Modal'
+import Checkbox from './Checkbox'
 
 type Props = {} & Modal.Props
 
@@ -24,7 +25,12 @@ const SignInModal = ({ ...modalProps }: Props) => {
         <Input type="password" placeholder="Password" />
         <Input type="password" placeholder="Confirm password" />
 
-        {/* Checkbox */}
+        <Checkbox className="text-left">
+          <span>
+            I have read and accept the <strong>Privacy Policy</strong> and{' '}
+            <strong>Terms of User Sign Up</strong>
+          </span>
+        </Checkbox>
 
         <Button className="w-full py-3" type="submit">
           Sign up
