@@ -13,23 +13,25 @@ const SignInModal = ({ ...modalProps }: Props) => {
         Sign in to <BrandName />
       </Modal.Title>
 
-      <Input type="email" placeholder="Email" className="mt-6" />
-      <Input type="password" placeholder="Password" className="mt-6" />
-      <Link
-        href="#"
-        className="text-small-label text-secondary hover:underline block w-max ml-auto mt-[9px]"
-      >
-        Forgot password?
-      </Link>
-
-      <Button
-        onClick={() => {
+      <form
+        onSubmit={() => {
           // TODO - Handle sign in
         }}
-        className="mt-4 w-full py-3"
+        className="mt-6"
       >
-        Sign in
-      </Button>
+        <Input type="email" placeholder="Email" />
+        <Input type="password" placeholder="Password" className="mt-6" />
+        <Link
+          href="#"
+          className="text-small-label text-secondary hover:underline block w-max ml-auto mt-[9px]"
+        >
+          Forgot password?
+        </Link>
+
+        <Button className="mt-4 w-full py-3" type="submit">
+          Sign in
+        </Button>
+      </form>
 
       <span className="text-small-label mt-4">
         <span className="hidden md:inline">Don{"'"}t have an account? </span>
