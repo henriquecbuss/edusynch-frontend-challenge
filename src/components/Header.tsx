@@ -12,9 +12,9 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
-          <Link href="/about">About us</Link>
+          <HeaderLink href="/about">About us</HeaderLink>
 
-          <Link href="#">Top cryptos</Link>
+          <HeaderLink href="/top-cryptos">Top cryptos</HeaderLink>
         </nav>
 
         <CoinCarrousel className="hidden lg:block ml-auto" />
@@ -29,29 +29,20 @@ export default function Header() {
   )
 }
 
-const CoinCarrousel = ({ className }: { className?: string }) => {
-  return <div className={className}>coin carrousel</div>
+function HeaderLink({
+  href,
+  children,
+}: {
+  href: string
+  children: React.ReactNode
+}) {
+  return (
+    <Link href={href} className="text-label hover:underline">
+      {children}
+    </Link>
+  )
 }
 
-const User = ({
-  isSignedIn,
-  className,
-}: {
-  isSignedIn?: boolean
-  className?: string
-}) => {
-  if (isSignedIn) {
-    return (
-      <div
-        className={clsx('w-8 h-8 rounded-full bg-secondary-600', className)}
-      ></div>
-    )
-  } else {
-    return (
-      <div className={clsx('flex flex-nowrap items-center', className)}>
-        <button className="rounded-full px-2 py-1">Sign in</button>
-        <button className="bg-primary rounded-full px-2 py-1">Sign up</button>
-      </div>
-    )
-  }
+const CoinCarrousel = ({ className }: { className?: string }) => {
+  return <div className={className}>coin carrousel</div>
 }
