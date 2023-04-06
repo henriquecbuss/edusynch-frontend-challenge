@@ -54,12 +54,8 @@ const Header = () => {
       </header>
       <hr className="text-secondary-200" />
 
-      <div className="lg:hidden shadow-md">
-        <CoinCarrousel
-          className="max-w-min mx-auto"
-          ref={carrouselRef}
-          coins={coins}
-        />
+      <div className="lg:hidden shadow-md" ref={carrouselRef}>
+        <CoinCarrousel className="max-w-min mx-auto" coins={coins} />
       </div>
     </>
   )

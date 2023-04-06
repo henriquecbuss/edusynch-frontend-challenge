@@ -1,8 +1,12 @@
 import clsx from 'clsx'
-import { forwardRef } from 'react'
 import FormattedNumber from './FormattedNumber'
 
 // TODO - Add auto scroll?
+
+type Props = {
+  className?: string
+  coins: Coin[]
+}
 
 type Coin = {
   symbol: string
@@ -10,23 +14,17 @@ type Coin = {
   change: number
 }
 
-const CoinCarrousel = forwardRef<
-  HTMLDivElement,
-  { className?: string; coins: Coin[] }
->(({ className, coins }, ref) => {
+const CoinCarrousel = ({ className, coins }: Props) => {
   return (
     <div className={clsx('py-[5px] overflow-hidden', className)}>
-      <div
-        className={clsx('mx-2 flex items-center gap-6 overflow-hidden')}
-        ref={ref}
-      >
+      <div className={clsx('mx-2 flex items-center gap-6 overflow-hidden')}>
         {coins.map((coin) => (
           <Coin coin={coin} key={coin.symbol} />
         ))}
       </div>
     </div>
   )
-})
+}
 CoinCarrousel.displayName = 'CoinCarrousel'
 
 const Coin = ({ coin }: { coin: Coin }) => {
