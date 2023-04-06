@@ -6,6 +6,24 @@ import Link from 'next/link'
 import User from './User'
 import CoinCarrousel from './CoinCarrousel'
 
+const coins = [
+  {
+    symbol: 'BIT',
+    price: 23.62,
+    change: 7.082,
+  },
+  {
+    symbol: 'DOG',
+    price: 23.62,
+    change: -5.23,
+  },
+  {
+    symbol: 'ETH',
+    price: 23.62,
+    change: 7.082,
+  },
+]
+
 const Header = () => {
   const headerRef = useRef<HTMLElement>(null)
   const carrouselRef = useRef<HTMLDivElement>(null)
@@ -23,7 +41,7 @@ const Header = () => {
           <HeaderLink href="#top-cryptos">Top cryptos</HeaderLink>
         </nav>
 
-        <CoinCarrousel className="hidden lg:block ml-auto" coins={[]} />
+        <CoinCarrousel className="hidden lg:block lg:ml-auto" coins={coins} />
 
         <User
           className="hidden md:block ml-auto lg:ml-20"
@@ -36,7 +54,7 @@ const Header = () => {
       <CoinCarrousel
         className="lg:hidden shadow-md"
         ref={carrouselRef}
-        coins={[]}
+        coins={coins}
       />
     </>
   )
