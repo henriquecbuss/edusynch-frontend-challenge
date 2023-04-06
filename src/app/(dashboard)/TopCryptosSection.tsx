@@ -56,10 +56,10 @@ const TopCryptos = () => {
       <table className="hidden md:table table-auto w-full text-left mt-6">
         <thead>
           <tr>
-            <Th>#</Th>
-            <Th>Crypto</Th>
-            <Th>Price</Th>
-            <Th>Change</Th>
+            <Th className="w-1/12">#</Th>
+            <Th className="w-1/3">Crypto</Th>
+            <Th className="w-1/3">Price</Th>
+            <Th className="w-1/3">Change</Th>
             <Th>Trade</Th>
           </tr>
         </thead>
@@ -78,9 +78,20 @@ const TopCryptos = () => {
   )
 }
 
-const Th = ({ children }: { children: React.ReactNode }) => {
+const Th = ({
+  children,
+  className,
+}: {
+  className?: string
+  children: React.ReactNode
+}) => {
   return (
-    <th className="py-4 px-6 font-normal text-secondary text-label">
+    <th
+      className={clsx(
+        'py-4 px-6 font-normal text-secondary text-label',
+        className
+      )}
+    >
       {children}
     </th>
   )
