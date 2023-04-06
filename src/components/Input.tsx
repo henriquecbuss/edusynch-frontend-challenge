@@ -2,18 +2,31 @@ import { useState } from 'react'
 import clsx from 'clsx'
 import Icons from './Icons'
 
-type Type = 'email' | 'password'
+type Type = 'email' | 'password' | 'username'
 
 type Props = {
   type: Type
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'>
 
 const Input = ({ type, className, ...inputAttrs }: Props) => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [inputType, setInputType] = useState<React.HTMLInputTypeAttribute>(
+    () => {
+      switch (type) {
+        case 'email':
+          return 'email'
+        case 'password':
+          return 'password'
+        case 'username':
+          return 'text'
+      }
+    }
+  )
 
   const handleTogglePasswordVisibility = (e: React.MouseEvent) => {
     e.stopPropagation()
-    setIsPasswordVisible((prev) => !prev)
+    if (type === 'password') {
+      setInputType((prev) => (prev === 'password' ? 'text' : 'password'))
+    }
   }
 
   return (
@@ -25,9 +38,7 @@ const Input = ({ type, className, ...inputAttrs }: Props) => {
     >
       <IconForType type={type} className="flex-shrink-0" />
       <input
-        type={
-          type === 'password' ? (isPasswordVisible ? 'text' : 'password') : type
-        }
+        type={inputType}
         className="focus:outline-none text-label w-full"
         {...inputAttrs}
       ></input>
@@ -55,6 +66,8 @@ const IconForType = ({
       return <Icons.Envelope className={className} />
     case 'password':
       return <Icons.Lock className={className} />
+    case 'username':
+      return <Icons.User className={className} />
   }
 }
 
