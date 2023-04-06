@@ -1,9 +1,7 @@
 import Button from '@/components/Button'
 import CryptoDisclosure from '@/components/CryptoDisclosure'
 import CryptoRow from '@/components/CryptoRow'
-import FormattedNumber from '@/components/FormattedNumber'
 import clsx from 'clsx'
-import Image from 'next/image'
 
 const cryptos = [
   {
@@ -38,7 +36,7 @@ const cryptos = [
 
 const TopCryptos = () => {
   return (
-    <section className="mt-14 container mb-20">
+    <section className="mt-14 container">
       <h2 className="font-bold text-center text-h5 md:text-h4 lg:text-h5">
         Top Cryptos
       </h2>
