@@ -9,7 +9,7 @@ type Props = {} & Modal.Props
 const SignInModal = ({ ...modalProps }: Props) => {
   return (
     <Modal.Root {...modalProps}>
-      <Modal.Title>
+      <Modal.Title as="h2">
         Sign in to <BrandName />
       </Modal.Title>
 

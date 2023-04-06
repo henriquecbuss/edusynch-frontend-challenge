@@ -7,9 +7,15 @@ export type Props = {
   close: () => void
 }
 
-export const Title = ({ children }: { children: React.ReactNode }) => {
+export const Title = ({
+  children,
+  as,
+}: {
+  children: React.ReactNode
+  as: `h${2 | 3 | 4 | 5 | 6}`
+}) => {
   return (
-    <Dialog.Title as="h3" className="text-center">
+    <Dialog.Title as={as} className="text-center">
       {children}
     </Dialog.Title>
   )
