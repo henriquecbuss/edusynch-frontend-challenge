@@ -1,16 +1,18 @@
+'use client'
+
 import BrandName from './BrandName'
 import Input from './Input'
 import Link from 'next/link'
 import Button from './Button'
 import * as Modal from './Modal'
+import useModal from '@/hooks/useModal'
 
-type Props = {
-  openSignUpModal: () => void
-} & Modal.Props
+const SignInModal = () => {
+  const { isOpen, close } = useModal('signIn')
+  const { open: openSignUpModal } = useModal('signUp')
 
-const SignInModal = ({ openSignUpModal, ...modalProps }: Props) => {
   return (
-    <Modal.Root {...modalProps}>
+    <Modal.Root isOpen={isOpen} close={close}>
       <Modal.Title as="h2">
         Sign in to <BrandName />
       </Modal.Title>
@@ -39,7 +41,6 @@ const SignInModal = ({ openSignUpModal, ...modalProps }: Props) => {
         <span className="hidden md:inline">Don{"'"}t have an account? </span>
         <button
           onClick={() => {
-            modalProps.close()
             openSignUpModal()
           }}
           className="font-bold hover:underline"

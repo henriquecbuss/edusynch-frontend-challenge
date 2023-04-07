@@ -1,5 +1,5 @@
-import Button from '@/components/Button'
 import Icons from '@/components/Icons'
+import SignUpButton from '@/components/SignUpButton'
 
 const AboutUs = () => {
   return (
@@ -19,13 +19,13 @@ const AboutUs = () => {
               urna, porttitor
             </p>
 
-            <Button className="hidden lg:block w-44 py-3 text-base mt-10">
+            <SignUpButton className="hidden lg:block w-44 py-3 text-base mt-10">
               Sign up now
-            </Button>
+            </SignUpButton>
           </div>
         </div>
 
-        <ul className="container flex md:flex-col items-center md:items-start overflow-x-scroll lg:overflow-visible pb-14 md:pb-20 gap-4 md:gap-6 mt-6 pt-[11px] md:pt-0 md:mt-10 bg-gradient-to-b lg:bg-transparent from-white to-secondary-100 lg:max-w-none lg:mx-0 lg:px-0">
+        <div className="container flex md:flex-col items-center md:items-start overflow-x-scroll lg:overflow-visible pb-14 md:pb-20 gap-4 md:gap-6 mt-6 pt-[11px] md:pt-0 md:mt-10 bg-gradient-to-b lg:bg-transparent from-white to-secondary-100 lg:max-w-none lg:mx-0 lg:px-0">
           <div className="flex gap-4 md:gap-6 lg:gap-8">
             <AboutUsCard
               title="For your company"
@@ -65,7 +65,7 @@ const AboutUs = () => {
               aliquam,
             </AboutUsCard>
           </div>
-        </ul>
+        </div>
       </section>
     </div>
   )
@@ -83,14 +83,14 @@ const AboutUsCard = ({
   children: React.ReactNode
 }) => {
   return (
-    <li className="p-6 rounded-md shadow-[0px_12px_24px_rgba(0,0,0,0.05)] flex-shrink-0 w-[200px] md:w-[280px]">
+    <div className="p-6 rounded-md shadow-[0px_12px_24px_rgba(0,0,0,0.05)] flex-shrink-0 w-[200px] md:w-[280px]">
       <div className="w-10 h-10 md:w-16 md:h-16">{icon}</div>
       <h3 className="font-bold text-label text-primary mt-4 md:text-base">
         {title}
       </h3>
       <p className="font-bold text-h5 mb-2 md:text-h4">{subtitle}</p>
       <p className="text-label">{children}</p>
-    </li>
+    </div>
   )
 }
 

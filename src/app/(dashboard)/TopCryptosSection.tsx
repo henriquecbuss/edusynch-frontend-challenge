@@ -16,7 +16,7 @@ const cryptos = [
     image: '/BTC.png',
     symbol: 'BTC',
     price: 25499.52,
-    changePercentage: 5.65,
+    changePercentage: -5.65,
   },
   {
     name: 'Bitcoin',

@@ -27,8 +27,8 @@ export const Root = ({
   children,
 }: Props & { children: React.ReactNode }) => {
   return (
-    <div className="isolate">
-      <Transition appear show={isOpen} as={Fragment}>
+    <Transition appear show={isOpen} as={Fragment}>
+      <div className="isolate">
         <Dialog as="div" className="relative" onClose={close}>
           <Transition.Child
             as={Fragment}
@@ -63,7 +63,7 @@ export const Root = ({
             </div>
           </div>
         </Dialog>
-      </Transition>
-    </div>
+      </div>
+    </Transition>
   )
 }

@@ -1,7 +1,7 @@
-import Button from '@/components/Button'
 import Icons from '@/components/Icons'
 import clsx from 'clsx'
 import Image from 'next/image'
+import SignUpButton from '@/components/SignUpButton'
 
 const LandingSection = () => {
   return (
@@ -15,9 +15,9 @@ const LandingSection = () => {
           purus sit amet luctus venenatis, lectus magna fringilla urna,
           porttitor
         </p>
-        <Button className="uppercase flex items-center justify-center gap-2 mx-auto mt-6 w-[180px] md:mx-0 md:py-3 md:w-[232px]">
+        <SignUpButton className="uppercase flex items-center justify-center gap-2 mx-auto mt-6 w-[180px] md:mx-0 md:py-3 md:w-[232px]">
           Sign up now <Icons.ArrowRight />
-        </Button>
+        </SignUpButton>
 
         <ul className="flex items-center gap-4 mt-6 md:mt-10 md:gap-6">
           <Tag>Cryptos</Tag>

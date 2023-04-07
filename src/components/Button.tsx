@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-type Props = {
+export type Props = {
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   className?: string
   variant?: Variant
