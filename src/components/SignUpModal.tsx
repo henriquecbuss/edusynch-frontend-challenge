@@ -1,13 +1,14 @@
 import BrandName from './BrandName'
 import Input from './Input'
-import Link from 'next/link'
 import Button from './Button'
 import * as Modal from './Modal'
 import Checkbox from './Checkbox'
 
-type Props = {} & Modal.Props
+type Props = {
+  openSignInModal: () => void
+} & Modal.Props
 
-const SignInModal = ({ ...modalProps }: Props) => {
+const SignUpModal = ({ openSignInModal, ...modalProps }: Props) => {
   return (
     <Modal.Root {...modalProps}>
       <Modal.Title as="h2">
@@ -41,7 +42,8 @@ const SignInModal = ({ ...modalProps }: Props) => {
         <span className="hidden md:inline">Already have an account? </span>
         <button
           onClick={() => {
-            // TODO - Handle sign up
+            modalProps.close()
+            openSignInModal()
           }}
           className="font-bold hover:underline"
         >
@@ -52,4 +54,4 @@ const SignInModal = ({ ...modalProps }: Props) => {
   )
 }
 
-export default SignInModal
+export default SignUpModal

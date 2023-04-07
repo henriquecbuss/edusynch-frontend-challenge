@@ -4,9 +4,11 @@ import Link from 'next/link'
 import Button from './Button'
 import * as Modal from './Modal'
 
-type Props = {} & Modal.Props
+type Props = {
+  openSignUpModal: () => void
+} & Modal.Props
 
-const SignInModal = ({ ...modalProps }: Props) => {
+const SignInModal = ({ openSignUpModal, ...modalProps }: Props) => {
   return (
     <Modal.Root {...modalProps}>
       <Modal.Title as="h2">
@@ -37,7 +39,8 @@ const SignInModal = ({ ...modalProps }: Props) => {
         <span className="hidden md:inline">Don{"'"}t have an account? </span>
         <button
           onClick={() => {
-            // TODO - Handle sign up
+            modalProps.close()
+            openSignUpModal()
           }}
           className="font-bold hover:underline"
         >

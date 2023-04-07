@@ -40,9 +40,6 @@ const SignedInView = ({ className }: Props) => {
 type ForegroundElement = 'slideOver' | 'signInModal' | 'signUpModal'
 
 const SignedOutView = ({ className, headerRef, coinCarrouselRef }: Props) => {
-  // const [isSlideOverOpen, setIsSlideOverOpen] = useState(false)
-  // const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
-  // const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false)
   const [openForegroundElement, setOpenForegroundElement] =
     useState<ForegroundElement | null>(null)
 
@@ -125,6 +122,9 @@ const SignedOutView = ({ className, headerRef, coinCarrouselRef }: Props) => {
             prev === 'signInModal' ? null : prev
           )
         }
+        openSignUpModal={() => {
+          setOpenForegroundElement('signUpModal')
+        }}
       />
       <SignUpModal
         isOpen={openForegroundElement === 'signUpModal'}
@@ -133,6 +133,9 @@ const SignedOutView = ({ className, headerRef, coinCarrouselRef }: Props) => {
             prev === 'signUpModal' ? null : prev
           )
         }
+        openSignInModal={() => {
+          setOpenForegroundElement('signInModal')
+        }}
       />
     </>
   )
