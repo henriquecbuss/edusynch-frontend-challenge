@@ -23,8 +23,6 @@ export const Input = (props: FinalCustomInputProps) => {
     meta.error
   )
 
-  console.log(errorMessage)
-
   return (
     <label className="flex flex-col w-full">
       <Field
