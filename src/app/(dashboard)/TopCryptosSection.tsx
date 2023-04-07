@@ -37,7 +37,10 @@ const cryptos = [
 const TopCryptos = () => {
   return (
     <section className="mt-14 container">
-      <h2 className="font-bold text-center text-h5 md:text-h4 lg:text-h5">
+      <h2
+        id="top-cryptos"
+        className="font-bold text-center text-h5 md:text-h4 lg:text-h5"
+      >
         Top Cryptos
       </h2>
 
