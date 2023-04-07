@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import './globals.css'
 import { Roboto } from 'next/font/google'
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 const roboto = Roboto({
   weight: ['400', '700'],
@@ -22,6 +23,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Header />
 
         {children}
+
+        <Footer />
       </body>
     </html>
   )
