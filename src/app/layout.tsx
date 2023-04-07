@@ -17,7 +17,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html
       lang="en"
-      className={clsx(roboto.className, 'text-body text-base font-normal')}
+      className={clsx(
+        roboto.className,
+        'text-body text-base font-normal scroll-smooth'
+      )}
     >
       <body>
         <Header />
