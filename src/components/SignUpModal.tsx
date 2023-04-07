@@ -6,6 +6,7 @@ import Button from './Button'
 import * as Modal from './Modal'
 import Checkbox from './Checkbox'
 import useModal from '@/hooks/useModal'
+import { Field, Form, Formik } from 'formik'
 
 const SignUpModal = () => {
   const { isOpen, close } = useModal('signUp')
@@ -17,28 +18,42 @@ const SignUpModal = () => {
         Sign up to <BrandName />
       </Modal.Title>
 
-      <form
-        onSubmit={() => {
-          // TODO - Handle sign up
+      <Formik
+        initialValues={{}}
+        onSubmit={(values, { setSubmitting }) => {
+          console.log('submitted')
         }}
-        className="flex flex-col gap-6 mt-6"
       >
-        <Input type="username" placeholder="Name" />
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="Password" />
-        <Input type="password" placeholder="Confirm password" />
+        {({ values, errors, isSubmitting, handleChange, touched }) => (
+          <Form className="flex flex-col gap-6 mt-6">
+            <Input type="username" name="name" placeholder="Name" required />
+            <Input type="email" name="email" placeholder="Email" required />
+            <Input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+            />
+            <Input
+              type="password"
+              name="passwordConfirmation"
+              placeholder="Confirm password"
+              required
+            />
 
-        <Checkbox className="text-left">
-          <span>
-            I have read and accept the <strong>Privacy Policy</strong> and{' '}
-            <strong>Terms of User Sign Up</strong>
-          </span>
-        </Checkbox>
+            <Checkbox className="text-left">
+              <span>
+                I have read and accept the <strong>Privacy Policy</strong> and{' '}
+                <strong>Terms of User Sign Up</strong>
+              </span>
+            </Checkbox>
 
-        <Button className="w-full py-3" type="submit">
-          Sign up
-        </Button>
-      </form>
+            <Button className="w-full py-3" type="submit">
+              Sign up
+            </Button>
+          </Form>
+        )}
+      </Formik>
 
       <div className="text-small-label mt-6">
         <span className="hidden md:inline">Already have an account? </span>

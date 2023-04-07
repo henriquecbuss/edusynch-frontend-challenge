@@ -2,6 +2,7 @@
 
 import Button from '@/components/Button'
 import Input from '@/components/Input'
+import { Form, Formik } from 'formik'
 import Image from 'next/image'
 
 const NewsLetterSection = () => {
@@ -30,20 +31,32 @@ const NewsLetterSection = () => {
           </p>
         </div>
 
-        <form className="mt-10 md:w-full">
-          <Input
-            type="email"
-            className="border-none bg-white text-secondary max-w-full"
-            placeholder="Email"
-          />
+        <Formik
+          initialValues={{ email: '' }}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2))
+              setSubmitting(false)
+            }, 400)
+          }}
+        >
+          <Form className="mt-10 md:w-full" noValidate>
+            <Input
+              type="email"
+              name="email"
+              className="border-none bg-white text-secondary max-w-full"
+              placeholder="Email"
+              required
+            />
 
-          <Button
-            className="py-3 w-full mt-4 shadow-[0px_12px_24px_rgba(0,0,0,0.1) md:mt-[21px]"
-            type="submit"
-          >
-            Subscribe
-          </Button>
-        </form>
+            <Button
+              className="py-3 w-full mt-4 shadow-[0px_12px_24px_rgba(0,0,0,0.1) md:mt-[21px]"
+              type="submit"
+            >
+              Subscribe
+            </Button>
+          </Form>
+        </Formik>
       </div>
     </section>
   )

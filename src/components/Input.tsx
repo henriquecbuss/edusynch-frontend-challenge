@@ -1,14 +1,96 @@
+'use client'
+
 import { useState } from 'react'
 import clsx from 'clsx'
 import Icons from './Icons'
+import { Transition } from '@headlessui/react'
+import { Field, FieldProps, useField } from 'formik'
+import { validateEmail } from '@/utils/validation/email'
 
 type Type = 'email' | 'password' | 'username'
 
-type Props = {
+type FinalCustomInputProps = {
   type: Type
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'>
+  name: string
+  required?: boolean
+  className?: string
+  placeholder?: string
+}
 
-const Input = ({ type, className, ...inputAttrs }: Props) => {
+export const Input = (props: FinalCustomInputProps) => {
+  const [field, meta, helpers] = useField(props)
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(
+    meta.error
+  )
+
+  console.log(errorMessage)
+
+  return (
+    <label className="flex flex-col w-full">
+      <Field
+        {...props}
+        component={CustomInput}
+        validate={(value: any) => {
+          if (typeof value !== 'string') return undefined
+
+          if (props.type === 'email') {
+            const result = validateEmail(value, {
+              required: props.required,
+            })
+
+            if (result.ok) {
+              return undefined
+            }
+
+            return result.error
+          }
+
+          if (props.required && value.length === 0) {
+            return 'Required'
+          }
+
+          return undefined
+        }}
+      />
+      <Transition
+        show={
+          meta.touched &&
+          typeof meta.error === 'string' &&
+          meta.error.length > 0
+        }
+        enter="ease-out duration-300 transition-all"
+        enterFrom="opacity-0 -translate-y-2"
+        enterTo="opacity-100 translate-y-0"
+        leave="ease-out duration-200 transition-all"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 -translate-y-2"
+        as="div"
+        className="text-quaternary-700 text-label mt-2 ml-4"
+        beforeEnter={() => {
+          setErrorMessage(meta.error)
+        }}
+        afterLeave={() => {
+          setErrorMessage(undefined)
+        }}
+      >
+        {errorMessage}
+      </Transition>
+    </label>
+  )
+}
+
+type CustomProps = {
+  type: Type
+  className?: string
+} & FieldProps
+
+const CustomInput = ({
+  type,
+  className,
+  field,
+  form,
+  ...props
+}: CustomProps) => {
   const [inputType, setInputType] = useState<React.HTMLInputTypeAttribute>(
     () => {
       switch (type) {
@@ -30,18 +112,20 @@ const Input = ({ type, className, ...inputAttrs }: Props) => {
   }
 
   return (
-    <label
+    <div
       className={clsx(
-        'border border-secondary-300 rounded-md p-4 flex items-center gap-2 focus-within:border focus-within:border-primary focus-within:ring ring-primary-200',
+        'w-full border border-secondary-300 rounded-md p-4 flex items-center gap-2 focus-within:border focus-within:border-primary focus-within:ring ring-primary-200',
         className
       )}
     >
       <IconForType type={type} className="flex-shrink-0" />
       <input
         type={inputType}
+        {...field}
+        {...props}
         className="focus:outline-none text-label w-full border-none p-0 focus:ring-0 placeholder:text-secondary-400"
-        {...inputAttrs}
-      ></input>
+      />
+
       {type === 'password' && (
         <button
           onClick={handleTogglePasswordVisibility}
@@ -51,7 +135,7 @@ const Input = ({ type, className, ...inputAttrs }: Props) => {
           <Icons.Eye className="fill-secondary-300 group-hover:fill-secondary-400 group-active:fill-secondary-500 transition-colors" />
         </button>
       )}
-    </label>
+    </div>
   )
 }
 
