@@ -14,7 +14,7 @@ export const request = async <T>(
   endpoint: `/${string}`,
   successSchema: z.Schema<T>,
   options?: RequestInit
-): Promise<{ error: string } | T> => {
+): Promise<{ ok: false; error: string } | { ok: true; data: T }> => {
   const coinApiKey = process.env.COINAPI_KEY as string
   const coinApiUrl = process.env.COINAPI_URL as string
 
@@ -35,11 +35,17 @@ export const request = async <T>(
   try {
     const error = errorSchema.parse(jsonResult)
     if ('message' in error) {
-      return { error: error.message }
+      return { ok: false, error: error.message }
     }
 
-    return error
+    return { ok: false, error: error.error }
   } catch {}
 
-  return successSchema.parse(jsonResult)
+  const data = successSchema.safeParse(jsonResult)
+
+  if (data.success) {
+    return { ok: true, data: data.data }
+  }
+
+  return { ok: false, error: data.error.toString() }
 }
