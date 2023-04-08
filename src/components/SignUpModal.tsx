@@ -24,35 +24,33 @@ const SignUpModal = () => {
           console.log('submitted')
         }}
       >
-        {({ values, errors, isSubmitting, handleChange, touched }) => (
-          <Form className="flex flex-col gap-6 mt-6">
-            <Input type="username" name="name" placeholder="Name" required />
-            <Input type="email" name="email" placeholder="Email" required />
-            <Input
-              type="password"
-              name="password"
-              placeholder="Password"
-              required
-            />
-            <Input
-              type="password"
-              name="passwordConfirmation"
-              placeholder="Confirm password"
-              required
-            />
+        <Form className="flex flex-col gap-6 mt-6">
+          <Input type="username" name="name" placeholder="Name" required />
+          <Input type="email" name="email" placeholder="Email" required />
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+          <Input
+            type="password"
+            name="passwordConfirmation"
+            placeholder="Confirm password"
+            required
+          />
 
-            <Checkbox className="text-left">
-              <span>
-                I have read and accept the <strong>Privacy Policy</strong> and{' '}
-                <strong>Terms of User Sign Up</strong>
-              </span>
-            </Checkbox>
+          <Checkbox className="text-left">
+            <span>
+              I have read and accept the <strong>Privacy Policy</strong> and{' '}
+              <strong>Terms of User Sign Up</strong>
+            </span>
+          </Checkbox>
 
-            <Button className="w-full py-3" type="submit">
-              Sign up
-            </Button>
-          </Form>
-        )}
+          <Button className="w-full py-3" type="submit">
+            Sign up
+          </Button>
+        </Form>
       </Formik>
 
       <div className="text-small-label mt-6">
