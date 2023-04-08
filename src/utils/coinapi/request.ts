@@ -10,11 +10,28 @@ const errorSchema = z
     })
   )
 
+export const unsafeResult = async <T>(
+  futureResult: Promise<RequestResult<T>>
+): Promise<T> => {
+  const result = await futureResult
+
+  // We should use some logging service like Sentry here instead
+  if (result.ok) {
+    return result.data
+  }
+
+  throw new Error(result.error)
+}
+
+export type RequestResult<T> =
+  | { ok: false; error: string }
+  | { ok: true; data: T }
+
 export const request = async <T>(
   endpoint: `/${string}`,
   successSchema: z.Schema<T>,
   options?: RequestInit
-): Promise<{ ok: false; error: string } | { ok: true; data: T }> => {
+): Promise<RequestResult<T>> => {
   const coinApiKey = process.env.COINAPI_KEY as string
   const coinApiUrl = process.env.COINAPI_URL as string
 
