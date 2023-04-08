@@ -90,5 +90,9 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [require('@tailwindcss/forms'), require('@headlessui/tailwindcss')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@headlessui/tailwindcss'),
+    require('tailwind-scrollbar-hide'),
+  ],
 }
