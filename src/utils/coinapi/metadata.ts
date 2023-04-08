@@ -38,9 +38,10 @@ export const icons = (size: number) => {
 
 export const rate = (baseId: string, quoteId: string) => {
   return request(
-    `/exchangerate/${baseId}/${quoteId}`,
+    `/exchangerate/${baseId}/${quoteId}/history?limit=1`,
     z.object({
-      rate: z.number(),
+      rate_open: z.number(),
+      rate_close: z.number(),
     })
   )
 }

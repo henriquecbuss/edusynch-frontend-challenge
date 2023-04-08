@@ -35,7 +35,7 @@ export const assetsWithBrlRates = async () => {
     unsafeResult(metadata.assets()),
   ])
 
-  const hydratedAssets = assets.flatMap((asset) => {
+  const hydratedAssets = assets.slice(0, 10).flatMap((asset) => {
     const hydratedAsset = hydrateAsset(asset, icons)
 
     if (hydratedAsset === undefined) {
@@ -47,17 +47,19 @@ export const assetsWithBrlRates = async () => {
 
   const assetsWithBrlRates = await Promise.all(
     hydratedAssets.map(async (asset) => {
-      const { rate } = await unsafeResult(metadata.rate(asset.id, 'BRL'))
+      const { rate_open, rate_close } = await unsafeResult(
+        metadata.rate(asset.id, 'BRL')
+      )
 
       return {
         ...asset,
-        brlRate: rate,
+        brlRate: rate_close,
+        brlRateChange: rate_close - rate_open,
       }
     })
   )
 
-  return assetsWithBrlRates.slice(0, 5)
-  // return assetsWithBrlRates
+  return assetsWithBrlRates
 }
 
 const api = {
