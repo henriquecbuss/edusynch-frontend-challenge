@@ -3,8 +3,13 @@ import LandingSection from './LandingSection'
 import AboutUs from './AboutUsSection'
 import TopCryptos from './TopCryptosSection'
 import NewsletterSection from './NewsletterSection'
+import { assetsWithBrlRates } from '@/utils/coinapi'
 
-const Home = () => {
+const Home = async () => {
+  const data = await assetsWithBrlRates()
+
+  console.log(data)
+
   return (
     <main>
       <LandingSection />
