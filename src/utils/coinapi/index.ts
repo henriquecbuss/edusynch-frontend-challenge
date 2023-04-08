@@ -3,6 +3,16 @@ import * as marketData from './marketData'
 import * as metadata from './metadata'
 import { unsafeResult } from './request'
 
+export type Asset = {
+  id: string
+  name: string
+  icon: string
+  priceUsd: number
+  priceBrl: number
+  brlRateChangeAbsolute: number
+  brlRateChangePercentage: number
+}
+
 const hydrateAsset = (
   asset: metadata.Asset,
   icons: metadata.Icon[]
@@ -29,7 +39,7 @@ const hydrateAsset = (
   }
 }
 
-export const assetsWithBrlRates = async () => {
+export const assetsWithBrlRates = async (): Promise<Asset[]> => {
   const [icons, assets] = await Promise.all([
     unsafeResult(metadata.icons(32)),
     unsafeResult(metadata.assets()),
@@ -53,8 +63,9 @@ export const assetsWithBrlRates = async () => {
 
       return {
         ...asset,
-        brlRate: rate_close,
-        brlRateChange: rate_close - rate_open,
+        priceBrl: rate_close,
+        brlRateChangeAbsolute: rate_close - rate_open,
+        brlRateChangePercentage: (rate_close - rate_open) / rate_open,
       }
     })
   )

@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import { ModalContextProvider } from '@/context/modalContext'
 import SignUpModal from '@/components/SignUpModal'
 import SignInModal from '@/components/SignInModal'
+import { Asset, assetsWithBrlRates } from '@/utils/coinapi'
 
 const roboto = Roboto({
   weight: ['400', '700'],
@@ -17,7 +18,41 @@ export const metadata = {
   description: 'CoinSynch is a cryptocurrency portfolio tracker.',
 }
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = async ({ children }: { children: React.ReactNode }) => {
+  let assets: Asset[] = [
+    {
+      id: 'BIT',
+      name: 'BITCOIN',
+      icon: '/logo.svg',
+      priceUsd: 4.67,
+      priceBrl: 23.62,
+      brlRateChangeAbsolute: 7.082,
+      brlRateChangePercentage: 0.1,
+    },
+    {
+      id: 'DOG',
+      name: 'DOGECOIN',
+      icon: '/logo.svg',
+      priceUsd: 4.67,
+      priceBrl: 23.62,
+      brlRateChangeAbsolute: -5.23,
+      brlRateChangePercentage: -0.35,
+    },
+    {
+      id: 'ETH',
+      name: 'ETHEREUM',
+      icon: '/logo.svg',
+      priceUsd: 4.67,
+      priceBrl: 23.62,
+      brlRateChangeAbsolute: 7.082,
+      brlRateChangePercentage: 0.1,
+    },
+  ]
+  // TODO - Bring this back
+  // try {
+  //   assets = await assetsWithBrlRates()
+  // } catch {}
+
   return (
     <html
       lang="en"
@@ -28,7 +63,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     >
       <body>
         <ModalContextProvider>
-          <Header />
+          <Header assets={assets} />
 
           {children}
 

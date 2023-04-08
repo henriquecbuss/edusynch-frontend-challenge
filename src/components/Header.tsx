@@ -5,26 +5,13 @@ import Logo from './Logo'
 import Link from 'next/link'
 import User from './User'
 import CoinCarrousel from './CoinCarrousel'
+import { Asset } from '@/utils/coinapi'
 
-const coins = [
-  {
-    symbol: 'BIT',
-    price: 23.62,
-    change: 7.082,
-  },
-  {
-    symbol: 'DOG',
-    price: 23.62,
-    change: -5.23,
-  },
-  {
-    symbol: 'ETH',
-    price: 23.62,
-    change: 7.082,
-  },
-]
+type Props = {
+  assets: Asset[]
+}
 
-const Header = () => {
+const Header = ({ assets }: Props) => {
   const headerRef = useRef<HTMLElement>(null)
   const carrouselRef = useRef<HTMLDivElement>(null)
 
@@ -42,8 +29,8 @@ const Header = () => {
         </nav>
 
         <CoinCarrousel
-          className="hidden lg:block ml-auto max-w-[360px]"
-          coins={coins}
+          className="hidden lg:flex ml-auto max-w-[360px]"
+          coins={assets}
         />
 
         <User
@@ -55,7 +42,7 @@ const Header = () => {
       <hr className="text-secondary-200" />
 
       <div className="lg:hidden shadow-md" ref={carrouselRef}>
-        <CoinCarrousel className="max-w-min mx-auto" coins={coins} />
+        <CoinCarrousel className="max-w-[360px] mx-auto" coins={assets} />
       </div>
     </>
   )
