@@ -20,6 +20,7 @@ const Home = () => {
 
       <AboutUs />
 
+      {/* @ts-expect-error Async Server Component */}
       <TopCryptos />
 
       <NewsletterSection />

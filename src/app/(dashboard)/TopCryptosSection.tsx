@@ -1,40 +1,12 @@
 import Button from '@/components/Button'
 import CryptoDisclosure from '@/components/CryptoDisclosure'
 import CryptoRow from '@/components/CryptoRow'
+import { assetsWithBrlRates } from '@/utils/coinapi'
 import clsx from 'clsx'
 
-const cryptos = [
-  {
-    name: 'Bitcoin',
-    image: '/BTC.png',
-    symbol: 'BTC',
-    price: 25499.52,
-    changePercentage: 5.65,
-  },
-  {
-    name: 'Bitcoin',
-    image: '/BTC.png',
-    symbol: 'BTC',
-    price: 25499.52,
-    changePercentage: -5.65,
-  },
-  {
-    name: 'Bitcoin',
-    image: '/BTC.png',
-    symbol: 'BTC',
-    price: 25499.52,
-    changePercentage: 5.65,
-  },
-  {
-    name: 'Bitcoin',
-    image: '/BTC.png',
-    symbol: 'BTC',
-    price: 25499.52,
-    changePercentage: 5.65,
-  },
-]
+const TopCryptos = async () => {
+  const assets = await assetsWithBrlRates()
 
-const TopCryptos = () => {
   return (
     <section className="mt-14 container">
       <h2
@@ -45,10 +17,10 @@ const TopCryptos = () => {
       </h2>
 
       <div className="flex flex-col mt-4 md:hidden">
-        {cryptos.map((crypto, index) => (
+        {assets.map((asset) => (
           <CryptoDisclosure
-            crypto={crypto}
-            key={index}
+            asset={asset}
+            key={asset.id}
             className="even:bg-secondary-100"
           />
         ))}
@@ -65,9 +37,8 @@ const TopCryptos = () => {
           </tr>
         </thead>
         <tbody>
-          {cryptos.map((crypto, index) => (
-            // TODO - Change key to crypto symbol
-            <CryptoRow crypto={crypto} index={index + 1} key={index} />
+          {assets.map((asset, index) => (
+            <CryptoRow asset={asset} index={index + 1} key={asset.id} />
           ))}
         </tbody>
       </table>

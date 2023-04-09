@@ -5,22 +5,22 @@ import Image from 'next/image'
 import ChevronDown from './Icons/ChevronDown'
 import clsx from 'clsx'
 import FormattedNumber from './FormattedNumber'
-import { CryptoCurrency } from '@/cryptoCurrency'
+import { Asset } from '@/utils/coinapi'
 
 type Props = {
-  crypto: CryptoCurrency
+  asset: Asset
   className?: string
 }
 
-const CryptoDisclosure = ({ crypto, className }: Props) => {
+const CryptoDisclosure = ({ asset, className }: Props) => {
   return (
     <Disclosure>
       <Disclosure.Button
         className={clsx('flex items-center gap-2 p-4', className)}
       >
-        <Image src={crypto.image} width={24} height={24} alt="" />
+        <Image src={asset.icon} width={24} height={24} alt="" />
         <p className="text-small-label">
-          {crypto.name} <span className="text-secondary">{crypto.symbol}</span>
+          {asset.name} <span className="text-secondary">{asset.id}</span>
         </p>
         <ChevronDown className="!fill-primary-300 ml-auto w-4 h-4 ui-open:rotate-180 transition-transform" />
       </Disclosure.Button>
@@ -36,7 +36,7 @@ const CryptoDisclosure = ({ crypto, className }: Props) => {
           <div className="flex items-center justify-between">
             <span className="text-small-label text-secondary">Price</span>
             <FormattedNumber
-              number={crypto.price}
+              number={asset.priceUsd}
               options={{
                 style: 'currency',
                 currency: 'USD',
@@ -48,10 +48,10 @@ const CryptoDisclosure = ({ crypto, className }: Props) => {
           <div className="flex items-center justify-between">
             <span className="text-small-label text-secondary">Change</span>
             <FormattedNumber
-              number={crypto.changePercentage / 100}
+              number={asset.brlRateChangePercentage}
               className={clsx({
-                'text-tertiary-700': crypto.changePercentage > 0,
-                'text-quaternary-700': crypto.changePercentage < 0,
+                'text-tertiary-700': asset.brlRateChangePercentage > 0,
+                'text-quaternary-700': asset.brlRateChangePercentage < 0,
               })}
               options={{
                 signDisplay: 'always',
