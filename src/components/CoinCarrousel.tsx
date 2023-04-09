@@ -13,7 +13,7 @@ const CoinCarrousel = ({ className, coins }: Props) => {
   return (
     <div
       className={clsx(
-        'py-[5px] mx-2 flex items-center gap-6 overflow-scroll scrollbar-hide',
+        'py-[5px] mx-2 flex items-center gap-6 overflow-scroll scrollbar-hide px-4 coin-carrousel-opacity-mask',
         className
       )}
     >
