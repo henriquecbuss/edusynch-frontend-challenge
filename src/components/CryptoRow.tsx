@@ -8,8 +8,8 @@ import { Asset } from '@/utils/coinapi'
 
 const CryptoRow = ({ asset, index }: { asset: Asset; index: number }) => {
   return (
-    <tr className="even:bg-secondary-100 hover:bg-secondary-100 even:hover:bg-secondary-200 transition-colors">
-      <Cell>{index}</Cell>
+    <tr className="even:bg-secondary-100 hover:bg-secondary-100 even:hover:bg-secondary-200 transition-colors max-h-16">
+      <Cell>{index < 10 ? `0${index}` : index}</Cell>
       <Cell className="flex items-center gap-2">
         <Image src={asset.icon} alt="" width={32} height={32} />
         <p className="text-small-label">
