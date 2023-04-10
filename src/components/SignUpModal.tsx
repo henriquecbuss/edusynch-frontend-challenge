@@ -7,10 +7,12 @@ import * as Modal from './Modal'
 import Checkbox from './Checkbox'
 import useModal from '@/hooks/useModal'
 import { Form, Formik } from 'formik'
+import { useRouter } from 'next/navigation'
 
 const SignUpModal = () => {
   const { isOpen, close } = useModal('signUp')
   const { open: openSignInModal } = useModal('signIn')
+  const router = useRouter()
 
   return (
     <Modal.Root isOpen={isOpen} close={close}>
@@ -27,9 +29,10 @@ const SignUpModal = () => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           close()
+          router.push('/dashboard')
         }}
       >
-        <Form className="flex flex-col gap-6 mt-6">
+        <Form className="flex flex-col gap-6 mt-6" noValidate>
           <Input type="username" name="name" placeholder="Name" required />
           <Input type="email" name="email" placeholder="Email" required />
           <Input

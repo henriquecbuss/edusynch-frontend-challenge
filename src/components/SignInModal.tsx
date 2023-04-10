@@ -7,10 +7,12 @@ import Button from './Button'
 import * as Modal from './Modal'
 import useModal from '@/hooks/useModal'
 import { Form, Formik } from 'formik'
+import { useRouter } from 'next/navigation'
 
 const SignInModal = () => {
   const { isOpen, close } = useModal('signIn')
   const { open: openSignUpModal } = useModal('signUp')
+  const router = useRouter()
 
   return (
     <Modal.Root isOpen={isOpen} close={close}>
@@ -25,6 +27,7 @@ const SignInModal = () => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           close()
+          router.push('/dashboard')
         }}
       >
         <Form className="mt-6">
