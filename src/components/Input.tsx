@@ -31,6 +31,10 @@ export const Input = (props: FinalCustomInputProps) => {
         validate={(value: any) => {
           if (typeof value !== 'string') return undefined
 
+          if (props.required && value.length === 0) {
+            return 'Required'
+          }
+
           if (props.type === 'email') {
             const result = validateEmail(value, {
               required: props.required,
@@ -41,10 +45,6 @@ export const Input = (props: FinalCustomInputProps) => {
             }
 
             return result.error
-          }
-
-          if (props.required && value.length === 0) {
-            return 'Required'
           }
 
           return undefined
@@ -63,7 +63,7 @@ export const Input = (props: FinalCustomInputProps) => {
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 -translate-y-2"
         as="div"
-        className="text-quaternary-700 text-label mt-2 ml-4"
+        className="text-quaternary-700 text-label text-left mt-2 ml-4"
         beforeEnter={() => {
           setErrorMessage(meta.error)
         }}
