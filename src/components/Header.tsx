@@ -30,7 +30,7 @@ const Header = ({ assets }: Props) => {
 
         <CoinCarrousel
           className="hidden lg:flex ml-auto max-w-[360px]"
-          coins={assets}
+          assets={assets}
         />
 
         <User
@@ -42,7 +42,7 @@ const Header = ({ assets }: Props) => {
       <hr className="text-secondary-200" />
 
       <div className="lg:hidden shadow-md" ref={carrouselRef}>
-        <CoinCarrousel className="max-w-[360px] mx-auto" coins={assets} />
+        <CoinCarrousel className="max-w-[360px] mx-auto" assets={assets} />
       </div>
     </>
   )
