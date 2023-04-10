@@ -13,6 +13,7 @@ type Props = {
   overlayStyle?: React.CSSProperties
   dialogClassName?: string
   dialogStyle?: React.CSSProperties
+  hiddenBreakpoint?: 'md' | 'lg'
 }
 
 const SlideOver = ({
@@ -24,11 +25,19 @@ const SlideOver = ({
   overlayStyle,
   dialogClassName,
   dialogStyle,
+  hiddenBreakpoint = 'md',
 }: Props) => {
   return (
     <div className="isolate">
       <Transition.Root show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10 md:hidden" onClose={onClose}>
+        <Dialog
+          as="div"
+          className={clsx('relative z-10', {
+            'md:hidden': hiddenBreakpoint === 'md',
+            'lg:hidden': hiddenBreakpoint === 'lg',
+          })}
+          onClose={onClose}
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-in-out duration-500"
