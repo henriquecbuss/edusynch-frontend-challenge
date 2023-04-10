@@ -3,9 +3,9 @@
 import { useRef } from 'react'
 import Logo from './Logo'
 import Link from 'next/link'
-import User from './User'
 import CoinCarrousel from './CoinCarrousel'
 import { Asset } from '@/utils/coinapi'
+import SignInSignUpMenu from './SignInSignUpMenu'
 
 type Props = {
   assets: Asset[]
@@ -33,7 +33,7 @@ const SignedOutHeader = ({ assets }: Props) => {
           assets={assets}
         />
 
-        <User
+        <SignInSignUpMenu
           className="hidden md:block ml-auto lg:ml-20"
           headerRef={headerRef}
           coinCarrouselRef={carrouselRef}
