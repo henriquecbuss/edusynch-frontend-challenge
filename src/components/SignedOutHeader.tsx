@@ -11,7 +11,7 @@ type Props = {
   assets: Asset[]
 }
 
-const Header = ({ assets }: Props) => {
+const SignedOutHeader = ({ assets }: Props) => {
   const headerRef = useRef<HTMLElement>(null)
   const carrouselRef = useRef<HTMLDivElement>(null)
 
@@ -62,4 +62,4 @@ const HeaderLink = ({
   )
 }
 
-export default Header
+export default SignedOutHeader
