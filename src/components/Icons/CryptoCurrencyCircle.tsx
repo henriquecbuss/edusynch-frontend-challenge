@@ -1,5 +1,10 @@
-const CryptoCurrencyCircle = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
+const CryptoCurrencyCircle = (props: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 64 64"
+    {...props}
+  >
     <path
       fill="#FBAB34"
       fillRule="evenodd"
