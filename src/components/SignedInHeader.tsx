@@ -14,11 +14,11 @@ const SignedInHeader = () => {
   return (
     <>
       <header
-        className="container py-4 grid grid-cols-3 grid-rows-1 shadow-md"
+        className="container py-4 grid grid-cols-3 grid-rows-1 shadow-md lg:flex lg:justify-between lg:items-center"
         ref={headerRef}
       >
         <button
-          className="md-hidden place-self-start"
+          className="lg:hidden place-self-start"
           onClick={() => setIsSlideOverOpen((prev) => !prev)}
           aria-label="Open navigation menu"
         >
