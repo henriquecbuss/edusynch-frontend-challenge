@@ -11,6 +11,7 @@ import Chart from './Chart'
 import Computer from './Computer'
 import CryptoCurrencyCircle from './CryptoCurrencyCircle'
 import CryptoWallet from './CryptoWallet'
+import CircledArrowLeft from './CircledArrowLeft'
 
 const icons = {
   Hamburger,
@@ -26,6 +27,7 @@ const icons = {
   Computer,
   CryptoCurrencyCircle,
   CryptoWallet,
+  CircledArrowLeft,
 }
 
 export default icons
