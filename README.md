@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project, for [the EduSynch frontend cha
 
 ## 📄 Live demo
 
-This project is hosted on Vercel, and can be accessed at ...
+This project is hosted on Vercel, and can be accessed at https://edusynch-frontend-challenge.vercel.app/
 
 ## ⚙️ Technologies
 
