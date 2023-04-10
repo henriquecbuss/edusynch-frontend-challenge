@@ -6,7 +6,7 @@ import Footer from '@/components/Footer'
 import { ModalContextProvider } from '@/context/modalContext'
 import SignUpModal from '@/components/SignUpModal'
 import SignInModal from '@/components/SignInModal'
-import { Asset, assetsWithBrlRates } from '@/utils/coinapi'
+import { assetsWithBrlRates } from '@/utils/coinapi'
 
 const roboto = Roboto({
   weight: ['400', '700'],

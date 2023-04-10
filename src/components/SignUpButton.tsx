@@ -2,25 +2,21 @@
 
 import useModal from '@/hooks/useModal'
 import Button, { Props as ButtonProps } from './Button'
-import SignUpModal from './SignUpModal'
 
 type Props = Omit<ButtonProps, 'type'>
 
 const SignUpButton = ({ onClick, ...props }: Props) => {
-  const { open } = useModal('signIn')
+  const { open } = useModal('signUp')
 
   return (
-    <>
-      <Button
-        {...props}
-        onClick={(e) => {
-          if (onClick) onClick(e)
+    <Button
+      {...props}
+      onClick={(e) => {
+        if (onClick) onClick(e)
 
-          open()
-        }}
-      />
-      <SignUpModal />
-    </>
+        open()
+      }}
+    />
   )
 }
 

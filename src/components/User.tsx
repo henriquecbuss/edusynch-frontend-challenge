@@ -36,8 +36,6 @@ const SignedInView = ({ className }: Props) => {
   )
 }
 
-type ForegroundElement = 'slideOver' | 'signInModal' | 'signUpModal'
-
 const SignedOutView = ({ className, headerRef, coinCarrouselRef }: Props) => {
   const [isSlideOverOpen, setIsSlideOverOpen] = useState(false)
 

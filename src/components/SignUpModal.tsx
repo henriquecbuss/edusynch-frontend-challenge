@@ -6,7 +6,7 @@ import Button from './Button'
 import * as Modal from './Modal'
 import Checkbox from './Checkbox'
 import useModal from '@/hooks/useModal'
-import { Field, Form, Formik } from 'formik'
+import { Form, Formik } from 'formik'
 
 const SignUpModal = () => {
   const { isOpen, close } = useModal('signUp')
