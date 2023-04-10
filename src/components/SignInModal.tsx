@@ -19,9 +19,12 @@ const SignInModal = () => {
       </Modal.Title>
 
       <Formik
-        initialValues={{}}
+        initialValues={{
+          email: '',
+          password: '',
+        }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log('submitted')
+          close()
         }}
       >
         <Form className="mt-6">

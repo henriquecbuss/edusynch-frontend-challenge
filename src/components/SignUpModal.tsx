@@ -19,9 +19,14 @@ const SignUpModal = () => {
       </Modal.Title>
 
       <Formik
-        initialValues={{}}
+        initialValues={{
+          name: '',
+          email: '',
+          password: '',
+          passwordConfirmation: '',
+        }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log('submitted')
+          close()
         }}
       >
         <Form className="flex flex-col gap-6 mt-6">
