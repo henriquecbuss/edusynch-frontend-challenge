@@ -27,6 +27,8 @@ And then install dependencies:
 yarn
 ```
 
+Now, set up your environment: copy the `.env.local.example` file, and name it `.env.local`, replacing the sample value for the `COINAPI_KEY` with your actual key, which you can get from (https://coinapi.io).
+
 And finally, start the development server:
 
 ```bash
