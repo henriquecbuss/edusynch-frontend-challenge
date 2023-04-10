@@ -64,8 +64,7 @@ const CoinCarrousel = ({ className, assets }: Props) => {
           const secondBoundingRect = secondContainer.getBoundingClientRect()
 
           return (
-            Math.abs(outerBoundingRect.left - secondBoundingRect.left) <
-            speed + 16
+            Math.abs(outerBoundingRect.left - secondBoundingRect.left) < speed
           )
         },
         andThen: (outerContainer) => {
