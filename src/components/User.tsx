@@ -3,18 +3,47 @@
 import clsx from 'clsx'
 import Icons from './Icons'
 import { Menu, Transition } from '@headlessui/react'
-import Link from 'next/link'
+import Image from 'next/image'
 import { Fragment } from 'react'
+import { useAuth, useUser } from '@clerk/nextjs'
+import Button from './Button'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   className?: string
 }
 
 const User = ({ className }: Props) => {
+  const router = useRouter()
+  const { isLoaded, user } = useUser()
+  const { signOut } = useAuth()
+
+  if (isLoaded && !user) {
+    return null
+  }
+
+  console.log(user?.imageUrl)
+
   return (
     <Menu as="div" className={clsx('relative', className)}>
       <Menu.Button className="flex items-center">
-        <div className="w-6 h-6 rounded-full bg-secondary-600 mr-2"></div>
+        {user && user.imageUrl && (
+          <Image
+            width={24}
+            height={24}
+            src={user.imageUrl ?? '/logo.svg'}
+            alt=""
+            className="rounded-full mr-2"
+          />
+        )}
+        {user && !user.imageUrl && (
+          <div className="w-6 h-6 rounded-full bg-secondary-600 mr-2 uppercase text-white">
+            {user.fullName?.charAt(0)}
+          </div>
+        )}
+        {!user && (
+          <div className="w-6 h-6 rounded-full bg-secondary-600 mr-2"></div>
+        )}
         <p className="hidden md:block text-label mr-1">Aulus</p>
         <Icons.ChevronDown className="w-2 h-2" />
       </Menu.Button>
@@ -28,21 +57,16 @@ const User = ({ className }: Props) => {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="absolute right-0 mt-2 p-1 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <Menu.Item>
-            {({ active }) => (
-              <Link
-                href="/"
-                className={clsx(
-                  'whitespace-nowrap text-right text-label transition-colors p-1 rounded',
-                  {
-                    'bg-quaternary-200 text-quaternary-700': active,
-                  }
-                )}
-              >
-                Sign out
-              </Link>
-            )}
-          </Menu.Item>
+          <Menu.Button
+            className="whitespace-nowrap text-right text-label transition-colors p-2 rounded hover:no-underline hover:bg-quaternary-200 hover:text-quaternary-700"
+            onClick={() => {
+              signOut().then(() => {
+                router.push('/')
+              })
+            }}
+          >
+            Sign out
+          </Menu.Button>
         </Menu.Items>
       </Transition>
     </Menu>
