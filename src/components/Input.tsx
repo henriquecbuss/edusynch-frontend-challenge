@@ -15,6 +15,7 @@ type FinalCustomInputProps = {
   required?: boolean
   className?: string
   placeholder?: string
+  disabled?: boolean
 }
 
 export const Input = (props: FinalCustomInputProps) => {
@@ -80,6 +81,7 @@ export const Input = (props: FinalCustomInputProps) => {
 type CustomProps = {
   type: Type
   className?: string
+  disabled?: boolean
 } & FieldProps
 
 const CustomInput = ({
@@ -112,8 +114,9 @@ const CustomInput = ({
   return (
     <div
       className={clsx(
-        'w-full border border-secondary-300 rounded-md p-4 flex items-center gap-2 focus-within:border focus-within:border-primary focus-within:ring ring-primary-200',
-        className
+        'w-full border border-secondary-300 rounded-md p-4 flex items-center gap-2 focus-within:border focus-within:border-primary focus-within:ring ring-primary-200 transition-colors',
+        className,
+        { 'bg-secondary-200': props.disabled }
       )}
     >
       <IconForType type={type} className="flex-shrink-0" />
@@ -121,7 +124,7 @@ const CustomInput = ({
         type={inputType}
         {...field}
         {...props}
-        className="focus:outline-none text-label w-full border-none p-0 focus:ring-0 placeholder:text-secondary-400"
+        className="focus:outline-none text-label w-full border-none p-0 focus:ring-0 placeholder:text-secondary-400 bg-transparent"
       />
 
       {type === 'password' && (

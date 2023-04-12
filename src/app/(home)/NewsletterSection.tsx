@@ -35,27 +35,30 @@ const NewsLetterSection = () => {
           initialValues={{ email: '' }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2))
               setSubmitting(false)
-            }, 400)
+            }, 3000)
           }}
         >
-          <Form className="mt-10 md:w-full" noValidate>
-            <Input
-              type="email"
-              name="email"
-              className="border-none bg-white text-secondary max-w-full"
-              placeholder="Email"
-              required
-            />
+          {({ isSubmitting }) => (
+            <Form className="mt-10 md:w-full" noValidate>
+              <Input
+                type="email"
+                name="email"
+                className="border-none bg-white text-secondary max-w-full"
+                placeholder="Email"
+                required
+                disabled={isSubmitting}
+              />
 
-            <Button
-              className="py-3 w-full mt-4 shadow-[0px_12px_24px_rgba(0,0,0,0.1) md:mt-[21px]"
-              type="submit"
-            >
-              Subscribe
-            </Button>
-          </Form>
+              <Button
+                className="py-3 w-full mt-4 shadow-[0px_12px_24px_rgba(0,0,0,0.1) md:mt-[21px]"
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Loading...' : 'Subscribe'}
+              </Button>
+            </Form>
+          )}
         </Formik>
       </div>
     </section>
