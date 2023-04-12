@@ -18,11 +18,18 @@ const User = ({ className }: Props) => {
   const { isLoaded, user } = useUser()
   const { signOut } = useAuth()
 
-  if (isLoaded && !user) {
-    return null
+  if (!isLoaded) {
+    return (
+      <div className={clsx('flex items-center', className)} aria-hidden>
+        <div className="rounded-full mr-2 bg-secondary-600 animate-pulse w-6 h-6" />
+        <div className="hidden md:block rounded w-20 h-4 bg-secondary-600 animate-pulse" />
+      </div>
+    )
   }
 
-  console.log(user?.imageUrl)
+  if (!user) {
+    return null
+  }
 
   return (
     <Menu as="div" className={clsx('relative', className)}>
@@ -44,7 +51,7 @@ const User = ({ className }: Props) => {
         {!user && (
           <div className="w-6 h-6 rounded-full bg-secondary-600 mr-2"></div>
         )}
-        <p className="hidden md:block text-label mr-1">Aulus</p>
+        <p className="hidden md:block text-label mr-1">{user?.firstName}</p>
         <Icons.ChevronDown className="w-2 h-2" />
       </Menu.Button>
       <Transition
