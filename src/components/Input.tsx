@@ -48,6 +48,12 @@ export const Input = (props: FinalCustomInputProps) => {
             return result.error
           }
 
+          if (props.type === 'password') {
+            if (value.length < 8) {
+              return 'Password must be at least 8 characters'
+            }
+          }
+
           return undefined
         }}
       />

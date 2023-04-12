@@ -8,11 +8,18 @@ import Checkbox from './Checkbox'
 import useModal from '@/hooks/useModal'
 import { Form, Formik } from 'formik'
 import { useRouter } from 'next/navigation'
+import { useSignUp } from '@clerk/nextjs'
 
 const SignUpModal = () => {
   const { isOpen, close } = useModal('signUp')
   const { open: openSignInModal } = useModal('signIn')
   const router = useRouter()
+
+  const { isLoaded, signUp, setActive } = useSignUp()
+
+  if (!isLoaded) {
+    return null
+  }
 
   return (
     <Modal.Root isOpen={isOpen} close={close}>
@@ -26,10 +33,54 @@ const SignUpModal = () => {
           email: '',
           password: '',
           passwordConfirmation: '',
+          acceptTos: false,
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          close()
-          router.push('/dashboard')
+        onSubmit={async (values, { setSubmitting, setFieldError }) => {
+          if (values.password !== values.passwordConfirmation) {
+            setSubmitting(false)
+            setFieldError('passwordConfirmation', 'Passwords do not match')
+            return
+          }
+
+          if (!values.acceptTos) {
+            setSubmitting(false)
+            setFieldError('acceptTos', 'You must accept terms of service')
+            return
+          }
+
+          const [firstName, ...lastNames] = values.name.split(' ')
+
+          try {
+            const signUpResult = await signUp.create({
+              emailAddress: values.email,
+              password: values.password,
+              firstName,
+              lastName: lastNames.join(' '),
+            })
+
+            if (signUpResult.status === 'complete') {
+              setActive({ session: signUpResult.createdSessionId })
+              router.push('/dashboard')
+              close()
+              return
+            }
+
+            setFieldError('passwordConfirmation', 'Something went wrong')
+          } catch (err) {
+            const error = err as {
+              errors: {
+                message: string
+                meta: {
+                  paramName: string
+                }
+              }[]
+            }
+
+            const firstError = error.errors[0]
+            setFieldError(firstError.meta.paramName, firstError.message)
+          } finally {
+            setSubmitting(false)
+          }
         }}
       >
         <Form className="flex flex-col gap-6 mt-6" noValidate>
@@ -48,7 +99,7 @@ const SignUpModal = () => {
             required
           />
 
-          <Checkbox className="text-left">
+          <Checkbox className="text-left" required name="acceptTos">
             <span>
               I have read and accept the <strong>Privacy Policy</strong> and{' '}
               <strong>Terms of User Sign Up</strong>

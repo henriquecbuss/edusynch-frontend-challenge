@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import { ModalContextProvider } from '@/context/modalContext'
 import SignUpModal from '@/components/SignUpModal'
 import SignInModal from '@/components/SignInModal'
+import { ClerkProvider } from '@clerk/nextjs/app-beta'
 
 const roboto = Roboto({
   weight: ['400', '700'],
@@ -25,16 +26,18 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
         'text-body text-base font-normal scroll-smooth'
       )}
     >
-      <body>
-        <ModalContextProvider>
-          {children}
+      <ClerkProvider>
+        <body>
+          <ModalContextProvider>
+            {children}
 
-          <Footer />
+            <Footer />
 
-          <SignInModal />
-          <SignUpModal />
-        </ModalContextProvider>
-      </body>
+            <SignInModal />
+            <SignUpModal />
+          </ModalContextProvider>
+        </body>
+      </ClerkProvider>
     </html>
   )
 }
