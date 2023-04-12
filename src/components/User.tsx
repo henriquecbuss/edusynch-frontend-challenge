@@ -63,16 +63,17 @@ const User = ({ className }: Props) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 mt-2 p-1 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 mt-3 p-1 origin-top-right rounded bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <Menu.Button
-            className="whitespace-nowrap text-right text-label transition-colors p-2 rounded hover:no-underline hover:bg-quaternary-200 hover:text-quaternary-700"
+            className="flex items-center gap-4 px-5 py-3 hover:bg-secondary-100 active:bg-secondary-200 rounded-sm text-label"
             onClick={() => {
               signOut().then(() => {
                 router.push('/')
               })
             }}
           >
-            Sign out
+            <Icons.DoorOut className="w-4 h-4" />
+            Logout
           </Menu.Button>
         </Menu.Items>
       </Transition>
