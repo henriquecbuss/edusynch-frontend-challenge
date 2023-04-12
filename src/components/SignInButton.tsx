@@ -6,12 +6,23 @@ import { useAuth } from '@clerk/nextjs'
 
 type Props = Omit<ButtonProps, 'type'>
 
-const SignInButton = ({ onClick, ...props }: Props) => {
+const SignInButton = ({ onClick, children, ...props }: Props) => {
   const { open } = useModal('signIn')
-  const { isSignedIn } = useAuth()
+  const { isSignedIn, signOut } = useAuth()
 
   if (isSignedIn) {
-    return null
+    return (
+      <Button
+        {...props}
+        onClick={(e) => {
+          if (onClick) onClick(e)
+
+          signOut()
+        }}
+      >
+        Sign out
+      </Button>
+    )
   }
 
   return (
@@ -22,7 +33,9 @@ const SignInButton = ({ onClick, ...props }: Props) => {
 
         open()
       }}
-    />
+    >
+      {children}
+    </Button>
   )
 }
 

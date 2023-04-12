@@ -69,15 +69,15 @@ const SignInSignUpMenu = ({
         </div>
       </SlideOver>
       <div
-        className={clsx('hidden md:flex flex-nowrap items-center', className)}
+        className={clsx(
+          'hidden md:flex flex-nowrap items-center gap-6',
+          className
+        )}
       >
         <SignInButton variant="ghost" onClick={() => setIsSlideOverOpen(false)}>
           Sign in
         </SignInButton>
-        <SignUpButton
-          onClick={() => setIsSlideOverOpen(false)}
-          className="ml-6"
-        >
+        <SignUpButton onClick={() => setIsSlideOverOpen(false)}>
           Sign up
         </SignUpButton>
       </div>

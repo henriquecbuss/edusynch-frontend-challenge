@@ -10,7 +10,7 @@ type Props = Omit<ButtonProps, 'type' | 'onClick'> & {
   onClick?: () => void
 }
 
-const SignUpButton = ({ onClick, className, ...props }: Props) => {
+const SignUpButton = ({ onClick, className, children, ...props }: Props) => {
   const { open } = useModal('signUp')
   const { isSignedIn } = useAuth()
 
@@ -31,13 +31,16 @@ const SignUpButton = ({ onClick, className, ...props }: Props) => {
 
   return (
     <Button
+      className={className}
       {...props}
       onClick={() => {
         if (onClick) onClick()
 
         open()
       }}
-    />
+    >
+      {children}
+    </Button>
   )
 }
 

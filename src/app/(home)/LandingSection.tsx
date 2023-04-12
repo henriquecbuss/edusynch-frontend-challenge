@@ -15,7 +15,7 @@ const LandingSection = () => {
           purus sit amet luctus venenatis, lectus magna fringilla urna,
           porttitor
         </p>
-        <SignUpButton className="uppercase flex items-center justify-center gap-2 mx-auto mt-6 min-w-[180px] md:mx-0 md:py-3 md:w-[232px]">
+        <SignUpButton className="uppercase flex items-center justify-center gap-2 mx-auto mt-6 min-w-[180px] md:mx-0 md:py-3 md:min-w-[232px]">
           Sign up now <Icons.ArrowRight />
         </SignUpButton>
 
