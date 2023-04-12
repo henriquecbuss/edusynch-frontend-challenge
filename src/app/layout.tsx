@@ -23,20 +23,22 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       lang="en"
       className={clsx(
         roboto.className,
-        'text-body text-base font-normal scroll-smooth'
+        'text-body text-base font-normal scroll-smooth h-full'
       )}
     >
       <ClerkProvider>
-        <body>
-          <ModalContextProvider>
-            {children}
+        <ModalContextProvider>
+          <body className="h-full">
+            <div className="h-full flex flex-col justify-between">
+              <div className="">{children}</div>
 
-            <Footer />
+              <Footer />
+            </div>
 
             <SignInModal />
             <SignUpModal />
-          </ModalContextProvider>
-        </body>
+          </body>
+        </ModalContextProvider>
       </ClerkProvider>
     </html>
   )

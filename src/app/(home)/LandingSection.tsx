@@ -34,7 +34,7 @@ const Carrousel = () => {
   // TODO - Nail this down
   return (
     <div className="hidden md:flex flex-shrink-0 flex-grow-0 self-start opacity-mask -mr-[48px] lg:-mr-[112px]">
-      <div className="flex flex-grow-0 gap-[67px] px-[71px] lg:px-[98px] lg:gap-[120px] overflow-scroll">
+      <div className="flex flex-grow-0 gap-[67px] px-[71px] lg:px-[98px] lg:gap-[120px] overflow-scroll scrollbar-hide">
         <CarrouselItem>
           <div className="bg-primary absolute right-0 bottom-0 w-[151px] h-[236px]"></div>
           <CarrouselIcon className="left-[-22px] top-[44px] lg:-left-10 lg:top-[79px]">

@@ -45,12 +45,14 @@ const SignInModal = () => {
                 beforeEmit: () => {
                   close()
                   router.push('/dashboard')
+                  setSubmitting(false)
                 },
               })
               return
             }
 
             setFieldError('password', 'Something went wrong')
+            setSubmitting(false)
           } catch (err) {
             const error = err as {
               errors: {
@@ -63,7 +65,6 @@ const SignInModal = () => {
 
             const firstError = error.errors[0]
             setFieldError(firstError.meta.paramName, firstError.message)
-          } finally {
             setSubmitting(false)
           }
         }}
