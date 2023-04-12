@@ -40,9 +40,13 @@ const SignInModal = () => {
             })
 
             if (signInResult.status === 'complete') {
-              router.push('/dashboard')
-              close()
-              setActive({ session: signInResult.createdSessionId })
+              setActive({
+                session: signInResult.createdSessionId,
+                beforeEmit: () => {
+                  close()
+                  router.push('/dashboard')
+                },
+              })
               return
             }
 

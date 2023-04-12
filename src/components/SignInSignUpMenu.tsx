@@ -63,7 +63,10 @@ const SignInSignUpMenu = ({
           >
             Sign in
           </SignInButton>
-          <SignUpButton onClick={() => setIsSlideOverOpen(false)}>
+          <SignUpButton
+            className="text-label"
+            onClick={() => setIsSlideOverOpen(false)}
+          >
             Sign up
           </SignUpButton>
         </div>
@@ -77,7 +80,10 @@ const SignInSignUpMenu = ({
         <SignInButton variant="ghost" onClick={() => setIsSlideOverOpen(false)}>
           Sign in
         </SignInButton>
-        <SignUpButton onClick={() => setIsSlideOverOpen(false)}>
+        <SignUpButton
+          className="text-label"
+          onClick={() => setIsSlideOverOpen(false)}
+        >
           Sign up
         </SignUpButton>
       </div>

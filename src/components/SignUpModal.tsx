@@ -61,9 +61,13 @@ const SignUpModal = () => {
             })
 
             if (signUpResult.status === 'complete') {
-              setActive({ session: signUpResult.createdSessionId })
-              router.push('/dashboard')
-              close()
+              setActive({
+                session: signUpResult.createdSessionId,
+                beforeEmit: () => {
+                  router.push('/dashboard')
+                  close()
+                },
+              })
               return
             }
 
