@@ -1,18 +1,39 @@
 'use client'
 
 import useModal from '@/hooks/useModal'
-import Button, { Props as ButtonProps } from './Button'
+import Button, { Props as ButtonProps, primaryClassName } from './Button'
+import { useAuth } from '@clerk/nextjs'
+import Link from 'next/link'
+import clsx from 'clsx'
 
-type Props = Omit<ButtonProps, 'type'>
+type Props = Omit<ButtonProps, 'type' | 'onClick'> & {
+  onClick?: () => void
+}
 
-const SignUpButton = ({ onClick, ...props }: Props) => {
+const SignUpButton = ({ onClick, className, ...props }: Props) => {
   const { open } = useModal('signUp')
+  const { isSignedIn } = useAuth()
+
+  if (isSignedIn) {
+    return (
+      <Link
+        href="/dashboard"
+        className={clsx(primaryClassName, className)}
+        {...props}
+        onClick={() => {
+          if (onClick) onClick()
+        }}
+      >
+        Go to dashboard
+      </Link>
+    )
+  }
 
   return (
     <Button
       {...props}
-      onClick={(e) => {
-        if (onClick) onClick(e)
+      onClick={() => {
+        if (onClick) onClick()
 
         open()
       }}

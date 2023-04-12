@@ -8,7 +8,7 @@ import Checkbox from './Checkbox'
 import useModal from '@/hooks/useModal'
 import { Form, Formik } from 'formik'
 import { useRouter } from 'next/navigation'
-import { useSignUp } from '@clerk/nextjs'
+import { useAuth, useSignUp } from '@clerk/nextjs'
 
 const SignUpModal = () => {
   const { isOpen, close } = useModal('signUp')
@@ -17,7 +17,9 @@ const SignUpModal = () => {
 
   const { isLoaded, signUp, setActive } = useSignUp()
 
-  if (!isLoaded) {
+  const { isSignedIn } = useAuth()
+
+  if (!isLoaded || isSignedIn) {
     return null
   }
 
