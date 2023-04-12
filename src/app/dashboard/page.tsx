@@ -1,11 +1,9 @@
 import SignedInHeader from '@/components/SignedInHeader'
 import Icons from '@/components/Icons'
-import clsx from 'clsx'
-import { Asset, assetsWithBrlRates } from '@/utils/coinapi'
-import Image from 'next/image'
-import FormattedNumber from '@/components/FormattedNumber'
+import { assetsWithBrlRates } from '@/utils/coinapi'
 import Card from './Card'
 import DailyVariationCard from './DailyVariationCard'
+import MyWalletCard from './MyWalletCard'
 
 const Dashboard = async () => {
   const assets = await assetsWithBrlRates()
@@ -13,7 +11,7 @@ const Dashboard = async () => {
   return (
     <>
       <SignedInHeader />
-      <main className="container mt-6">
+      <main className="container mt-6 mb-10">
         <div className="flex flex-col gap-4 md:gap-6 lg:flex-row lg:gap-8">
           <Balance />
           <div className="flex w-full gap-4 md:gap-8">
@@ -21,6 +19,10 @@ const Dashboard = async () => {
             <News />
           </div>
         </div>
+
+        <hr className="text-secondary-300 mt-6 md:hidden" />
+
+        <MyWalletCard wallets={[]} />
       </main>
     </>
   )

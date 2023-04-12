@@ -13,6 +13,7 @@ import CryptoCurrencyCircle from './CryptoCurrencyCircle'
 import CryptoWallet from './CryptoWallet'
 import CircledArrowLeft from './CircledArrowLeft'
 import Balance from './Balance'
+import NoWallets from './NoWallets'
 
 const icons = {
   Hamburger,
@@ -30,6 +31,7 @@ const icons = {
   CryptoWallet,
   CircledArrowLeft,
   Balance,
+  NoWallets,
 }
 
 export default icons
