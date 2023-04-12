@@ -9,11 +9,12 @@ type Props = {
   name: string
   children: React.ReactNode
   className?: string
+  disabled?: boolean
   required?: boolean
 }
 
 const Checkbox = (props: Props) => {
-  const { className, children, required, name } = props
+  const { className, children, ...otherProps } = props
   const [field, meta, helpers] = useField(props)
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
     meta.error
@@ -23,9 +24,8 @@ const Checkbox = (props: Props) => {
     <label className={clsx('text-label flex items-start', className)}>
       <Field
         type="checkbox"
-        className="rounded-[4px] border-primary mr-4 accent-primary focus:ring-primary text-primary"
-        required={required}
-        name={name}
+        className="rounded-[4px] border-primary mr-4 accent-primary focus:ring-primary text-primary disabled:text-secondary"
+        {...otherProps}
       />
       <div className="flex flex-col items-start">
         {children}

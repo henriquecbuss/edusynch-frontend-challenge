@@ -85,33 +85,58 @@ const SignUpModal = () => {
           }
         }}
       >
-        <Form className="flex flex-col gap-6 mt-6" noValidate>
-          <Input type="username" name="name" placeholder="Name" required />
-          <Input type="email" name="email" placeholder="Email" required />
-          <Input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-          />
-          <Input
-            type="password"
-            name="passwordConfirmation"
-            placeholder="Confirm password"
-            required
-          />
+        {({ isSubmitting }) => (
+          <Form className="flex flex-col gap-6 mt-6" noValidate>
+            <Input
+              type="username"
+              name="name"
+              placeholder="Name"
+              required
+              disabled={isSubmitting}
+            />
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+              disabled={isSubmitting}
+            />
+            <Input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+              disabled={isSubmitting}
+            />
+            <Input
+              type="password"
+              name="passwordConfirmation"
+              placeholder="Confirm password"
+              required
+              disabled={isSubmitting}
+            />
 
-          <Checkbox className="text-left" required name="acceptTos">
-            <span>
-              I have read and accept the <strong>Privacy Policy</strong> and{' '}
-              <strong>Terms of User Sign Up</strong>
-            </span>
-          </Checkbox>
+            <Checkbox
+              className="text-left"
+              required
+              disabled={isSubmitting}
+              name="acceptTos"
+            >
+              <span>
+                I have read and accept the <strong>Privacy Policy</strong> and{' '}
+                <strong>Terms of User Sign Up</strong>
+              </span>
+            </Checkbox>
 
-          <Button className="w-full py-3" type="submit">
-            Sign up
-          </Button>
-        </Form>
+            <Button
+              className="w-full py-3"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Loading...' : 'Sign up'}
+            </Button>
+          </Form>
+        )}
       </Formik>
 
       <div className="text-small-label mt-6">
