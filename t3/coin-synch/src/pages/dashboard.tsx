@@ -9,9 +9,7 @@ import { api } from "@/utils/api";
 import LoadingPage from "@/components/LoadingPage";
 
 const Dashboard = () => {
-  const { data: assets, isLoading } = api.asset.get.useQuery({
-    limit: 10,
-  });
+  const { data: assets, isLoading } = api.asset.get.useQuery({});
 
   if (isLoading || !assets || !assets[0]) {
     return <LoadingPage />;
@@ -83,9 +81,7 @@ const News = () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const ssg = generateSSGHelper();
 
-  await ssg.asset.get.prefetch({
-    limit: 10,
-  });
+  await ssg.asset.get.prefetch({});
 
   return {
     props: {

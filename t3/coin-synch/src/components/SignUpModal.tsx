@@ -7,6 +7,7 @@ import useModal from "@/hooks/useModal";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useAuth, useSignUp } from "@clerk/nextjs";
+import LoadingSpinner from "./LoadingSpinner";
 
 const SignUpModal = () => {
   const { isOpen, close } = useModal("signUp");
@@ -139,7 +140,11 @@ const SignUpModal = () => {
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Loading..." : "Sign up"}
+              {isSubmitting ? (
+                <LoadingSpinner className="mx-auto" />
+              ) : (
+                "Sign up"
+              )}
             </Button>
           </Form>
         )}

@@ -12,6 +12,10 @@ import { api } from "@/utils/api";
 import "@/styles/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Head from "next/head";
+import { ModalContextProvider } from "@/context/modalContext";
+import SignInModal from "@/components/SignInModal";
+import SignUpModal from "@/components/SignUpModal";
+import AddCryptoModal from "@/components/AddCryptoModal";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -32,7 +36,13 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ClerkProvider>
-        <Component {...pageProps} />
+        <ModalContextProvider>
+          <Component {...pageProps} />
+
+          <SignInModal />
+          <SignUpModal />
+          <AddCryptoModal />
+        </ModalContextProvider>
       </ClerkProvider>
     </>
   );

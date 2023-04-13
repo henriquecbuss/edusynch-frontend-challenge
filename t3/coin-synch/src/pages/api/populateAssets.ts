@@ -27,16 +27,25 @@ export default async function handler(
 
   const assets = await assetsWithBrlRates();
 
-  await prisma.asset.createMany({
-    data: assets,
-    skipDuplicates: true,
-  });
+  // This isn't great, but prisma doesn't have an `upsertMany` function, and doing it all inside a transaction causes it to timeout
+  await Promise.all(
+    assets.map((asset) =>
+      prisma.asset.upsert({
+        where: {
+          id: asset.id,
+        },
+        create: asset,
+        update: asset,
+      })
+    )
+  );
 
   await prisma.assetSync.create({
     data: {},
   });
 
   await response.revalidate("/");
+  await response.revalidate("/dashboard");
 
   response.status(200).json({
     body: assets,

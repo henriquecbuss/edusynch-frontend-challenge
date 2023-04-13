@@ -2,6 +2,7 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { Form, Formik } from "formik";
 import Image from "next/image";
+import LoadingSpinner from "../LoadingSpinner";
 
 const NewsLetterSection = () => {
   return (
@@ -53,7 +54,11 @@ const NewsLetterSection = () => {
                 type="submit"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Loading..." : "Subscribe"}
+                {isSubmitting ? (
+                  <LoadingSpinner className="mx-auto" />
+                ) : (
+                  "Subscribe"
+                )}
               </Button>
             </Form>
           )}

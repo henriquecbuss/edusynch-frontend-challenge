@@ -8,13 +8,15 @@ import Button from "./Button";
 import clsx from "clsx";
 import ListboxField from "./ListboxField";
 import { Asset } from "@prisma/client";
+import { api } from "@/utils/api";
 
-type Props = {
-  availableAssets: Asset[];
-};
-
-const AddCryptoModal = ({ availableAssets }: Props) => {
+const AddCryptoModal = () => {
   const { isOpen, close } = useModal("addCrypto");
+  const { data: assets, isLoading } = api.asset.get.useQuery({});
+
+  if (isLoading || !assets) {
+    return null;
+  }
 
   return (
     <Modal.Root isOpen={isOpen} close={close}>
@@ -54,7 +56,7 @@ const AddCryptoModal = ({ availableAssets }: Props) => {
           <Form className="mt-6">
             <ListboxField
               name="asset"
-              options={availableAssets}
+              options={assets}
               optionToKey={(asset) => asset.id}
               disabled={isSubmitting}
               RenderButton={({ open, value }) => (
