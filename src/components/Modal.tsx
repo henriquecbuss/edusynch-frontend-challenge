@@ -42,10 +42,10 @@ export const Root = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-secondary-500 bg-opacity-75" />
+            <div className="fixed inset-0 z-40 bg-secondary-500 bg-opacity-75" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto">
+          <div className="fixed inset-0 z-50 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
