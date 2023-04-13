@@ -17,6 +17,13 @@ const MyWalletCard = () => {
   return (
     <>
       <Header className="mt-6 md:hidden" />
+      <div className="mt-4 grid grid-cols-2 gap-4 md:hidden">
+        {walletEntries &&
+          walletEntries.length > 0 &&
+          walletEntries?.map((entry) => (
+            <SingleEntryCard entry={entry} key={entry.asset.id} />
+          ))}
+      </div>
       <Card className="mt-4 overflow-visible md:mt-8">
         <Header className="hidden rounded-t-lg md:flex" />
         <hr className="hidden text-secondary-200 md:flex" />
@@ -70,12 +77,74 @@ const Header = ({ className }: { className?: string }) => {
       <span className="text-h5 font-bold md:text-h4">My Wallet</span>
       <Button
         className="ml-auto h-6 w-6 rounded-full !p-0 md:h-auto md:w-auto md:!px-4 md:!py-2"
-        onClick={openAddCryptoModal}
+        onClick={() => openAddCryptoModal()}
       >
         <span>+</span>
         <span className="ml-2 hidden md:inline">Add crypto</span>
       </Button>
     </div>
+  );
+};
+
+const SingleEntryCard = ({
+  entry,
+}: {
+  entry: WalletEntry & { asset: Asset };
+}) => {
+  const { open: openTradeCryptoModal } = useModal("tradeCrypto");
+
+  return (
+    <Card>
+      <div className="flex items-center bg-primary-100 px-2 py-4 text-small-label">
+        <Image src={entry.asset.icon} width={16} height={16} alt="" />
+        <span className="ml-2">{entry.asset.name}</span>
+        <span className="ml-1 text-secondary">{entry.asset.id}</span>
+      </div>
+      <div className="flex flex-col gap-4 p-4">
+        <div className="flex flex-col gap-1">
+          <span className="text-small-label text-secondary">Holdings</span>
+          <FormattedNumber
+            number={entry.asset.priceUsd * entry.amount}
+            className="whitespace-nowrap text-label"
+            options={{
+              signDisplay: "never",
+              style: "currency",
+              currency: "USD",
+              maximumFractionDigits: 4,
+              minimumFractionDigits: 4,
+            }}
+          />
+          <span className="text-small-label text-primary">
+            {entry.amount} {entry.asset.id}
+          </span>
+        </div>
+
+        <hr className="text-secondary-200" />
+
+        <div className="flex flex-col gap-1">
+          <span className="text-small-label text-secondary">Change</span>
+          <FormattedNumber
+            number={entry.asset.brlRateChangePercentage}
+            className={clsx("text-label", {
+              "text-tertiary-700": entry.asset.brlRateChangePercentage > 0,
+              "text-quaternary-700": entry.asset.brlRateChangePercentage < 0,
+            })}
+            options={{
+              signDisplay: "always",
+              style: "percent",
+              maximumFractionDigits: 4,
+              minimumFractionDigits: 4,
+            }}
+          />
+        </div>
+        <Button
+          className="w-full py-1"
+          onClick={() => openTradeCryptoModal({ entry })}
+        >
+          Trade
+        </Button>
+      </div>
+    </Card>
   );
 };
 
@@ -151,7 +220,7 @@ const Row = ({
         />
       </Cell>
       <Cell className="rounded-br-lg">
-        <TradePopover />
+        <TradePopover entry={entry} />
       </Cell>
     </tr>
   );
@@ -167,8 +236,9 @@ const Cell = ({
   return <td className={clsx("px-6 py-4 text-left", className)}>{children}</td>;
 };
 
-const TradePopover = ({}) => {
+const TradePopover = ({ entry }: { entry: WalletEntry & { asset: Asset } }) => {
   const [isShowing, setIsShowing] = useState(false);
+  const { open: openTradeCryptoModal } = useModal("tradeCrypto");
 
   return (
     <Popover
@@ -177,9 +247,8 @@ const TradePopover = ({}) => {
       onMouseLeave={() => setIsShowing(false)}
     >
       <Popover.Button
-        as="a"
-        href="#"
         className="flex items-center justify-center"
+        onClick={() => openTradeCryptoModal({ entry })}
       >
         <Icons.Trade className="h-4 w-4" />
       </Popover.Button>

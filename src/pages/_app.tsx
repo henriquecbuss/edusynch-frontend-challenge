@@ -16,6 +16,7 @@ import { ModalContextProvider } from "@/context/modalContext";
 import SignInModal from "@/components/SignInModal";
 import SignUpModal from "@/components/SignUpModal";
 import AddCryptoModal from "@/components/AddCryptoModal";
+import TradeCryptoModal from "@/components/TradeCryptoModal";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -42,6 +43,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
           <SignInModal />
           <SignUpModal />
           <AddCryptoModal />
+          <TradeCryptoModal />
         </ModalContextProvider>
       </ClerkProvider>
     </>

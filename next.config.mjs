@@ -19,7 +19,7 @@ const config = {
     defaultLocale: "en",
   },
   images: {
-    domains: ["s3.eu-central-1.amazonaws.com"],
+    domains: ["s3.eu-central-1.amazonaws.com", "www.gravatar.com"],
   },
 };
 export default config;

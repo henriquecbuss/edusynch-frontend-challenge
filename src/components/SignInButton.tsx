@@ -15,7 +15,7 @@ const SignInButton = ({ onClick, children, ...props }: Props) => {
         onClick={(e) => {
           if (onClick) onClick(e);
 
-          signOut();
+          void signOut();
         }}
       >
         Sign out

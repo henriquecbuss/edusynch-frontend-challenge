@@ -38,7 +38,7 @@ const SignInModal = () => {
             });
 
             if (signInResult.status === "complete") {
-              setActive({
+              void setActive({
                 session: signInResult.createdSessionId,
                 beforeEmit: () => {
                   close();

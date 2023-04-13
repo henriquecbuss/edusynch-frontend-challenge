@@ -4,7 +4,6 @@ import { Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { Fragment } from "react";
 import { useAuth, useUser } from "@clerk/nextjs";
-import Button from "./Button";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -32,19 +31,14 @@ const User = ({ className }: Props) => {
   return (
     <Menu as="div" className={clsx("relative", className)}>
       <Menu.Button className="flex items-center">
-        {user && user.imageUrl && (
+        {user && user.profileImageUrl && (
           <Image
             width={24}
             height={24}
-            src={user.imageUrl ?? "/logo.svg"}
+            src={user.profileImageUrl}
             alt=""
             className="mr-2 rounded-full"
           />
-        )}
-        {user && !user.imageUrl && (
-          <div className="mr-2 h-6 w-6 rounded-full bg-secondary-600 uppercase text-white">
-            {user.fullName?.charAt(0)}
-          </div>
         )}
         {!user && (
           <div className="mr-2 h-6 w-6 rounded-full bg-secondary-600"></div>
@@ -61,11 +55,11 @@ const User = ({ className }: Props) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 mt-3 origin-top-right rounded bg-white p-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 isolate z-10 mt-3 origin-top-right rounded bg-white p-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <Menu.Button
             className="flex items-center gap-4 rounded-sm px-5 py-3 text-label hover:bg-secondary-100 active:bg-secondary-200"
             onClick={() => {
-              signOut().then(() => {
+              void signOut().then(() => {
                 router.push("/");
               });
             }}
