@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import Card from './Card'
 import Icons from '@/components/Icons'
 import Button from '@/components/Button'
+import useModal from '@/hooks/useModal'
 
 type Props = {
   wallets: Record<string, string>[]
@@ -33,11 +34,16 @@ const MyWalletCard = ({ wallets }: Props) => {
 }
 
 const Header = ({ className }: { className?: string }) => {
+  const { open: openAddCryptoModal } = useModal('addCrypto')
+
   return (
     <div className={clsx('flex items-center gap-4 md:p-6', className)}>
       <Icons.CryptoWallet className="w-6 h-6 md:w-8 md:h-8" />
       <span className="font-bold text-h5 md:text-h4">My Wallet</span>
-      <Button className="w-6 h-6 rounded-full !p-0 ml-auto md:w-auto md:h-auto md:!py-2 md:!px-4">
+      <Button
+        className="w-6 h-6 rounded-full !p-0 ml-auto md:w-auto md:h-auto md:!py-2 md:!px-4"
+        onClick={openAddCryptoModal}
+      >
         <span>+</span>
         <span className="hidden md:inline ml-2">Add crypto</span>
       </Button>

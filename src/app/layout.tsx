@@ -6,6 +6,8 @@ import { ModalContextProvider } from '@/context/modalContext'
 import SignUpModal from '@/components/SignUpModal'
 import SignInModal from '@/components/SignInModal'
 import { ClerkProvider } from '@clerk/nextjs/app-beta'
+import AddCryptoModal from '@/components/AddCryptoModal'
+import { assetsWithBrlRates } from '@/utils/coinapi'
 
 const roboto = Roboto({
   weight: ['400', '700'],
@@ -18,6 +20,8 @@ export const metadata = {
 }
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
+  const assets = await assetsWithBrlRates()
+
   return (
     <html
       lang="en"
@@ -37,6 +41,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
 
             <SignInModal />
             <SignUpModal />
+            <AddCryptoModal availableAssets={assets} />
           </body>
         </ModalContextProvider>
       </ClerkProvider>

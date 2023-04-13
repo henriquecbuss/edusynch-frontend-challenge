@@ -2,7 +2,7 @@
 
 import { useState, createContext } from 'react'
 
-export type Modal = 'signIn' | 'signUp'
+export type Modal = 'signIn' | 'signUp' | 'addCrypto'
 
 export const ModalContext = createContext<{
   currentOpenModal: Modal | null

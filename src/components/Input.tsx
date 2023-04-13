@@ -6,8 +6,9 @@ import Icons from './Icons'
 import { Transition } from '@headlessui/react'
 import { Field, FieldProps, useField } from 'formik'
 import { validateEmail } from '@/utils/validation/email'
+import FormError from './FormError'
 
-type Type = 'email' | 'password' | 'username'
+type Type = 'email' | 'password' | 'username' | 'numeric'
 
 type FinalCustomInputProps = {
   type: Type
@@ -57,20 +58,12 @@ export const Input = (props: FinalCustomInputProps) => {
           return undefined
         }}
       />
-      <Transition
+      <FormError
         show={
           meta.touched &&
           typeof meta.error === 'string' &&
           meta.error.length > 0
         }
-        enter="ease-out duration-300 transition-all"
-        enterFrom="opacity-0 -translate-y-2"
-        enterTo="opacity-100 translate-y-0"
-        leave="ease-out duration-200 transition-all"
-        leaveFrom="opacity-100 translate-y-0"
-        leaveTo="opacity-0 -translate-y-2"
-        as="div"
-        className="text-quaternary-700 text-label text-left mt-2 ml-4"
         beforeEnter={() => {
           setErrorMessage(meta.error)
         }}
@@ -79,7 +72,7 @@ export const Input = (props: FinalCustomInputProps) => {
         }}
       >
         {errorMessage}
-      </Transition>
+      </FormError>
     </label>
   )
 }
@@ -106,6 +99,8 @@ const CustomInput = ({
           return 'password'
         case 'username':
           return 'text'
+        case 'numeric':
+          return 'number'
       }
     }
   )
@@ -160,6 +155,8 @@ const IconForType = ({
       return <Icons.Lock className={className} />
     case 'username':
       return <Icons.User className={className} />
+    case 'numeric':
+      return null
   }
 }
 
