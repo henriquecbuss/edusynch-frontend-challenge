@@ -1,13 +1,13 @@
 import useModal from "@/hooks/useModal";
 import * as Modal from "./Modal";
 import { Form, Formik } from "formik";
-import { Asset } from "@/utils/coinapi";
 import Image from "next/image";
 import Icons from "./Icons";
 import Input from "./Input";
 import Button from "./Button";
 import clsx from "clsx";
 import ListboxField from "./ListboxField";
+import { Asset } from "@prisma/client";
 
 type Props = {
   availableAssets: Asset[];

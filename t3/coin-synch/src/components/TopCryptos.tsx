@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { Asset } from "@/utils/coinapi";
 import CryptoDisclosure from "./CryptoDisclosure";
 import CryptoRow from "./CryptoRow";
 import clsx from "clsx";
+import { Asset } from "@prisma/client";
 
 type Props = {
   assets: Asset[];

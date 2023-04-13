@@ -3,7 +3,7 @@ import Image from "next/image";
 import ChevronDown from "./Icons/ChevronDown";
 import clsx from "clsx";
 import FormattedNumber from "./FormattedNumber";
-import { Asset } from "@/utils/coinapi";
+import { Asset } from "@prisma/client";
 
 type Props = {
   asset: Asset;

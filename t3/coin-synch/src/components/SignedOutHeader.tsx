@@ -2,8 +2,8 @@ import { useRef } from "react";
 import Logo from "./Logo";
 import Link from "next/link";
 import CoinCarrousel from "./CoinCarrousel";
-import { Asset } from "@/utils/coinapi";
 import SignInSignUpMenu from "./SignInSignUpMenu";
+import { Asset } from "@prisma/client";
 
 type Props = {
   assets: Asset[];

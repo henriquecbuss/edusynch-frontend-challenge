@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import FormattedNumber from "./FormattedNumber";
-import { Asset } from "@/utils/coinapi";
 import { useEffect, useRef } from "react";
+import { Asset } from "@prisma/client";
 
 type Props = {
   className?: string;
