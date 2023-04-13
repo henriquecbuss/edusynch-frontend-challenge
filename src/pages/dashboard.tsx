@@ -23,15 +23,15 @@ const Dashboard = () => {
   return (
     <div className="flex h-full flex-col">
       <SignedInHeader />
-      <main className="container relative flex-grow pb-10 pt-6 lg:bg-[#f9f9f9]">
-        <div className="flex flex-col gap-4 md:gap-6 lg:flex-row lg:gap-8">
+      <main className="relative flex-grow pb-10 pt-6 lg:bg-[#f9f9f9]">
+        <div className="container flex flex-col gap-4 md:gap-6 lg:flex-row lg:gap-8">
           <Balance />
           <div className="flex w-full gap-4 md:gap-8">
             <DailyVariationCard asset={assets[0]} />
             <News />
           </div>
         </div>
-        <hr className="mt-6 text-secondary-300 md:hidden" />
+        <hr className="container mt-6 text-secondary-300 md:hidden" />
         <MyWalletCard />
         <Sidebar />
       </main>
@@ -42,7 +42,7 @@ const Dashboard = () => {
 
 const Sidebar = () => {
   return (
-    <nav className="absolute inset-y-0 left-0 hidden flex-col items-center gap-8 border-y border-secondary-300 bg-white px-6 py-12 lg:flex">
+    <nav className="absolute inset-y-0 left-0 z-20 hidden flex-col items-center gap-8 border-y border-secondary-300 bg-white px-6 py-12 lg:flex">
       <SidebarItem
         name="Lorem ipsum"
         Icon={(props) => <Icons.CryptoWallet {...props} />}

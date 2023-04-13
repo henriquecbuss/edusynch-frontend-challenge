@@ -15,7 +15,7 @@ const MyWalletCard = () => {
   const { data: walletEntries } = api.walletEntry.getAll.useQuery();
 
   return (
-    <>
+    <div className="container">
       <Header className="mt-6 md:hidden" />
       <div className="mt-4 grid grid-cols-2 gap-4 md:hidden">
         {walletEntries &&
@@ -68,7 +68,7 @@ const MyWalletCard = () => {
           </table>
         )}
       </Card>
-    </>
+    </div>
   );
 };
 
@@ -251,7 +251,7 @@ const TradePopover = ({ entry }: { entry: WalletEntry & { asset: Asset } }) => {
       onMouseLeave={() => setIsShowing(false)}
     >
       <Popover.Button
-        className="flex items-center justify-center"
+        className="flex w-full items-center justify-center"
         onClick={() => openTradeCryptoModal({ entry })}
       >
         <Icons.Trade className="h-4 w-4" />

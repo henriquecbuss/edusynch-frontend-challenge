@@ -11,22 +11,24 @@ const SignedInHeader = () => {
 
   return (
     <>
-      <header
-        className="container grid grid-cols-3 grid-rows-1 py-4 shadow-md lg:flex lg:items-center lg:justify-between"
-        ref={headerRef}
-      >
-        <button
-          className="place-self-start lg:hidden"
-          onClick={() => setIsSlideOverOpen((prev) => !prev)}
-          aria-label="Open navigation menu"
+      <div className="z-10 shadow-[0px_4px_8px_rgba(77,77,77,0.1)]">
+        <header
+          className="container grid grid-cols-3 grid-rows-1 py-4 lg:flex lg:items-center lg:justify-between"
+          ref={headerRef}
         >
-          <Icons.Hamburger />
-        </button>
+          <button
+            className="place-self-start lg:hidden"
+            onClick={() => setIsSlideOverOpen((prev) => !prev)}
+            aria-label="Open navigation menu"
+          >
+            <Icons.Hamburger />
+          </button>
 
-        <Logo className="place-self-center" />
+          <Logo className="place-self-center" />
 
-        <User className="place-self-end" />
-      </header>
+          <User className="place-self-end" />
+        </header>
+      </div>
 
       <SlideOver
         isOpen={isSlideOverOpen}
