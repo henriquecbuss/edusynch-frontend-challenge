@@ -11,6 +11,7 @@ import { api } from "@/utils/api";
 
 import "@/styles/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import Head from "next/head";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -22,6 +23,14 @@ const MyApp: AppType = ({ Component, pageProps }) => {
           }
         `}
       </style>
+      <Head>
+        <title>CoinSynch</title>
+        <meta
+          name="description"
+          content="CoinSynch is a cryptocurrency portfolio tracker."
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <ClerkProvider>
         <Component {...pageProps} />
       </ClerkProvider>
