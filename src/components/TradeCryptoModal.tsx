@@ -18,8 +18,18 @@ const TradeCryptoModal = () => {
   const { isOpen, close, args } = useModal("tradeCrypto");
   const { mutate: increaseEntry } = api.walletEntry.increase.useMutation();
   const { mutate: decreaseEntry } = api.walletEntry.decrease.useMutation();
-  const { refetch: refetchUsdBalance } = api.walletEntry.usdBalance.useQuery();
-  const { refetch: refetchWalletEntries } = api.walletEntry.getAll.useQuery();
+  const { refetch: refetchUsdBalance } = api.walletEntry.usdBalance.useQuery(
+    undefined,
+    {
+      enabled: false,
+    }
+  );
+  const { refetch: refetchWalletEntries } = api.walletEntry.getAll.useQuery(
+    undefined,
+    {
+      enabled: false,
+    }
+  );
 
   if (!args) {
     return null;
