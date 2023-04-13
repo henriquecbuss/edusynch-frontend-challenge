@@ -8,6 +8,7 @@ import AboutUs from "@/components/Homepage/AboutUsSection";
 import NewsletterSection from "@/components/Homepage/NewsletterSection";
 import TopCryptosSection from "@/components/Homepage/TopCryptosSection";
 import { generateSSGHelper } from "@/server/helpers/ssgHelper";
+import Footer from "@/components/Footer";
 
 const Home: NextPage = () => {
   const { data: assets } = api.asset.get.useQuery({
@@ -35,6 +36,7 @@ const Home: NextPage = () => {
 
         <NewsletterSection />
       </main>
+      <Footer />
     </>
   );
 };
