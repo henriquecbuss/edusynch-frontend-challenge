@@ -1,8 +1,19 @@
-const LoadingSpinner = ({ size = 16 }: { size?: number }) => (
+import clsx from "clsx";
+
+const LoadingSpinner = ({
+  size = 16,
+  className,
+}: {
+  size?: number;
+  className?: string;
+}) => (
   <div role="status">
     <svg
       aria-hidden="true"
-      className="animate-spin fill-slate-300 text-slate-600"
+      className={clsx(
+        "animate-spin fill-primary text-secondary-100",
+        className
+      )}
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -20,6 +31,6 @@ const LoadingSpinner = ({ size = 16 }: { size?: number }) => (
     </svg>
     <span className="sr-only">Loading...</span>
   </div>
-)
+);
 
-export default LoadingSpinner
+export default LoadingSpinner;

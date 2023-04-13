@@ -1,26 +1,25 @@
-'use client'
-
-import BrandName from './BrandName'
-import Input from './Input'
-import Button from './Button'
-import * as Modal from './Modal'
-import Checkbox from './Checkbox'
-import useModal from '@/hooks/useModal'
-import { Form, Formik } from 'formik'
-import { useRouter } from 'next/navigation'
-import { useAuth, useSignUp } from '@clerk/nextjs'
+import BrandName from "./BrandName";
+import Input from "./Input";
+import Button from "./Button";
+import * as Modal from "./Modal";
+import Checkbox from "./Checkbox";
+import useModal from "@/hooks/useModal";
+import { Form, Formik } from "formik";
+import { useRouter } from "next/navigation";
+import { useAuth, useSignUp } from "@clerk/nextjs";
+import LoadingSpinner from "./LoadingSpinner";
 
 const SignUpModal = () => {
-  const { isOpen, close } = useModal('signUp')
-  const { open: openSignInModal } = useModal('signIn')
-  const router = useRouter()
+  const { isOpen, close } = useModal("signUp");
+  const { open: openSignInModal } = useModal("signIn");
+  const router = useRouter();
 
-  const { isLoaded, signUp, setActive } = useSignUp()
+  const { isLoaded, signUp, setActive } = useSignUp();
 
-  const { isSignedIn } = useAuth()
+  const { isSignedIn } = useAuth();
 
   if (!isLoaded || isSignedIn) {
-    return null
+    return null;
   }
 
   return (
@@ -31,66 +30,70 @@ const SignUpModal = () => {
 
       <Formik
         initialValues={{
-          name: '',
-          email: '',
-          password: '',
-          passwordConfirmation: '',
+          name: "",
+          email: "",
+          password: "",
+          passwordConfirmation: "",
           acceptTos: false,
         }}
         onSubmit={async (values, { setSubmitting, setFieldError }) => {
           if (values.password !== values.passwordConfirmation) {
-            setSubmitting(false)
-            setFieldError('passwordConfirmation', 'Passwords do not match')
-            return
+            setSubmitting(false);
+            setFieldError("passwordConfirmation", "Passwords do not match");
+            return;
           }
 
           if (!values.acceptTos) {
-            setSubmitting(false)
-            setFieldError('acceptTos', 'You must accept terms of service')
-            return
+            setSubmitting(false);
+            setFieldError("acceptTos", "You must accept terms of service");
+            return;
           }
 
-          const [firstName, ...lastNames] = values.name.split(' ')
+          const [firstName, ...lastNames] = values.name.split(" ");
 
           try {
             const signUpResult = await signUp.create({
               emailAddress: values.email,
               password: values.password,
               firstName,
-              lastName: lastNames.join(' '),
-            })
+              lastName: lastNames.join(" "),
+            });
 
-            if (signUpResult.status === 'complete') {
+            if (signUpResult.status === "complete") {
               setActive({
                 session: signUpResult.createdSessionId,
                 beforeEmit: () => {
-                  router.push('/dashboard')
-                  close()
+                  router.push("/dashboard");
+                  close();
                 },
-              })
-              return
+              });
+              return;
             }
 
-            setFieldError('passwordConfirmation', 'Something went wrong')
+            setFieldError("passwordConfirmation", "Something went wrong");
           } catch (err) {
             const error = err as {
               errors: {
-                message: string
+                message: string;
                 meta: {
-                  paramName: string
-                }
-              }[]
+                  paramName: string;
+                };
+              }[];
+            };
+
+            const firstError = error.errors[0];
+            if (!firstError) {
+              return;
             }
 
-            const firstError = error.errors[0]
-            setFieldError(firstError.meta.paramName, firstError.message)
+            setFieldError(firstError.meta.paramName, firstError.message);
           } finally {
-            setSubmitting(false)
+            setSubmitting(false);
           }
         }}
       >
         {({ isSubmitting }) => (
-          <Form className="flex flex-col gap-6 mt-6" noValidate>
+          <Form className="mt-6 flex flex-col gap-6" noValidate>
             <Input
               type="username"
               name="name"
@@ -127,7 +130,7 @@ const SignUpModal = () => {
               name="acceptTos"
             >
               <span>
-                I have read and accept the <strong>Privacy Policy</strong> and{' '}
+                I have read and accept the <strong>Privacy Policy</strong> and{" "}
                 <strong>Terms of User Sign Up</strong>
               </span>
             </Checkbox>
@@ -137,17 +140,21 @@ const SignUpModal = () => {
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Loading...' : 'Sign up'}
+              {isSubmitting ? (
+                <LoadingSpinner className="mx-auto" />
+              ) : (
+                "Sign up"
+              )}
             </Button>
           </Form>
         )}
       </Formik>
 
-      <div className="text-small-label mt-6">
+      <div className="mt-6 text-small-label">
         <span className="hidden md:inline">Already have an account? </span>
         <button
           onClick={() => {
-            openSignInModal()
+            openSignInModal();
           }}
           className="font-bold hover:underline"
         >
@@ -155,7 +162,7 @@ const SignUpModal = () => {
         </button>
       </div>
     </Modal.Root>
-  )
-}
+  );
+};
 
-export default SignUpModal
+export default SignUpModal;

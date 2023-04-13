@@ -1,22 +1,20 @@
-'use client'
-
-import clsx from 'clsx'
-import FormattedNumber from './FormattedNumber'
-import { Asset } from '@/utils/coinapi'
-import { useEffect, useRef } from 'react'
+import clsx from "clsx";
+import FormattedNumber from "./FormattedNumber";
+import { useEffect, useRef } from "react";
+import { Asset } from "@prisma/client";
 
 type Props = {
-  className?: string
-  assets: Asset[]
-}
+  className?: string;
+  assets: Asset[];
+};
 
 const CoinCarrousel = ({ className, assets }: Props) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const firstContainerRef = useRef<HTMLDivElement>(null)
-  const secondContainerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const firstContainerRef = useRef<HTMLDivElement>(null);
+  const secondContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const speed = 0.5
+    const speed = 0.5;
 
     const scroll = (
       ref: React.RefObject<HTMLDivElement>,
@@ -24,23 +22,23 @@ const CoinCarrousel = ({ className, assets }: Props) => {
         until,
         andThen,
       }: {
-        until: (container: HTMLDivElement) => boolean
-        andThen: (container: HTMLDivElement) => void
+        until: (container: HTMLDivElement) => boolean;
+        andThen: (container: HTMLDivElement) => void;
       }
     ) => {
-      const container = ref.current
+      const container = ref.current;
       if (!container || container.clientWidth === 0) {
-        return
+        return;
       }
-      container.scrollLeft += speed
+      container.scrollLeft += speed;
 
       if (until(container)) {
-        andThen(container)
-        return
+        andThen(container);
+        return;
       }
 
-      requestAnimationFrame(() => scroll(ref, { until, andThen }))
-    }
+      requestAnimationFrame(() => scroll(ref, { until, andThen }));
+    };
 
     const scrollFirstContainer = () => {
       scroll(firstContainerRef, {
@@ -48,47 +46,47 @@ const CoinCarrousel = ({ className, assets }: Props) => {
           firstContainer.scrollLeft + firstContainer.clientWidth >=
           firstContainer.scrollWidth - speed,
         andThen: scrollOuterContainer,
-      })
-    }
+      });
+    };
 
     const scrollOuterContainer = (firstContainer: HTMLDivElement) => {
       scroll(containerRef, {
         until: (outerContainer) => {
-          const secondContainer = secondContainerRef.current
+          const secondContainer = secondContainerRef.current;
 
           if (!secondContainer) {
-            return true
+            return true;
           }
 
-          const outerBoundingRect = outerContainer.getBoundingClientRect()
-          const secondBoundingRect = secondContainer.getBoundingClientRect()
+          const outerBoundingRect = outerContainer.getBoundingClientRect();
+          const secondBoundingRect = secondContainer.getBoundingClientRect();
 
           return (
             Math.abs(outerBoundingRect.left - secondBoundingRect.left) < speed
-          )
+          );
         },
         andThen: (outerContainer) => {
-          firstContainer.scrollLeft = 0
-          outerContainer.scrollLeft = 0
-          scrollFirstContainer()
+          firstContainer.scrollLeft = 0;
+          outerContainer.scrollLeft = 0;
+          scrollFirstContainer();
         },
-      })
-    }
+      });
+    };
 
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      requestAnimationFrame(scrollFirstContainer)
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      requestAnimationFrame(scrollFirstContainer);
     }
-  }, [])
+  }, []);
 
   return (
-    <div className={clsx('py-[5px] mx-2 px-4', className)}>
-      <div className="overflow-hidden coin-carrousel-opacity-mask">
+    <div className={clsx("mx-2 px-4 py-[5px]", className)}>
+      <div className="coin-carrousel-opacity-mask overflow-hidden">
         <div
           ref={containerRef}
           className="flex items-center gap-6 overflow-hidden"
         >
           <div
-            className="flex items-center gap-6 overflow-hidden flex-shrink-0 w-full motion-reduce:overflow-x-auto"
+            className="flex w-full flex-shrink-0 items-center gap-6 overflow-hidden motion-reduce:overflow-x-auto"
             ref={firstContainerRef}
           >
             {assets.map((asset) => (
@@ -97,7 +95,7 @@ const CoinCarrousel = ({ className, assets }: Props) => {
           </div>
           <div
             aria-hidden
-            className="flex items-center gap-6 flex-shrink-0 overflow-hidden w-full motion-reduce:hidden"
+            className="flex w-full flex-shrink-0 items-center gap-6 overflow-hidden motion-reduce:hidden"
             ref={secondContainerRef}
           >
             {assets.map((asset) => (
@@ -107,36 +105,36 @@ const CoinCarrousel = ({ className, assets }: Props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const Coin = ({ coin }: { coin: Asset }) => {
   return (
-    <div className="text-small-label flex items-center gap-2 flex-shrink-0">
+    <div className="flex flex-shrink-0 items-center gap-2 text-small-label">
       <span className="text-secondary-800">{coin.id}</span>
       <span>
         <FormattedNumber
           number={coin.priceBrl}
-          options={{ style: 'currency', currency: 'BRL' }}
+          options={{ style: "currency", currency: "BRL" }}
         />
       </span>
       <span
         className={clsx({
-          'text-tertiary-700': coin.brlRateChangeAbsolute > 0,
-          'text-quaternary-700': coin.brlRateChangeAbsolute < 0,
+          "text-tertiary-700": coin.brlRateChangeAbsolute > 0,
+          "text-quaternary-700": coin.brlRateChangeAbsolute < 0,
         })}
       >
         <FormattedNumber
           number={coin.brlRateChangeAbsolute}
           options={{
-            signDisplay: 'always',
+            signDisplay: "always",
             minimumFractionDigits: 3,
             maximumFractionDigits: 3,
           }}
         />
       </span>
     </div>
-  )
-}
+  );
+};
 
-export default CoinCarrousel
+export default CoinCarrousel;

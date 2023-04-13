@@ -1,28 +1,27 @@
-'use client'
-
-import { useEffect, useState } from 'react'
-import Button from './Button'
-import { useAutoAnimate } from '@formkit/auto-animate/react'
-import { Asset } from '@/utils/coinapi'
-import CryptoDisclosure from './CryptoDisclosure'
-import CryptoRow from './CryptoRow'
-import clsx from 'clsx'
+import { useEffect, useState } from "react";
+import Button from "./Button";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import CryptoDisclosure from "./CryptoDisclosure";
+import CryptoRow from "./CryptoRow";
+import clsx from "clsx";
+import { Asset } from "@prisma/client";
 
 type Props = {
-  assets: Asset[]
-}
+  assets: Asset[];
+};
+
 const TopCryptosViewMoreContainer = ({ assets }: Props) => {
-  const [viewMore, setViewMore] = useState(false)
-  const [smParent] = useAutoAnimate()
-  const [mdParent, mdEnableAnimations] = useAutoAnimate()
+  const [viewMore, setViewMore] = useState(false);
+  const [smParent] = useAutoAnimate();
+  const [mdParent, mdEnableAnimations] = useAutoAnimate();
 
   useEffect(() => {
-    mdEnableAnimations(viewMore)
-  }, [viewMore, mdEnableAnimations])
+    mdEnableAnimations(viewMore);
+  }, [viewMore, mdEnableAnimations]);
 
   return (
     <>
-      <div className="flex flex-col mt-4 md:hidden" ref={smParent}>
+      <div className="mt-4 flex flex-col md:hidden" ref={smParent}>
         {assets.slice(0, viewMore ? 10 : 4).map((asset) => (
           <CryptoDisclosure
             asset={asset}
@@ -32,7 +31,7 @@ const TopCryptosViewMoreContainer = ({ assets }: Props) => {
         ))}
       </div>
 
-      <table className="hidden md:table table-auto w-full text-left mt-6">
+      <table className="mt-6 hidden w-full table-auto text-left md:table">
         <thead>
           <tr>
             <Th className="w-1/12">#</Th>
@@ -51,32 +50,32 @@ const TopCryptosViewMoreContainer = ({ assets }: Props) => {
 
       <Button
         variant="ghost"
-        className="text-primary mt-4 mx-auto block"
+        className="mx-auto mt-4 block text-primary"
         onClick={() => setViewMore((prev) => !prev)}
       >
-        {viewMore ? 'View less -' : 'View more +'}
+        {viewMore ? "View less -" : "View more +"}
       </Button>
     </>
-  )
-}
+  );
+};
 
 const Th = ({
   children,
   className,
 }: {
-  className?: string
-  children: React.ReactNode
+  className?: string;
+  children: React.ReactNode;
 }) => {
   return (
     <th
       className={clsx(
-        'py-4 px-6 font-normal text-secondary text-label',
+        "px-6 py-4 text-label font-normal text-secondary",
         className
       )}
     >
       {children}
     </th>
-  )
-}
+  );
+};
 
-export default TopCryptosViewMoreContainer
+export default TopCryptosViewMoreContainer;

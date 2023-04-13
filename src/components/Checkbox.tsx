@@ -1,30 +1,28 @@
-'use client'
-
-import { Transition } from '@headlessui/react'
-import clsx from 'clsx'
-import { Field, useField } from 'formik'
-import { useState } from 'react'
+import { Transition } from "@headlessui/react";
+import clsx from "clsx";
+import { Field, useField } from "formik";
+import { useState } from "react";
 
 type Props = {
-  name: string
-  children: React.ReactNode
-  className?: string
-  disabled?: boolean
-  required?: boolean
-}
+  name: string;
+  children: React.ReactNode;
+  className?: string;
+  disabled?: boolean;
+  required?: boolean;
+};
 
 const Checkbox = (props: Props) => {
-  const { className, children, ...otherProps } = props
-  const [field, meta, helpers] = useField(props)
+  const { className, children, ...otherProps } = props;
+  const [field, meta, helpers] = useField(props);
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
     meta.error
-  )
+  );
 
   return (
-    <label className={clsx('text-label flex items-start', className)}>
+    <label className={clsx("flex items-start text-label", className)}>
       <Field
         type="checkbox"
-        className="rounded-[4px] border-primary mr-4 accent-primary focus:ring-primary text-primary disabled:text-secondary"
+        className="mr-4 rounded-[4px] border-primary text-primary accent-primary focus:ring-primary disabled:text-secondary"
         {...otherProps}
       />
       <div className="flex flex-col items-start">
@@ -33,7 +31,7 @@ const Checkbox = (props: Props) => {
         <Transition
           show={
             meta.touched &&
-            typeof meta.error === 'string' &&
+            typeof meta.error === "string" &&
             meta.error.length > 0
           }
           enter="ease-out duration-300 transition-all"
@@ -43,19 +41,19 @@ const Checkbox = (props: Props) => {
           leaveFrom="opacity-100 translate-y-0"
           leaveTo="opacity-0 -translate-y-2"
           as="div"
-          className="text-quaternary-700 text-label text-left mt-2"
+          className="mt-2 text-left text-label text-quaternary-700"
           beforeEnter={() => {
-            setErrorMessage(meta.error)
+            setErrorMessage(meta.error);
           }}
           afterLeave={() => {
-            setErrorMessage(undefined)
+            setErrorMessage(undefined);
           }}
         >
           {errorMessage}
         </Transition>
       </div>
     </label>
-  )
-}
+  );
+};
 
-export default Checkbox
+export default Checkbox;

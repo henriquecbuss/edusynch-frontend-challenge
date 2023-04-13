@@ -1,24 +1,22 @@
-'use client'
-
-import { useRef, useState } from 'react'
-import Icons from './Icons'
-import SlideOver from './SlideOver'
-import Logo from './Logo'
-import User from './User'
-import Link from 'next/link'
+import { useRef, useState } from "react";
+import Icons from "./Icons";
+import SlideOver from "./SlideOver";
+import Logo from "./Logo";
+import User from "./User";
+import Link from "next/link";
 
 const SignedInHeader = () => {
-  const [isSlideOverOpen, setIsSlideOverOpen] = useState(false)
-  const headerRef = useRef<HTMLElement>(null)
+  const [isSlideOverOpen, setIsSlideOverOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   return (
     <>
       <header
-        className="container py-4 grid grid-cols-3 grid-rows-1 shadow-md lg:flex lg:justify-between lg:items-center"
+        className="container grid grid-cols-3 grid-rows-1 py-4 shadow-md lg:flex lg:items-center lg:justify-between"
         ref={headerRef}
       >
         <button
-          className="lg:hidden place-self-start"
+          className="place-self-start lg:hidden"
           onClick={() => setIsSlideOverOpen((prev) => !prev)}
           aria-label="Open navigation menu"
         >
@@ -37,11 +35,11 @@ const SignedInHeader = () => {
         hiddenBreakpoint="lg"
         overlayClassName="top-[--top-distance]"
         overlayStyle={{
-          '--top-distance': `${headerRef.current?.clientHeight ?? 0}px`,
+          "--top-distance": `${headerRef.current?.clientHeight ?? 0}px`,
         }}
         dialogClassName="mt-[--header-height] border-t border-secondary-300"
         dialogStyle={{
-          '--header-height': `${headerRef.current?.clientHeight}px`,
+          "--header-height": `${headerRef.current?.clientHeight}px`,
         }}
       >
         <nav className="flex flex-col gap-8 px-6 py-4">
@@ -72,33 +70,33 @@ const SignedInHeader = () => {
             className="mt-[14px] w-max"
             onClick={() => setIsSlideOverOpen(false)}
           >
-            <Icons.CircledArrowLeft className="w-6 h-6" />
+            <Icons.CircledArrowLeft className="h-6 w-6" />
           </button>
         </nav>
       </SlideOver>
     </>
-  )
-}
+  );
+};
 
 const SlideOverLink = ({
   href,
   icon,
   children,
 }: {
-  href: string
-  icon: (props: { className: string }) => React.ReactNode
-  children: React.ReactNode
-  onClick?: () => void
+  href: string;
+  icon: (props: { className: string }) => React.ReactNode;
+  children: React.ReactNode;
+  onClick?: () => void;
 }) => {
   return (
     <Link
       href={href}
-      className="flex items-center gap-4 text-label hover:text-primary hover:underline transition-colors"
+      className="flex items-center gap-4 text-label transition-colors hover:text-primary hover:underline"
     >
-      {icon({ className: 'h-6 w-6' })}
+      {icon({ className: "h-6 w-6" })}
       {children}
     </Link>
-  )
-}
+  );
+};
 
-export default SignedInHeader
+export default SignedInHeader;
