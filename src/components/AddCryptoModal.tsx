@@ -7,12 +7,13 @@ import Input from "./Input";
 import Button from "./Button";
 import clsx from "clsx";
 import ListboxField from "./ListboxField";
-import { Asset } from "@prisma/client";
+import { type Asset } from "@prisma/client";
 import { api } from "@/utils/api";
 
 const AddCryptoModal = () => {
   const { isOpen, close } = useModal("addCrypto");
   const { data: assets, isLoading } = api.asset.get.useQuery({});
+  const { mutate: addCrypto } = api.asset.add.useMutation();
 
   if (isLoading || !assets) {
     return null;
@@ -26,7 +27,7 @@ const AddCryptoModal = () => {
       <Formik
         initialValues={{
           amount: "",
-          asset: null,
+          asset: null as null | Asset,
         }}
         onSubmit={({ amount, asset }, { setFieldError, setSubmitting }) => {
           if (asset === null) {
@@ -49,7 +50,20 @@ const AddCryptoModal = () => {
             return;
           }
 
-          // TODO - add crypto to db
+          addCrypto(
+            {
+              amount: numberAmount,
+              assetId: asset.id,
+            },
+            {
+              onError: () => {
+                setFieldError("amount", "Something went wrong");
+              },
+              onSuccess: () => {
+                close();
+              },
+            }
+          );
         }}
       >
         {({ isSubmitting }) => (

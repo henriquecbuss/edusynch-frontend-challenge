@@ -17,11 +17,25 @@ model AssetSync {
 }
 
 model Asset {
-    id                      String @id @unique
-    name                    String @unique
+    id                      String        @id @unique
+    name                    String        @unique
     icon                    String
     priceUsd                Float
     priceBrl                Float
     brlRateChangeAbsolute   Float
     brlRateChangePercentage Float
+    WalletEntry             WalletEntry[]
+}
+
+model WalletEntry {
+    userId    String
+    asset     Asset    @relation(fields: [assetId], references: [id])
+    amount    Float
+    assetId   String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@id([userId, assetId])
+    @@index([userId])
+    @@index([assetId])
 }

@@ -26,9 +26,8 @@ const Dashboard = () => {
             <News />
           </div>
         </div>
-
         <hr className="mt-6 text-secondary-300 md:hidden" />
-
+        {/* TODO - Fetch walletEntries and show them */}
         <MyWalletCard wallets={[]} />
       </main>
     </>
