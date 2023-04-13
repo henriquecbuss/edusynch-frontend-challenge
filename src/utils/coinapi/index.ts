@@ -1,4 +1,4 @@
-import { Asset } from "@prisma/client";
+import { type Asset } from "@prisma/client";
 import { findAndRemove } from "../findAndRemove";
 import * as marketData from "./marketData";
 import * as metadata from "./metadata";

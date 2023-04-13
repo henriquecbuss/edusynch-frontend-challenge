@@ -24,5 +24,5 @@ const NoWallets = (props: { className?: string }) => (
       clipRule="evenodd"
     />
   </svg>
-)
-export default NoWallets
+);
+export default NoWallets;

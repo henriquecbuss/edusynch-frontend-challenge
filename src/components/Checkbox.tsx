@@ -13,7 +13,7 @@ type Props = {
 
 const Checkbox = (props: Props) => {
   const { className, children, ...otherProps } = props;
-  const [field, meta, helpers] = useField(props);
+  const [, meta] = useField(props);
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
     meta.error
   );

@@ -30,5 +30,5 @@ const Balance = (props: { className?: string }) => (
       clipRule="evenodd"
     />
   </svg>
-)
-export default Balance
+);
+export default Balance;

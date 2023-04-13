@@ -1,10 +1,10 @@
-import Image from 'next/image'
+import Image from "next/image";
 
 type Props = {
-  width?: number
-  height?: number
-  className?: string
-}
+  width?: number;
+  height?: number;
+  className?: string;
+};
 
 const Logo = ({ className, width = 124, height = 21 }: Props) => {
   return (
@@ -15,7 +15,7 @@ const Logo = ({ className, width = 124, height = 21 }: Props) => {
       height={height}
       className={className}
     />
-  )
-}
+  );
+};
 
-export default Logo
+export default Logo;

@@ -1,14 +1,13 @@
-import { Transition, TransitionRootProps } from '@headlessui/react'
-import { ElementType } from 'react'
+import { Transition } from "@headlessui/react";
 
-const FormError = <T extends ElementType>({
+const FormError = ({
   children,
   ...props
 }: {
-  children: React.ReactNode
-  show: boolean
-  beforeEnter?: () => void
-  afterLeave?: () => void
+  children: React.ReactNode;
+  show: boolean;
+  beforeEnter?: () => void;
+  afterLeave?: () => void;
 }) => (
   <Transition
     {...props}
@@ -19,10 +18,10 @@ const FormError = <T extends ElementType>({
     leaveFrom="opacity-100 translate-y-0"
     leaveTo="opacity-0 -translate-y-2"
     as="div"
-    className="text-quaternary-700 text-label text-left mt-2 ml-4"
+    className="ml-4 mt-2 text-left text-label text-quaternary-700"
   >
     {children}
   </Transition>
-)
+);
 
-export default FormError
+export default FormError;

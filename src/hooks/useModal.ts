@@ -9,13 +9,7 @@ type UseModalOpen<T extends Modal> = ModalArguments[T] extends undefined
   ? () => void
   : (args: ModalArguments[T]) => void;
 
-// const x = <T extends boolean>(): { isOpen: T extends true ? true : false } => {
-//   return { isOpen: true } as unknown as {
-//     isOpen: T extends true ? true : false;
-//   };
-// };
-
-const useModal = <T extends Modal, TOpen extends boolean>(
+const useModal = <T extends Modal>(
   modal: T
 ): {
   isOpen: boolean;
@@ -27,7 +21,6 @@ const useModal = <T extends Modal, TOpen extends boolean>(
 
   const isOpen = currentOpenModal?.name === modal;
 
-  // const args = currentOpenModal?.name ===  currentOpenModal?.args;
   const args = isOpen ? currentOpenModal.args : undefined;
 
   return {

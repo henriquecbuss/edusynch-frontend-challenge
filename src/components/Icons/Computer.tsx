@@ -12,5 +12,5 @@ const Computer = ({ className }: { className?: string }) => (
       clipRule="evenodd"
     />
   </svg>
-)
-export default Computer
+);
+export default Computer;

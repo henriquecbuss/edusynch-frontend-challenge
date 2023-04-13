@@ -1,6 +1,6 @@
 import { prisma } from "@/server/db";
 import { assetsWithBrlRates } from "@/utils/coinapi";
-import { NextApiRequest, NextApiResponse } from "next";
+import { type NextApiRequest, type NextApiResponse } from "next";
 
 export default async function handler(
   request: NextApiRequest,

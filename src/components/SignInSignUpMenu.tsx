@@ -1,28 +1,28 @@
-import clsx from 'clsx'
-import Link from 'next/link'
-import { useState } from 'react'
-import Icons from './Icons'
-import SignInButton from './SignInButton'
-import SignUpButton from './SignUpButton'
-import SlideOver from './SlideOver'
+import clsx from "clsx";
+import Link from "next/link";
+import { useState } from "react";
+import Icons from "./Icons";
+import SignInButton from "./SignInButton";
+import SignUpButton from "./SignUpButton";
+import SlideOver from "./SlideOver";
 
 type Props = {
-  className?: string
-  headerRef: React.RefObject<HTMLElement>
-  coinCarrouselRef: React.RefObject<HTMLElement>
-}
+  className?: string;
+  headerRef: React.RefObject<HTMLElement>;
+  coinCarrouselRef: React.RefObject<HTMLElement>;
+};
 
 const SignInSignUpMenu = ({
   className,
   headerRef,
   coinCarrouselRef,
 }: Props) => {
-  const [isSlideOverOpen, setIsSlideOverOpen] = useState(false)
+  const [isSlideOverOpen, setIsSlideOverOpen] = useState(false);
 
   return (
     <>
       <button
-        className="md:hidden ml-auto"
+        className="ml-auto md:hidden"
         onClick={() => setIsSlideOverOpen((prev) => !prev)}
         aria-label="Open navigation menu"
       >
@@ -34,14 +34,14 @@ const SignInSignUpMenu = ({
         side="right"
         overlayClassName="top-[--top-distance]"
         overlayStyle={{
-          '--top-distance': `${
+          "--top-distance": `${
             (headerRef.current?.clientHeight ?? 0) +
             (coinCarrouselRef.current?.clientHeight ?? 0)
           }px`,
         }}
         dialogClassName="mt-[--header-height] border-t border-secondary-300"
         dialogStyle={{
-          '--header-height': `${headerRef.current?.clientHeight}px`,
+          "--header-height": `${headerRef.current?.clientHeight ?? 0}px`,
         }}
       >
         <div className="flex flex-col items-center gap-8 px-[62px]">
@@ -73,7 +73,7 @@ const SignInSignUpMenu = ({
       </SlideOver>
       <div
         className={clsx(
-          'hidden md:flex flex-nowrap items-center gap-6',
+          "hidden flex-nowrap items-center gap-6 md:flex",
           className
         )}
       >
@@ -88,23 +88,23 @@ const SignInSignUpMenu = ({
         </SignUpButton>
       </div>
     </>
-  )
-}
+  );
+};
 
 const SlideOverLink = ({
   href,
   children,
   onClick,
 }: {
-  href: string
-  children: React.ReactNode
-  onClick?: () => void
+  href: string;
+  children: React.ReactNode;
+  onClick?: () => void;
 }) => {
   return (
     <Link href={href} className="text-label hover:underline" onClick={onClick}>
       {children}
     </Link>
-  )
-}
+  );
+};
 
-export default SignInSignUpMenu
+export default SignInSignUpMenu;

@@ -3,7 +3,7 @@ import Logo from "./Logo";
 import Link from "next/link";
 import CoinCarrousel from "./CoinCarrousel";
 import SignInSignUpMenu from "./SignInSignUpMenu";
-import { Asset } from "@prisma/client";
+import { type Asset } from "@prisma/client";
 
 type Props = {
   assets: Asset[] | undefined;

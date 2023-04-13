@@ -30,5 +30,5 @@ const CryptoCurrency = (props: { className?: string }) => (
       clipRule="evenodd"
     />
   </svg>
-)
-export default CryptoCurrency
+);
+export default CryptoCurrency;

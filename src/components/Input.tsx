@@ -1,8 +1,7 @@
 import { useState } from "react";
 import clsx from "clsx";
 import Icons from "./Icons";
-import { Transition } from "@headlessui/react";
-import { Field, FieldProps, useField } from "formik";
+import { Field, type FieldProps, useField } from "formik";
 import { validateEmail } from "@/utils/validation/email";
 import FormError from "./FormError";
 
@@ -18,7 +17,7 @@ type FinalCustomInputProps = {
 };
 
 export const Input = (props: FinalCustomInputProps) => {
-  const [field, meta, helpers] = useField(props);
+  const [, meta] = useField(props);
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
     meta.error
   );
@@ -28,7 +27,7 @@ export const Input = (props: FinalCustomInputProps) => {
       <Field
         {...props}
         component={CustomInput}
-        validate={(value: any) => {
+        validate={(value: unknown) => {
           if (typeof value !== "string") return undefined;
 
           if (props.required && value.length === 0) {
@@ -85,7 +84,7 @@ const CustomInput = ({
   type,
   className,
   field,
-  form,
+  form: _form,
   ...props
 }: CustomProps) => {
   const [inputType, setInputType] = useState<React.HTMLInputTypeAttribute>(

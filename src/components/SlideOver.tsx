@@ -1,20 +1,20 @@
-import { Fragment } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import clsx from 'clsx'
+import { Fragment } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import clsx from "clsx";
 
-type Side = 'left' | 'right'
+type Side = "left" | "right";
 
 type Props = {
-  side: Side
-  children: React.ReactNode
-  isOpen: boolean
-  onClose: () => void
-  overlayClassName?: string
-  overlayStyle?: React.CSSProperties
-  dialogClassName?: string
-  dialogStyle?: React.CSSProperties
-  hiddenBreakpoint?: 'md' | 'lg'
-}
+  side: Side;
+  children: React.ReactNode;
+  isOpen: boolean;
+  onClose: () => void;
+  overlayClassName?: string;
+  overlayStyle?: React.CSSProperties;
+  dialogClassName?: string;
+  dialogStyle?: React.CSSProperties;
+  hiddenBreakpoint?: "md" | "lg";
+};
 
 const SlideOver = ({
   side,
@@ -25,16 +25,16 @@ const SlideOver = ({
   overlayStyle,
   dialogClassName,
   dialogStyle,
-  hiddenBreakpoint = 'md',
+  hiddenBreakpoint = "md",
 }: Props) => {
   return (
     <div className="isolate">
       <Transition.Root show={isOpen} as={Fragment}>
         <Dialog
           as="div"
-          className={clsx('relative z-10', {
-            'md:hidden': hiddenBreakpoint === 'md',
-            'lg:hidden': hiddenBreakpoint === 'lg',
+          className={clsx("relative z-10", {
+            "md:hidden": hiddenBreakpoint === "md",
+            "lg:hidden": hiddenBreakpoint === "lg",
           })}
           onClose={onClose}
         >
@@ -49,7 +49,7 @@ const SlideOver = ({
           >
             <div
               className={clsx(
-                'fixed inset-0 bg-secondary-500 bg-opacity-75 transition-opacity',
+                "fixed inset-0 bg-secondary-500 bg-opacity-75 transition-opacity",
                 overlayClassName
               )}
               style={overlayStyle}
@@ -60,26 +60,26 @@ const SlideOver = ({
             <div className="absolute inset-0 overflow-hidden">
               <div
                 className={clsx(
-                  'pointer-events-none fixed inset-y-0 flex max-w-full',
-                  { 'left-0': side === 'left', 'right-0': side === 'right' }
+                  "pointer-events-none fixed inset-y-0 flex max-w-full",
+                  { "left-0": side === "left", "right-0": side === "right" }
                 )}
               >
                 <Transition.Child
                   as={Fragment}
                   enter="transform transition ease-in-out duration-500 sm:duration-700"
                   enterFrom={
-                    side === 'left' ? '-translate-x-full' : 'translate-x-full'
+                    side === "left" ? "-translate-x-full" : "translate-x-full"
                   }
                   enterTo="translate-x-0"
                   leave="transform transition ease-in-out duration-500 sm:duration-700"
                   leaveFrom="translate-x-0"
                   leaveTo={
-                    side === 'left' ? '-translate-x-full' : 'translate-x-full'
+                    side === "left" ? "-translate-x-full" : "translate-x-full"
                   }
                 >
                   <Dialog.Panel
                     className={clsx(
-                      'pointer-events-auto relative',
+                      "pointer-events-auto relative",
                       dialogClassName
                     )}
                     style={dialogStyle}
@@ -95,7 +95,7 @@ const SlideOver = ({
         </Dialog>
       </Transition.Root>
     </div>
-  )
-}
+  );
+};
 
-export default SlideOver
+export default SlideOver;

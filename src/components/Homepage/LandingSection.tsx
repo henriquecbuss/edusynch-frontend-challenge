@@ -1,25 +1,25 @@
-import Icons from '@/components/Icons'
-import clsx from 'clsx'
-import Image from 'next/image'
-import SignUpButton from '@/components/SignUpButton'
+import Icons from "@/components/Icons";
+import clsx from "clsx";
+import Image from "next/image";
+import SignUpButton from "@/components/SignUpButton";
 
 const LandingSection = () => {
   return (
-    <section className="mt-14 grid grid-flow-col container">
-      <div className="flex flex-shrink-0 text-center flex-col items-center md:max-w-[320px] md:text-left md:items-start">
-        <h1 className="font-bold text-h5 text-primary md:text-h3">
+    <section className="container mt-14 grid grid-flow-col">
+      <div className="flex flex-shrink-0 flex-col items-center text-center md:max-w-[320px] md:items-start md:text-left">
+        <h1 className="text-h5 font-bold text-primary md:text-h3">
           Lorem ipsum dolor sit amet, consectetur
         </h1>
-        <p className="text-label mt-2 md:text-base">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam,{' '}
+        <p className="mt-2 text-label md:text-base">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam,{" "}
           purus sit amet luctus venenatis, lectus magna fringilla urna,
           porttitor
         </p>
-        <SignUpButton className="uppercase flex items-center justify-center gap-2 mx-auto mt-6 min-w-[180px] md:mx-0 md:py-3 md:min-w-[232px]">
+        <SignUpButton className="mx-auto mt-6 flex min-w-[180px] items-center justify-center gap-2 uppercase md:mx-0 md:min-w-[232px] md:py-3">
           Sign up now <Icons.ArrowRight />
         </SignUpButton>
 
-        <ul className="flex items-center gap-4 mt-6 md:mt-10 md:gap-6">
+        <ul className="mt-6 flex items-center gap-4 md:mt-10 md:gap-6">
           <Tag>Cryptos</Tag>
           <Tag>NFTs</Tag>
           <Tag>Games</Tag>
@@ -27,20 +27,20 @@ const LandingSection = () => {
       </div>
       <Carrousel />
     </section>
-  )
-}
+  );
+};
 
 const Carrousel = () => {
   // TODO - Nail this down
   return (
-    <div className="hidden md:flex flex-shrink-0 flex-grow-0 self-start opacity-mask -mr-[48px] lg:-mr-[112px]">
-      <div className="flex flex-grow-0 gap-[67px] px-[71px] lg:px-[98px] lg:gap-[120px] overflow-scroll scrollbar-hide">
+    <div className="opacity-mask -mr-[48px] hidden flex-shrink-0 flex-grow-0 self-start md:flex lg:-mr-[112px]">
+      <div className="flex flex-grow-0 gap-[67px] overflow-scroll px-[71px] scrollbar-hide lg:gap-[120px] lg:px-[98px]">
         <CarrouselItem>
-          <div className="bg-primary absolute right-0 bottom-0 w-[151px] h-[236px]"></div>
+          <div className="absolute bottom-0 right-0 h-[236px] w-[151px] bg-primary"></div>
           <CarrouselIcon className="left-[-22px] top-[44px] lg:-left-10 lg:top-[79px]">
             <Icons.CryptoCurrency />
           </CarrouselIcon>
-          <CarrouselIcon className="right-[-22px] bottom-[57px] lg:-right-10 lg:top-[318px]">
+          <CarrouselIcon className="bottom-[57px] right-[-22px] lg:-right-10 lg:top-[318px]">
             <Icons.Chart />
           </CarrouselIcon>
           <CarrouselImage
@@ -50,7 +50,7 @@ const Carrousel = () => {
         </CarrouselItem>
 
         <CarrouselItem>
-          <div className="bg-primary absolute inset-y-0 inset-x-10 lg:inset-x-[72px]"></div>
+          <div className="absolute inset-x-10 inset-y-0 bg-primary lg:inset-x-[72px]"></div>
           <CarrouselIcon className="-left-[-22px] top-[78px] lg:-left-10 lg:top-[140px]">
             <Icons.Computer />
           </CarrouselIcon>
@@ -64,7 +64,7 @@ const Carrousel = () => {
         </CarrouselItem>
 
         <CarrouselItem>
-          <div className="bg-primary absolute top-[18px] right-0 w-[179px] bottom-0"></div>
+          <div className="absolute bottom-0 right-0 top-[18px] w-[179px] bg-primary"></div>
           <CarrouselIcon className="-left-[-22px] top-[193px] lg:-left-10 lg:top-[344px]">
             <Icons.CryptoCurrency />
           </CarrouselIcon>
@@ -79,35 +79,35 @@ const Carrousel = () => {
         </CarrouselItem>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const CarrouselItem = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="relative isolate flex-shrink-0" aria-hidden>
       {children}
     </div>
-  )
-}
+  );
+};
 
 const CarrouselIcon = ({
   children,
   className,
 }: {
-  children: React.ReactNode
-  className?: string
+  children: React.ReactNode;
+  className?: string;
 }) => {
   return (
     <div
       className={clsx(
-        'bg-primary-100 rounded-lg shadow-lg p-1 w-11 h-11 absolute z-10 lg:w-20 lg:h-20',
+        "absolute z-10 h-11 w-11 rounded-lg bg-primary-100 p-1 shadow-lg lg:h-20 lg:w-20",
         className
       )}
     >
       {children}
     </div>
-  )
-}
+  );
+};
 
 const CarrouselImage = ({ src, alt }: { src: string; alt: string }) => {
   return (
@@ -116,17 +116,17 @@ const CarrouselImage = ({ src, alt }: { src: string; alt: string }) => {
       width={384}
       height={499}
       alt={alt}
-      className="isolate z-10 md:w-[215px] md:h-[280px] lg:w-[384px] lg:h-[499px]"
+      className="isolate z-10 md:h-[280px] md:w-[215px] lg:h-[499px] lg:w-[384px]"
     />
-  )
-}
+  );
+};
 
 const Tag = ({ children }: { children: React.ReactNode }) => {
   return (
-    <li className="bg-primary-100 text-primary py-1 px-4 rounded-[4px]">
+    <li className="rounded-[4px] bg-primary-100 px-4 py-1 text-primary">
       {children}
     </li>
-  )
-}
+  );
+};
 
-export default LandingSection
+export default LandingSection;

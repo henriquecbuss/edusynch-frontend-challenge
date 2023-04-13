@@ -1,12 +1,12 @@
-import { z } from 'zod'
-import { request } from './request'
+import { z } from "zod";
+import { request } from "./request";
 
-type Period = '1DAY'
+type Period = "1DAY";
 
 type OhlcvOptions = {
-  period?: Period
-  limit?: number
-}
+  period?: Period;
+  limit?: number;
+};
 
 export const ohlcv = (
   exchange: string,
@@ -15,11 +15,11 @@ export const ohlcv = (
   options?: OhlcvOptions
 ) => {
   const parameters = new URLSearchParams({
-    period_id: options?.period ?? '1DAY',
-  })
+    period_id: options?.period ?? "1DAY",
+  });
 
   if (options?.limit) {
-    parameters.append('limit', options.limit.toString())
+    parameters.append("limit", options.limit.toString());
   }
 
   return request(
@@ -30,5 +30,5 @@ export const ohlcv = (
         price_close: z.number(),
       })
     )
-  )
-}
+  );
+};

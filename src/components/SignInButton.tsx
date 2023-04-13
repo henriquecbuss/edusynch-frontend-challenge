@@ -1,5 +1,5 @@
 import useModal from "@/hooks/useModal";
-import Button, { Props as ButtonProps } from "./Button";
+import Button, { type Props as ButtonProps } from "./Button";
 import { useAuth } from "@clerk/nextjs";
 
 type Props = Omit<ButtonProps, "type">;

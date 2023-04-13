@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { RequestResult, request } from "./request";
+import { type RequestResult, request } from "./request";
 
 const assetSchema = z.object({
   asset_id: z.string(),

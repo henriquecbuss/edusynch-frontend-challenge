@@ -14,7 +14,7 @@ const Envelope = ({ className }: { className?: string }) => {
         clipRule="evenodd"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default Envelope
+export default Envelope;

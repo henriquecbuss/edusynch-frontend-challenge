@@ -12,5 +12,5 @@ const DoorOut = (props: { className?: string }) => (
       clipRule="evenodd"
     />
   </svg>
-)
-export default DoorOut
+);
+export default DoorOut;

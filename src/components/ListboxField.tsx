@@ -1,5 +1,5 @@
 import { Transition, Listbox } from "@headlessui/react";
-import { Field, FieldProps, useField } from "formik";
+import { Field, type FieldProps, useField } from "formik";
 import { Fragment, useState } from "react";
 import FormError from "./FormError";
 
@@ -13,7 +13,7 @@ type Props<T> = {
 };
 
 function ActualField<T>(props: Props<T>) {
-  const [field, meta, helpers] = useField(props);
+  const [, meta] = useField(props);
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
     meta.error
   );

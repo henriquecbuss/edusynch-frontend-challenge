@@ -1,6 +1,6 @@
 type Props = {
-  className?: string
-}
+  className?: string;
+};
 
 const Hamburger = ({ className }: Props) => {
   return (
@@ -28,7 +28,7 @@ const Hamburger = ({ className }: Props) => {
         d="M7.25 12h9.5M7.25 15.25h9.5M7.25 8.75h9.5"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default Hamburger
+export default Hamburger;

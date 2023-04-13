@@ -14,7 +14,7 @@ const User = ({ className }: { className?: string }) => {
         clipRule="evenodd"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default User
+export default User;

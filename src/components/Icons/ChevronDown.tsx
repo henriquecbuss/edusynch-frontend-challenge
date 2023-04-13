@@ -1,10 +1,10 @@
-import clsx from 'clsx'
+import clsx from "clsx";
 
 const ChevronDown = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={clsx('fill-secondary-400', className)}
+      className={clsx("fill-secondary-400", className)}
       viewBox="0 0 8 8"
     >
       <path
@@ -13,7 +13,7 @@ const ChevronDown = ({ className }: { className?: string }) => {
         clipRule="evenodd"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default ChevronDown
+export default ChevronDown;

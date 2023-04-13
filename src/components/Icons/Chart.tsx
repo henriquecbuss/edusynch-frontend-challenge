@@ -18,5 +18,5 @@ const Chart = (props: { className?: string }) => (
       clipRule="evenodd"
     />
   </svg>
-)
-export default Chart
+);
+export default Chart;

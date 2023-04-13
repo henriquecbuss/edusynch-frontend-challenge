@@ -60,7 +60,7 @@ const SignUpModal = () => {
             });
 
             if (signUpResult.status === "complete") {
-              setActive({
+              void setActive({
                 session: signUpResult.createdSessionId,
                 beforeEmit: () => {
                   router.push("/dashboard");

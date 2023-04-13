@@ -1,5 +1,5 @@
 import useModal from "@/hooks/useModal";
-import Button, { Props as ButtonProps, primaryClassName } from "./Button";
+import Button, { type Props as ButtonProps, primaryClassName } from "./Button";
 import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import clsx from "clsx";

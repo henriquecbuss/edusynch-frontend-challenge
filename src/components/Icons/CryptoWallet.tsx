@@ -36,5 +36,5 @@ const CryptoWallet = (props: { className?: string }) => (
       d="M7.998 8.999H13"
     />
   </svg>
-)
-export default CryptoWallet
+);
+export default CryptoWallet;

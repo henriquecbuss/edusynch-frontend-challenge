@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import clsx from "clsx";
 
 const Eye = ({ className }: { className?: string }) => {
   return (
@@ -7,7 +7,7 @@ const Eye = ({ className }: { className?: string }) => {
       width="16"
       height="16"
       fill="none"
-      className={clsx('fill-secondary', className)}
+      className={clsx("fill-secondary", className)}
     >
       <path
         fillRule="evenodd"
@@ -15,7 +15,7 @@ const Eye = ({ className }: { className?: string }) => {
         clipRule="evenodd"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default Eye
+export default Eye;
