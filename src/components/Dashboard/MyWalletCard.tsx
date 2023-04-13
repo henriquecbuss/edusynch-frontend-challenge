@@ -24,11 +24,15 @@ const MyWalletCard = () => {
             <SingleEntryCard entry={entry} key={entry.asset.id} />
           ))}
       </div>
-      <Card className="mt-4 overflow-visible md:mt-8">
+      <Card
+        className={clsx("mt-4 overflow-visible md:mt-8", {
+          "py-10": walletEntries === undefined,
+        })}
+      >
         <Header className="hidden rounded-t-lg md:flex" />
         <hr className="hidden text-secondary-200 md:flex" />
         {walletEntries === undefined && (
-          <LoadingSpinner size={48} className="mx-auto my-10" />
+          <LoadingSpinner size={48} className="mx-auto" />
         )}
         {walletEntries && walletEntries.length === 0 && (
           <div className="flex flex-col items-center justify-center px-14 py-10 text-center md:py-20">
