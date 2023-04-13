@@ -11,6 +11,11 @@ datasource db {
     relationMode = "prisma"
 }
 
+model AssetSync {
+    id        String   @id @unique @default(cuid())
+    createdAt DateTime @default(now())
+}
+
 model Asset {
     id                      String @id @unique
     name                    String @unique

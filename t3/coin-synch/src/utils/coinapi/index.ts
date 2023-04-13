@@ -126,12 +126,15 @@ export const assetsWithBrlRates = async (): Promise<Asset[]> => {
 
   // return assets;
   // // TODO - Bring this back
+  console.log("STARTING");
   const [icons, assets] = await Promise.all([
     unsafeResult(metadata.icons(32)),
     unsafeResult(metadata.assets()),
   ]);
 
-  const hydratedAssets = assets.slice(0, 10).flatMap((asset) => {
+  console.log("GOT ICONS AND ASSETS");
+
+  const hydratedAssets = assets.slice(0, 20).flatMap((asset) => {
     const hydratedAsset = hydrateAsset(asset, icons);
 
     if (hydratedAsset === undefined) {
@@ -141,9 +144,11 @@ export const assetsWithBrlRates = async (): Promise<Asset[]> => {
     return [hydratedAsset];
   });
 
+  console.log("HYDRATED ASSETS");
+
   const assetsWithBrlRates = await Promise.all(
     hydratedAssets.map(async (asset) => {
-      const { rate_open, rate_close } = await unsafeResult(
+      const [{ rate_open, rate_close }] = await unsafeResult(
         metadata.rate(asset.id, "BRL")
       );
 
@@ -155,6 +160,8 @@ export const assetsWithBrlRates = async (): Promise<Asset[]> => {
       };
     })
   );
+
+  console.log("INSERTED BRL RATES");
 
   return assetsWithBrlRates;
 };
