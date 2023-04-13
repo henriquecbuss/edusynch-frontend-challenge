@@ -39,7 +39,7 @@ const SignedInHeader = () => {
         }}
         dialogClassName="mt-[--header-height] border-t border-secondary-300"
         dialogStyle={{
-          "--header-height": `${headerRef.current?.clientHeight}px`,
+          "--header-height": `${headerRef.current?.clientHeight ?? 0}px`,
         }}
       >
         <nav className="flex flex-col gap-8 px-6 py-4">

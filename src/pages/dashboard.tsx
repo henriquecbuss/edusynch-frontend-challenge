@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 import FormattedNumber from "@/components/FormattedNumber";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { Popover, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 const Dashboard = () => {
   const { data: assets, isLoading } = api.asset.get.useQuery({});
@@ -125,7 +125,6 @@ const Balance = () => {
         </div>
       </div>
       <div className="flex w-1/2 items-center justify-center bg-primary-100 px-4 py-2 font-bold md:text-h4 md:font-bold lg:text-h3">
-        {/* $32,256.56 */}
         {!usdBalance && <LoadingSpinner size={32} />}
         {usdBalance && (
           <FormattedNumber
@@ -158,7 +157,7 @@ const News = () => {
           Read more +
         </p>
       </div>
-      <div className="mt-2 min-h-[77px] w-full bg-gradient-to-tr from-primary to-quaternary-400 md:mt-0" />
+      <div className="mt-2 min-h-[77px] w-full overflow-hidden bg-gradient-to-tr from-primary to-quaternary-400 md:mt-0" />
     </Card>
   );
 };

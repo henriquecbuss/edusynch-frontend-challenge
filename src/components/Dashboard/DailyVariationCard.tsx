@@ -1,4 +1,4 @@
-import { Asset } from "@prisma/client";
+import { type Asset } from "@prisma/client";
 import Image from "next/image";
 import FormattedNumber from "@/components/FormattedNumber";
 import clsx from "clsx";

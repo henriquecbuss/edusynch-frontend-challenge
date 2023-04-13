@@ -8,6 +8,8 @@ import { api } from "@/utils/api";
 import LoadingSpinner from "../LoadingSpinner";
 import { type Asset, type WalletEntry } from "@prisma/client";
 import FormattedNumber from "../FormattedNumber";
+import { useState } from "react";
+import { Popover, Transition } from "@headlessui/react";
 
 const MyWalletCard = () => {
   const { data: walletEntries } = api.walletEntry.getAll.useQuery();
@@ -15,8 +17,8 @@ const MyWalletCard = () => {
   return (
     <>
       <Header className="mt-6 md:hidden" />
-      <Card className="mt-4 md:mt-8">
-        <Header className="hidden md:flex" />
+      <Card className="mt-4 overflow-visible md:mt-8">
+        <Header className="hidden rounded-t-lg md:flex" />
         <hr className="hidden text-secondary-200 md:flex" />
         {walletEntries === undefined && (
           <LoadingSpinner size={48} className="mx-auto my-10" />
@@ -33,7 +35,7 @@ const MyWalletCard = () => {
           </div>
         )}
         {walletEntries && walletEntries.length > 0 && (
-          <table className="mt-4">
+          <table className="mt-4 hidden rounded-b-lg md:table">
             <thead>
               <tr className="text-left">
                 <Th className="w-1/12">#</Th>
@@ -43,7 +45,7 @@ const MyWalletCard = () => {
                 <Th className="w-1/12">Trade</Th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="rounded-b-lg">
               {walletEntries.map((walletEntry, index) => (
                 <Row
                   entry={walletEntry}
@@ -104,8 +106,10 @@ const Row = ({
   index: number;
 }) => {
   return (
-    <tr className="max-h-16 transition-colors even:bg-secondary-100 hover:bg-secondary-100 even:hover:bg-secondary-200">
-      <Cell className="text-label">{index < 10 ? `0${index}` : index}</Cell>
+    <tr className="max-h-16 transition-colors last:rounded-b-lg even:bg-secondary-100 hover:bg-secondary-100 even:hover:bg-secondary-200">
+      <Cell className="rounded-bl-lg text-label">
+        {index < 10 ? `0${index}` : index}
+      </Cell>
       <Cell className="flex items-center gap-2">
         <Image src={entry.asset.icon} alt="" width={32} height={32} />
         <p className="text-small-label">
@@ -146,8 +150,8 @@ const Row = ({
           }}
         />
       </Cell>
-      <Cell>
-        <Icons.Trade className="h-6 w-6" />
+      <Cell className="rounded-br-lg">
+        <TradePopover />
       </Cell>
     </tr>
   );
@@ -161,6 +165,44 @@ const Cell = ({
   children: React.ReactNode;
 }) => {
   return <td className={clsx("px-6 py-4 text-left", className)}>{children}</td>;
+};
+
+const TradePopover = ({}) => {
+  const [isShowing, setIsShowing] = useState(false);
+
+  return (
+    <Popover
+      className="relative"
+      onMouseEnter={() => setIsShowing(true)}
+      onMouseLeave={() => setIsShowing(false)}
+    >
+      <Popover.Button
+        as="a"
+        href="#"
+        className="flex items-center justify-center"
+      >
+        <Icons.Trade className="h-4 w-4" />
+      </Popover.Button>
+      <Transition
+        show={isShowing}
+        enter="transition duration-100 ease-out"
+        enterFrom="transform scale-95 opacity-0"
+        enterTo="transform scale-100 opacity-100"
+        leave="transition duration-75 ease-out"
+        leaveFrom="transform scale-100 opacity-100"
+        leaveTo="transform scale-95 opacity-0"
+        className="absolute left-1/2 top-full isolate z-50 mt-4 flex origin-top -translate-x-1/2 items-center justify-center rounded bg-primary px-6 py-2 text-center shadow-[0px_4px_8px_rgba(0,0,0,0.1)]"
+      >
+        <Popover.Panel static>
+          <div
+            className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-primary"
+            aria-hidden
+          />
+          <span className="text-label text-white">Transfer Crypto</span>
+        </Popover.Panel>
+      </Transition>
+    </Popover>
+  );
 };
 
 export default MyWalletCard;
