@@ -10,6 +10,8 @@ import LoadingPage from "@/components/LoadingPage";
 import Footer from "@/components/Footer";
 import FormattedNumber from "@/components/FormattedNumber";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { Popover, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
 
 const Dashboard = () => {
   const { data: assets, isLoading } = api.asset.get.useQuery({});
@@ -21,7 +23,7 @@ const Dashboard = () => {
   return (
     <div className="flex h-full flex-col">
       <SignedInHeader />
-      <main className="container mb-10 mt-6 flex-grow">
+      <main className="container relative flex-grow pb-10 pt-6 lg:bg-[#f9f9f9]">
         <div className="flex flex-col gap-4 md:gap-6 lg:flex-row lg:gap-8">
           <Balance />
           <div className="flex w-full gap-4 md:gap-8">
@@ -31,9 +33,75 @@ const Dashboard = () => {
         </div>
         <hr className="mt-6 text-secondary-300 md:hidden" />
         <MyWalletCard />
+        <Sidebar />
       </main>
       <Footer />
     </div>
+  );
+};
+
+const Sidebar = () => {
+  return (
+    <nav className="absolute inset-y-0 left-0 hidden flex-col items-center gap-8 border-y border-secondary-300 bg-white px-6 py-12 lg:flex">
+      <SidebarItem
+        name="Lorem ipsum"
+        Icon={(props) => <Icons.CryptoWallet {...props} />}
+      />
+      <SidebarItem
+        name="Lorem ipsum"
+        Icon={(props) => <Icons.CryptoCurrencyCircle {...props} />}
+      />
+      <SidebarItem
+        name="Lorem ipsum"
+        Icon={(props) => <Icons.CryptoCurrency {...props} />}
+      />
+      <SidebarItem
+        name="Lorem ipsum"
+        Icon={(props) => <Icons.Chart {...props} />}
+      />
+    </nav>
+  );
+};
+
+const SidebarItem = ({
+  name,
+  Icon,
+}: {
+  name: string;
+  Icon: React.FC<{ className?: string }>;
+}) => {
+  const [isShowing, setIsShowing] = useState(false);
+
+  return (
+    <Popover
+      className="relative"
+      onMouseEnter={() => setIsShowing(true)}
+      onMouseLeave={() => setIsShowing(false)}
+    >
+      <Popover.Button as="a" href="#">
+        <Icon className="h-8 w-8" />
+      </Popover.Button>
+      <Transition
+        show={isShowing}
+        enter="transition duration-100 ease-out"
+        enterFrom="transform scale-95 opacity-0"
+        enterTo="transform scale-100 opacity-100"
+        leave="transition duration-75 ease-out"
+        leaveFrom="transform scale-100 opacity-100"
+        leaveTo="transform scale-95 opacity-0"
+        className="absolute inset-y-0 left-full ml-4 flex origin-left items-center justify-center rounded bg-primary px-6 py-2 shadow-[0px_4px_8px_rgba(0,0,0,0.1)]"
+      >
+        <Popover.Panel static>
+          <div
+            className="absolute -left-1.5 top-1/2 h-3 w-3 -translate-y-1/2 rotate-45 bg-primary"
+            aria-hidden
+          />
+          <span className="whitespace-nowrap text-label text-white">
+            {name}
+          </span>
+        </Popover.Panel>
+      </Transition>
+    </Popover>
   );
 };
 
