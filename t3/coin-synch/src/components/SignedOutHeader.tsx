@@ -6,7 +6,7 @@ import SignInSignUpMenu from "./SignInSignUpMenu";
 import { Asset } from "@prisma/client";
 
 type Props = {
-  assets: Asset[];
+  assets: Asset[] | undefined;
 };
 
 const SignedOutHeader = ({ assets }: Props) => {
@@ -26,10 +26,12 @@ const SignedOutHeader = ({ assets }: Props) => {
           <HeaderLink href="#top-cryptos">Top cryptos</HeaderLink>
         </nav>
 
-        <CoinCarrousel
-          className="ml-auto hidden max-w-[360px] lg:flex"
-          assets={assets}
-        />
+        {assets && assets.length > 0 && (
+          <CoinCarrousel
+            className="ml-auto hidden max-w-[360px] lg:flex"
+            assets={assets}
+          />
+        )}
 
         <SignInSignUpMenu
           className="ml-auto hidden md:block lg:ml-20"
@@ -39,9 +41,11 @@ const SignedOutHeader = ({ assets }: Props) => {
       </header>
       <hr className="text-secondary-200" />
 
-      <div className="shadow-md lg:hidden" ref={carrouselRef}>
-        <CoinCarrousel className="mx-auto max-w-[360px]" assets={assets} />
-      </div>
+      {assets && assets.length > 0 && (
+        <div className="shadow-md lg:hidden" ref={carrouselRef}>
+          <CoinCarrousel className="mx-auto max-w-[360px]" assets={assets} />
+        </div>
+      )}
     </>
   );
 };

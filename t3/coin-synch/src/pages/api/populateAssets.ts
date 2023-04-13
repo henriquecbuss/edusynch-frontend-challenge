@@ -6,6 +6,7 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
+  // We should have some more security (maybe by using a secret key in the request)
   const latestAssetSync = await prisma.assetSync.findFirst({
     orderBy: {
       createdAt: "desc",
@@ -17,12 +18,11 @@ export default async function handler(
     latestAssetSync &&
     Date.now() - latestAssetSync.createdAt.getTime() < 23 * ONE_HOUR
   ) {
-    response.status(200).json({
+    return response.status(200).json({
       body: "Already synced",
       query: request.query,
       cookies: request.cookies,
     });
-    return;
   }
 
   const assets = await assetsWithBrlRates();
@@ -35,6 +35,8 @@ export default async function handler(
   await prisma.assetSync.create({
     data: {},
   });
+
+  await response.revalidate("/");
 
   response.status(200).json({
     body: assets,

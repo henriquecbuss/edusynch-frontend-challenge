@@ -1,9 +1,7 @@
 import TopCryptos from "@/components/TopCryptos";
-import { assetsWithBrlRates } from "@/utils/coinapi";
+import { Asset } from "@prisma/client";
 
-const TopCryptosSection = () => {
-  // const assets = await assetsWithBrlRates()
-
+const TopCryptosSection = ({ assets }: { assets: Asset[] | undefined }) => {
   return (
     <section className="container mt-14">
       <h2
@@ -13,7 +11,7 @@ const TopCryptosSection = () => {
         Top Cryptos
       </h2>
 
-      <TopCryptos assets={[]} />
+      {assets && <TopCryptos assets={assets} />}
     </section>
   );
 };

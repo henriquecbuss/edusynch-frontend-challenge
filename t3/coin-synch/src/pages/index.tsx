@@ -1,6 +1,4 @@
-import { type NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
+import { GetStaticProps, type NextPage } from "next";
 import Image from "next/image";
 
 import { api } from "@/utils/api";
@@ -9,13 +7,16 @@ import LandingSection from "@/components/Homepage/LandingSection";
 import AboutUs from "@/components/Homepage/AboutUsSection";
 import NewsletterSection from "@/components/Homepage/NewsletterSection";
 import TopCryptosSection from "@/components/Homepage/TopCryptosSection";
+import { generateSSGHelper } from "@/server/helpers/ssgHelper";
 
 const Home: NextPage = () => {
-  // const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const { data: assets } = api.asset.get.useQuery({
+    limit: 10,
+  });
 
   return (
     <>
-      <SignedOutHeader assets={[]} />
+      <SignedOutHeader assets={assets} />
       <main>
         <LandingSection />
 
@@ -30,12 +31,26 @@ const Home: NextPage = () => {
 
         <AboutUs />
 
-        <TopCryptosSection />
+        <TopCryptosSection assets={assets} />
 
         <NewsletterSection />
       </main>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const ssg = generateSSGHelper();
+
+  await ssg.asset.get.prefetch({
+    limit: 10,
+  });
+
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+    },
+  };
 };
 
 export default Home;
