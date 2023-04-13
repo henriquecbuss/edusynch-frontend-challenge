@@ -21,8 +21,6 @@ const TradeCryptoModal = () => {
   const { refetch: refetchUsdBalance } = api.walletEntry.usdBalance.useQuery();
   const { refetch: refetchWalletEntries } = api.walletEntry.getAll.useQuery();
 
-  console.log(args);
-
   if (!args) {
     return null;
   }
@@ -62,13 +60,13 @@ const TradeCryptoModal = () => {
           const numberQuantity = parseInt(quantity);
 
           if (isNaN(numberQuantity)) {
-            setFieldError("amount", "You must enter a valid number");
+            setFieldError("quantity", "You must enter a valid number");
             setSubmitting(false);
             return;
           }
 
           if (numberQuantity <= 0) {
-            setFieldError("amount", "You must enter a number bigger than 0");
+            setFieldError("quantity", "You must enter a number bigger than 0");
             setSubmitting(false);
             return;
           }
@@ -87,6 +85,9 @@ const TradeCryptoModal = () => {
                   void refetchUsdBalance();
                   void refetchWalletEntries();
                   close();
+                },
+                onError: (error) => {
+                  setFieldError("quantity", error.message);
                 },
               }
             );
@@ -107,6 +108,9 @@ const TradeCryptoModal = () => {
                   void refetchUsdBalance();
                   void refetchWalletEntries();
                   close();
+                },
+                onError: (error) => {
+                  setFieldError("quantity", error.message);
                 },
               }
             );

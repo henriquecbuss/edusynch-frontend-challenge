@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { createTRPCRouter, privateProcedure } from "../trpc";
+import { TRPCError } from "@trpc/server";
 
 export const walletEntryRouter = createTRPCRouter({
   getAll: privateProcedure.query(async ({ ctx }) => {
@@ -65,19 +66,43 @@ export const walletEntryRouter = createTRPCRouter({
         amount: z.number().positive(),
       })
     )
-    .mutation(async ({ input, ctx }) => {
-      await ctx.prisma.walletEntry.update({
-        where: {
-          userId_assetId: {
-            assetId: input.assetId,
-            userId: ctx.currentUserId,
+    .mutation(({ input, ctx }) => {
+      return ctx.prisma.$transaction(async (prisma) => {
+        const entry = await prisma.walletEntry.findUnique({
+          where: {
+            userId_assetId: {
+              assetId: input.assetId,
+              userId: ctx.currentUserId,
+            },
           },
-        },
-        data: {
-          amount: {
-            decrement: input.amount,
+        });
+
+        if (!entry) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+          });
+        }
+
+        if (entry.amount < input.amount) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "Not enough funds",
+          });
+        }
+
+        await prisma.walletEntry.update({
+          where: {
+            userId_assetId: {
+              assetId: input.assetId,
+              userId: ctx.currentUserId,
+            },
           },
-        },
+          data: {
+            amount: {
+              decrement: input.amount,
+            },
+          },
+        });
       });
     }),
 });
