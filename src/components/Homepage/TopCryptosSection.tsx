@@ -1,5 +1,5 @@
 import TopCryptos from "@/components/TopCryptos";
-import { Asset } from "@prisma/client";
+import { type Asset } from "@prisma/client";
 
 const TopCryptosSection = ({ assets }: { assets: Asset[] | undefined }) => {
   return (

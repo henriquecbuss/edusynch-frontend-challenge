@@ -8,6 +8,15 @@
   }
 }
 
+html {
+  @apply h-screen;
+}
+
+#__next,
+body {
+  @apply h-full;
+}
+
 .opacity-mask {
   mask-image: linear-gradient(
     to right,
@@ -53,5 +62,5 @@
 }
 
 html {
-  @apply text-body h-full scroll-smooth text-base font-normal;
+  @apply h-full scroll-smooth text-base font-normal text-body;
 }

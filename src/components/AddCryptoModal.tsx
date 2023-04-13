@@ -14,6 +14,10 @@ const AddCryptoModal = () => {
   const { isOpen, close } = useModal("addCrypto");
   const { data: assets, isLoading } = api.asset.get.useQuery({});
   const { mutate: addCrypto } = api.asset.add.useMutation();
+  const { refetch: refetchWalletEntries } =
+    api.walletEntry.getAll.useQuery(undefined);
+  const { refetch: refetchUsdBalance } =
+    api.walletEntry.usdBalance.useQuery(undefined);
 
   if (isLoading || !assets) {
     return null;
@@ -61,6 +65,8 @@ const AddCryptoModal = () => {
               },
               onSuccess: () => {
                 close();
+                void refetchWalletEntries();
+                void refetchUsdBalance();
               },
             }
           );

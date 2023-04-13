@@ -4,9 +4,12 @@ import Card from "@/components/Dashboard/Card";
 import DailyVariationCard from "@/components/Dashboard/DailyVariationCard";
 import MyWalletCard from "@/components/Dashboard/MyWalletCard";
 import { generateSSGHelper } from "@/server/helpers/ssgHelper";
-import { GetStaticProps } from "next";
+import { type GetStaticProps } from "next";
 import { api } from "@/utils/api";
 import LoadingPage from "@/components/LoadingPage";
+import Footer from "@/components/Footer";
+import FormattedNumber from "@/components/FormattedNumber";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const Dashboard = () => {
   const { data: assets, isLoading } = api.asset.get.useQuery({});
@@ -16,9 +19,9 @@ const Dashboard = () => {
   }
 
   return (
-    <>
+    <div className="flex h-full flex-col">
       <SignedInHeader />
-      <main className="container mb-10 mt-6">
+      <main className="container mb-10 mt-6 flex-grow">
         <div className="flex flex-col gap-4 md:gap-6 lg:flex-row lg:gap-8">
           <Balance />
           <div className="flex w-full gap-4 md:gap-8">
@@ -27,14 +30,16 @@ const Dashboard = () => {
           </div>
         </div>
         <hr className="mt-6 text-secondary-300 md:hidden" />
-        {/* TODO - Fetch walletEntries and show them */}
-        <MyWalletCard wallets={[]} />
+        <MyWalletCard />
       </main>
-    </>
+      <Footer />
+    </div>
   );
 };
 
 const Balance = () => {
+  const { data: usdBalance } = api.walletEntry.usdBalance.useQuery();
+
   return (
     <Card className="flex w-full">
       <div className="flex w-1/2 items-center gap-2 bg-white px-4 py-2 md:gap-4">
@@ -52,7 +57,20 @@ const Balance = () => {
         </div>
       </div>
       <div className="flex w-1/2 items-center justify-center bg-primary-100 px-4 py-2 font-bold md:text-h4 md:font-bold lg:text-h3">
-        $32,256.56
+        {/* $32,256.56 */}
+        {!usdBalance && <LoadingSpinner size={32} />}
+        {usdBalance && (
+          <FormattedNumber
+            number={usdBalance}
+            options={{
+              signDisplay: "never",
+              style: "currency",
+              currency: "USD",
+              maximumFractionDigits: 2,
+              minimumFractionDigits: 2,
+            }}
+          />
+        )}
       </div>
     </Card>
   );
@@ -77,7 +95,7 @@ const News = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const ssg = generateSSGHelper();
 
   await ssg.asset.get.prefetch({});

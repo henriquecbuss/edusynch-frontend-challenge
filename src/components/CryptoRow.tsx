@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Button from "./Button";
 import FormattedNumber from "./FormattedNumber";
 import Image from "next/image";
-import { Asset } from "@prisma/client";
+import { type Asset } from "@prisma/client";
 
 const CryptoRow = ({ asset, index }: { asset: Asset; index: number }) => {
   return (

@@ -1,4 +1,4 @@
-import { GetStaticProps, type NextPage } from "next";
+import { type GetStaticProps, type NextPage } from "next";
 import Image from "next/image";
 
 import { api } from "@/utils/api";
@@ -41,7 +41,7 @@ const Home: NextPage = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const ssg = generateSSGHelper();
 
   await ssg.asset.get.prefetch({

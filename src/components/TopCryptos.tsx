@@ -4,7 +4,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import CryptoDisclosure from "./CryptoDisclosure";
 import CryptoRow from "./CryptoRow";
 import clsx from "clsx";
-import { Asset } from "@prisma/client";
+import { type Asset } from "@prisma/client";
 
 type Props = {
   assets: Asset[];
